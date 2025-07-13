@@ -6,19 +6,25 @@ public abstract class Cell implements AdjacentCell{
     protected boolean markedAsMine;
 
     public void markAsMine(){
-        markedAsMine = true;
-        notifyAdjacentCells();
+        if(revealed){
+            throw new GameOver("Tried to mark a revealed cell!");
+        }
+
+        if(!markedAsMine){
+            markedAsMine = true;
+            notifyAdjacentCells();
+        }
     }
 
     protected void notifyAdjacentCells(){
         for(AdjacentCell adjacentCell : remainingAdjacentCells){
+            removeAdjacent(adjacentCell);
             if(revealed){
                 adjacentCell.reactToCellReveal(this);
             }
             if(markedAsMine){
                 adjacentCell.reactToCellMarked(this);
             }
-            removeAdjacent(adjacentCell);
         }
     }
 
