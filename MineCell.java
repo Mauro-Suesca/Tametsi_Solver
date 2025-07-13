@@ -1,4 +1,9 @@
 public class MineCell extends Cell{
+    MineCell(){
+        revealed = false;
+        markedAsMine = false;
+    }
+
     public void reveal() throws GameOver{
         throw new GameOver("Revealed a cell with a mine in it!");
     }
