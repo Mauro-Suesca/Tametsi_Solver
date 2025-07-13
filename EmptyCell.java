@@ -1,5 +1,13 @@
 public class EmptyCell extends Cell{
     protected int remainingMines;
+    protected boolean unknown;
+
+    EmptyCell(int remainingMines, boolean revealed, boolean unknown){
+        this.remainingMines = remainingMines;
+        this.revealed = revealed;
+        this.unknown = unknown;
+        this.markedAsMine = false;
+    }
 
     @Override public void reveal(){
         if(markedAsMine){
@@ -13,39 +21,46 @@ public class EmptyCell extends Cell{
         }
     }
 
-    @Override public void markAsMine(){
-        if(revealed){
-            throw new GameOver("Tried to mark a revealed cell!");
-        }
-
-        super.markAsMine();
+    @Override public void markAsMine() throws GameOver{
+        throw new GameOver("Tried to mark an empty cell as a mine!");
     }
 
     @Override public void reactToCellReveal(Cell revealedCell){
-        if(revealed){
-            executeLogicalSequence();
-        }
+        executeLogicalSequence();
     }
 
     @Override public void reactToCellMarked(Cell markedCell){
-        if(revealed){
-            executeLogicalSequence();
-        }
+        executeLogicalSequence();
+        remainingMines--;
     }
 
     //TODO Kickstarts the logic for this Cell. Must check if it's still valid to call this method for each method that calls this function every time a new step is added to the sequence
     private void executeLogicalSequence(){
-        countRemaining();
+        if(revealed && !unknown){
+            countRemaining();
+            //TODO Make a way to implement hypothesis logic by contradiction
+            //TODO Make a way to mark groups of Cells as having a certain number of mines, and make adjacent cells understand the number of mines in a group and apply logic.
+            //TODO Maybe make a way to implement logic by cases
+        }
     }
 
-    //TODO countRemaining method for EmptyCell, starts revealing Cells if remainingMines is 0, marks everything as a mine if remainingMines is equal to number of adjacent cells
     private void countRemaining(){
-        if(revealed){
-
+        if(remainingMines == 0){
+            for(AdjacentCell adjacentCell : remainingAdjacentCells){
+                adjacentCell.reveal();
+            }
+        }else if(remainingAdjacentCells.size() == remainingMines){
+            for(AdjacentCell adjacentCell : remainingAdjacentCells){
+                adjacentCell.markAsMine();
+            }
         }
     }
 
     @Override public String toString(){
-        return revealed ? String.valueOf(remainingMines) : super.toString();
+        if(revealed){
+            return unknown ? "?" : String.valueOf(remainingMines);
+        }else{
+            return super.toString();
+        }
     }
 }
