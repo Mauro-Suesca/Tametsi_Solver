@@ -34,8 +34,8 @@ public class EmptyCell extends Cell{
         remainingMines--;
     }
 
-    //TODO Kickstarts the logic for this Cell. Must check if it's still valid to call this method for each method that calls this function every time a new step is added to the sequence
-    private void executeLogicalSequence(){
+    //TODO Kickstarts the logic for this Cell. We must check if it's still valid to call this method for each method that calls this function every time a new step is added to the sequence
+    protected void executeLogicalSequence(){
         if(revealed && !unknown){
             countRemaining();
             //TODO Make a way to implement hypothesis logic by contradiction
@@ -44,13 +44,13 @@ public class EmptyCell extends Cell{
         }
     }
 
-    private void countRemaining(){
+    protected void countRemaining(){
         if(remainingMines == 0){
-            for(AdjacentCell adjacentCell : remainingAdjacentCells){
+            for(Cell adjacentCell : remainingAdjacentCells){
                 adjacentCell.reveal();
             }
         }else if(remainingAdjacentCells.size() == remainingMines){
-            for(AdjacentCell adjacentCell : remainingAdjacentCells){
+            for(Cell adjacentCell : remainingAdjacentCells){
                 adjacentCell.markAsMine();
             }
         }
