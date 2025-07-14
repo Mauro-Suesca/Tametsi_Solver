@@ -7,8 +7,13 @@ public class ExternalCounter extends EmptyCell{
         return;
     }
 
-    @Override protected void executeLogicalSequence(){
+    @Override public void executeLogicalSequence(){
         countRemaining();
         //TODO Copy changes in EmptyCell to here
+    }
+
+    public int getRemainingNumberOfAdjacencies(){
+        System.out.println("total");
+        return remainingAdjacentCells.size();
     }
 }
