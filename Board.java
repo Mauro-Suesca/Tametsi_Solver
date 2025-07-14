@@ -1,6 +1,38 @@
 public class Board implements CellObserver{
     private Cell[][] cellsInBoard;
-    private int columns, files;
+    private ExternalCounter[] verticalLines;
+    private ExternalCounter[] horizontalLines;
+    private int currentRow;
+    private int currentColumn;
+
+    Board(int columns, int rows){
+        this.cellsInBoard = new Cell[columns][rows];
+        this.verticalLines = new ExternalCounter[columns];
+        this.horizontalLines = new ExternalCounter[rows];
+        resetCurrentRowAndColumn();
+    }
+
+    public void addCell(Cell newCell){
+        cellsInBoard[currentRow][currentColumn] = newCell;
+
+        if(++currentColumn == verticalLines.length){
+            currentColumn = 0;
+            currentRow++;
+        }
+    }
+
+    public void addVerticalLine(ExternalCounter newLine){
+        verticalLines[currentColumn++] = newLine;
+    }
+
+    public void addHorizontalLine(ExternalCounter newLine){
+        horizontalLines[currentRow++] = newLine;
+    }
+
+    public void resetCurrentRowAndColumn(){
+        currentRow = 0;
+        currentColumn = 0;
+    }
 
     @Override public void reactToCellReveal(Cell revealedCell){
         render();
@@ -12,12 +44,45 @@ public class Board implements CellObserver{
 
     private void render(){
         //TODO Maybe delete the previous board before showing the new one?
-        for(int i=0; i<columns; i++){
-            for(int j=0; j<files; j++){
-                System.out.print(cellsInBoard[i][j]);
+        System.out.print(" ");
+        for(ExternalCounter line : verticalLines){
+            System.out.print(line);
+        }
+        System.out.println();
+
+        for(int row=0; row<cellsInBoard.length; row++){
+            System.out.print(horizontalLines[row]);
+            for(int column=0; column<cellsInBoard[row].length; column++){
+                System.out.print(cellsInBoard[row][column]);
             }
             System.out.println();
         }
         //TODO Ask for user input before continuing
+    }
+
+    //Only works for Tametsi level 9, could be useful to check other methods for other levels
+    public void autoAdjacencySetter(){
+        //Cell to Cell adjacency
+        for(int row=1; row<6; row+=3){
+            for(int column=1; column<6; column+=3){
+                Cell currentCell = cellsInBoard[row][column];
+                currentCell.addAdjacent(cellsInBoard[row-1][column-1]);
+                currentCell.addAdjacent(cellsInBoard[row-1][column]);
+                currentCell.addAdjacent(cellsInBoard[row-1][column+1]);
+                currentCell.addAdjacent(cellsInBoard[row][column-1]);
+                currentCell.addAdjacent(cellsInBoard[row][column+1]);
+                currentCell.addAdjacent(cellsInBoard[row+1][column-1]);
+                currentCell.addAdjacent(cellsInBoard[row+1][column]);
+                currentCell.addAdjacent(cellsInBoard[row+1][column+1]);
+            }
+        }
+
+        //Line to Cell adjacency
+        for(int row=0; row<cellsInBoard.length; row++){
+            for(int column=0; column<cellsInBoard[row].length; column++){
+                verticalLines[column].addAdjacent(cellsInBoard[row][column]);
+                horizontalLines[row].addAdjacent(cellsInBoard[row][column]);
+            }
+        }
     }
 }
