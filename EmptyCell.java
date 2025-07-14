@@ -1,8 +1,11 @@
+import java.util.HashSet;
+
 public class EmptyCell extends Cell{
     protected int remainingMines;
     protected boolean unknown;
 
     EmptyCell(int remainingMines, boolean revealed, boolean unknown){
+        remainingAdjacentCells = new HashSet<>();
         this.remainingMines = remainingMines;
         this.revealed = revealed;
         this.unknown = unknown;
@@ -17,7 +20,7 @@ public class EmptyCell extends Cell{
         if(!revealed){
             revealed = true;            
             notifyAdjacentCells();
-            executeLogicalSequence();
+            addCellToProcess(this);
         }
     }
 
@@ -26,16 +29,16 @@ public class EmptyCell extends Cell{
     }
 
     @Override public void reactToCellReveal(Cell revealedCell){
-        executeLogicalSequence();
+        addCellToProcess(this);
     }
 
     @Override public void reactToCellMarked(Cell markedCell){
-        executeLogicalSequence();
         remainingMines--;
+        addCellToProcess(this);
     }
 
     //TODO Kickstarts the logic for this Cell. We must check if it's still valid to call this method for each method that calls this function every time a new step is added to the sequence
-    protected void executeLogicalSequence(){
+    public void executeLogicalSequence(){
         if(revealed && !unknown){
             countRemaining();
             //TODO Make a way to implement hypothesis logic by contradiction

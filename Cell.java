@@ -1,9 +1,30 @@
-import java.util.Set;
+import java.util.ArrayDeque;
+import java.util.HashSet;
 
 public abstract class Cell implements AdjacentCell{
-    protected Set<Cell> remainingAdjacentCells;
+    protected static ArrayDeque<EmptyCell> cellsToProcess;
+    protected HashSet<Cell> remainingAdjacentCells;
     protected boolean revealed;
     protected boolean markedAsMine;
+
+    public void addCellToProcess(EmptyCell cellToAdd){
+        if(!cellsToProcess.contains(cellToAdd)){
+            cellsToProcess.add(cellToAdd);
+        }
+    }
+
+    public static void executeNextProcess(){
+        if(!cellsToProcess.isEmpty()){
+            cellsToProcess.remove().executeLogicalSequence();
+            executeNextProcess();
+        }
+    }
+
+    public static void setFirstStep(EmptyCell firstCellToProcess){
+        if(cellsToProcess.size() == 0){
+            cellsToProcess.add(firstCellToProcess);
+        }
+    }
 
     public void markAsMine(){
         if(revealed){
@@ -30,8 +51,10 @@ public abstract class Cell implements AdjacentCell{
 
     //Acts like "subscribe" from Observer design pattern.
     public void addAdjacent(Cell otherCell){
-        remainingAdjacentCells.add(otherCell);
-        otherCell.remainingAdjacentCells.add(this);
+        if(!remainingAdjacentCells.contains(otherCell)){
+            remainingAdjacentCells.add(otherCell);
+            otherCell.remainingAdjacentCells.add(this);
+        }
     }
 
     //Acts like "unsubscribe" from Observer design pattern.

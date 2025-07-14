@@ -1,5 +1,8 @@
+import java.util.HashSet;
+
 public class MineCell extends Cell{
     MineCell(){
+        remainingAdjacentCells = new HashSet<>();
         revealed = false;
         markedAsMine = false;
     }
