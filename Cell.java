@@ -1,7 +1,7 @@
 import java.util.Set;
 
 public abstract class Cell implements AdjacentCell{
-    protected Set<AdjacentCell> remainingAdjacentCells;
+    protected Set<Cell> remainingAdjacentCells;
     protected boolean revealed;
     protected boolean markedAsMine;
 
@@ -17,7 +17,7 @@ public abstract class Cell implements AdjacentCell{
     }
 
     protected void notifyAdjacentCells(){
-        for(AdjacentCell adjacentCell : remainingAdjacentCells){
+        for(Cell adjacentCell : remainingAdjacentCells){
             removeAdjacent(adjacentCell);
             if(revealed){
                 adjacentCell.reactToCellReveal(this);
@@ -28,14 +28,16 @@ public abstract class Cell implements AdjacentCell{
         }
     }
 
-    //TODO addAdjacent method, acts like "subscribe" from Observer design pattern, adds cells both ways
-    protected void addAdjacent(AdjacentCell otherCell){
-
+    //Acts like "subscribe" from Observer design pattern.
+    public void addAdjacent(Cell otherCell){
+        remainingAdjacentCells.add(otherCell);
+        otherCell.remainingAdjacentCells.add(this);
     }
 
-    //TODO removeAdjacent method, acts like "unsubscribe" from Observer design pattern, removes cells both ways
-    protected void removeAdjacent(AdjacentCell otherCell){
-        
+    //Acts like "unsubscribe" from Observer design pattern.
+    public void removeAdjacent(Cell otherCell){
+        remainingAdjacentCells.remove(otherCell);
+        otherCell.remainingAdjacentCells.remove(this);
     }
 
     @Override public String toString(){
