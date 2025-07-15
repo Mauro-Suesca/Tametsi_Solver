@@ -1,11 +1,11 @@
-import java.util.HashSet;
+import java.util.ArrayList;
 
 public class EmptyCell extends Cell{
     protected int remainingMines;
     protected boolean unknown;
 
     EmptyCell(int remainingMines, boolean revealed, boolean unknown){
-        remainingAdjacentCells = new HashSet<>();
+        remainingAdjacentCells = new ArrayList<>();
         this.remainingMines = remainingMines;
         this.revealed = revealed;
         this.unknown = unknown;
@@ -49,12 +49,14 @@ public class EmptyCell extends Cell{
 
     protected void countRemaining(){
         if(remainingMines == 0){
-            for(Cell adjacentCell : remainingAdjacentCells){
-                adjacentCell.reveal();
+            for(int i=0; i<remainingAdjacentCells.size(); i++){
+                remainingAdjacentCells.get(i).reveal();
+                i--;
             }
         }else if(remainingAdjacentCells.size() == remainingMines){
-            for(Cell adjacentCell : remainingAdjacentCells){
-                adjacentCell.markAsMine();
+            for(int i=0; i<remainingAdjacentCells.size(); i++){
+                remainingAdjacentCells.get(i).markAsMine();
+                i--;
             }
         }
     }

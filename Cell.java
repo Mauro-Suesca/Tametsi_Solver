@@ -1,11 +1,10 @@
 import java.util.ArrayDeque;
-import java.util.HashSet;
-import java.util.Iterator;
+import java.util.ArrayList;
 
 public abstract class Cell implements AdjacentCell{
     protected static ArrayDeque<EmptyCell> cellsToProcess;
     protected static Board board;
-    protected HashSet<Cell> remainingAdjacentCells;
+    protected ArrayList<Cell> remainingAdjacentCells;
     protected boolean revealed;
     protected boolean markedAsMine;
 
@@ -41,15 +40,18 @@ public abstract class Cell implements AdjacentCell{
     }
 
     protected void notifyAdjacentCells(){
-        Iterator<Cell> cellIterator = remainingAdjacentCells.iterator();
-        while(cellIterator.hasNext()){
-            Cell adjacentCell = cellIterator.next();
+        for(int i=0; i<remainingAdjacentCells.size(); i++){
+            Cell adjacentCell = remainingAdjacentCells.get(i);
             if(revealed){
-                //TODO Remove adjacencies from both sides if both are revealed
+                if(adjacentCell.revealed){
+                    this.removeAdjacent(adjacentCell);
+                    i--;
+                }
                 adjacentCell.reactToCellReveal(this);
             }
             if(markedAsMine){
-                //TODO Remove adjacencies from both sides if the other one is revealed
+                this.removeAdjacent(adjacentCell);
+                i--;
                 adjacentCell.reactToCellMarked(this);
             }
         }
