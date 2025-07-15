@@ -46,7 +46,7 @@ public class Board implements CellObserver{
 
     public void render(){
         //TODO Maybe delete the previous board before showing the new one?
-        System.out.print(" ");
+        System.out.print("   ");
         for(ExternalCounter line : verticalLines){
             System.out.print(line);
         }
@@ -63,6 +63,7 @@ public class Board implements CellObserver{
         if(totalMineCounter.getRemainingNumberOfAdjacencies() == 0){
             System.out.println("\nCongratulations, the level has been completed!");
         }
+
         //TODO Ask for user input before continuing
     }
 
@@ -95,6 +96,9 @@ public class Board implements CellObserver{
                 horizontalLines[row].addAdjacent(cellsInBoard[row][column]);
             }
         }
+
+        //Board to all Cells adjacency
+        Cell.addBoard(this);
     }
 
     private void addIfValidPosition(Cell currentCell, int row, int column){

@@ -13,7 +13,6 @@ public class ExternalCounter extends EmptyCell{
     }
 
     public int getRemainingNumberOfAdjacencies(){
-        System.out.println("total");
         return remainingAdjacentCells.size();
     }
 }

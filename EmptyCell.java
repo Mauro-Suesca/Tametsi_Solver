@@ -61,7 +61,7 @@ public class EmptyCell extends Cell{
 
     @Override public String toString(){
         if(revealed){
-            return unknown ? "?" : String.valueOf(remainingMines);
+            return (unknown ? "? " : String.valueOf(remainingMines) + " ");
         }else{
             return super.toString();
         }

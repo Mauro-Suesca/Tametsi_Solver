@@ -1,16 +1,16 @@
 import java.util.ArrayDeque;
 import java.util.HashSet;
+import java.util.Iterator;
 
 public abstract class Cell implements AdjacentCell{
     protected static ArrayDeque<EmptyCell> cellsToProcess;
+    protected static Board board;
     protected HashSet<Cell> remainingAdjacentCells;
     protected boolean revealed;
     protected boolean markedAsMine;
 
     public void addCellToProcess(EmptyCell cellToAdd){
-        if(!cellsToProcess.contains(cellToAdd)){
-            cellsToProcess.add(cellToAdd);
-        }
+        cellsToProcess.add(cellToAdd);
     }
 
     public static void executeNextProcess(){
@@ -21,6 +21,9 @@ public abstract class Cell implements AdjacentCell{
     }
 
     public static void setFirstStep(EmptyCell firstCellToProcess){
+        if(cellsToProcess == null){
+            cellsToProcess = new ArrayDeque<>();
+        }
         if(cellsToProcess.size() == 0){
             cellsToProcess.add(firstCellToProcess);
         }
@@ -38,15 +41,27 @@ public abstract class Cell implements AdjacentCell{
     }
 
     protected void notifyAdjacentCells(){
-        for(Cell adjacentCell : remainingAdjacentCells){
-            removeAdjacent(adjacentCell);
+        Iterator<Cell> cellIterator = remainingAdjacentCells.iterator();
+        while(cellIterator.hasNext()){
+            Cell adjacentCell = cellIterator.next();
             if(revealed){
+                //TODO Remove adjacencies from both sides if both are revealed
                 adjacentCell.reactToCellReveal(this);
             }
             if(markedAsMine){
+                //TODO Remove adjacencies from both sides if the other one is revealed
                 adjacentCell.reactToCellMarked(this);
             }
         }
+
+        if(revealed) board.reactToCellReveal(this);
+        if(markedAsMine) board.reactToCellMarked(this);
+    }
+
+    public static void addBoard(Board newBoard){
+        if(board == null){
+            board = newBoard;
+        }  
     }
 
     //Acts like "subscribe" from Observer design pattern.
@@ -64,6 +79,6 @@ public abstract class Cell implements AdjacentCell{
     }
 
     @Override public String toString(){
-        return markedAsMine ? "■" : "◻";
+        return markedAsMine ? "■ " : "[]";
     }
 }
