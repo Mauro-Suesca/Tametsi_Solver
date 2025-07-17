@@ -61,9 +61,9 @@ public class Main{
         board.addHorizontalLine(new ExternalCounter(3));
         board.addHorizontalLine(new ExternalCounter(1));
         
-        Cell.setFirstStep(firstStep);
+        board.setFirstStep(firstStep);
         board.autoAdjacencySetter();
         board.render();
-        Cell.executeNextProcess();
+        board.executeNextProcess();
     }
 }

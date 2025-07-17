@@ -1,32 +1,10 @@
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 
 public abstract class Cell implements AdjacentCell{
-    protected static ArrayDeque<EmptyCell> cellsToProcess;
-    protected static Board board;
+    protected Board board;
     protected ArrayList<Cell> remainingAdjacentCells;
     protected boolean revealed;
     protected boolean markedAsMine;
-
-    public void addCellToProcess(EmptyCell cellToAdd){
-        cellsToProcess.add(cellToAdd);
-    }
-
-    public static void executeNextProcess(){
-        if(!cellsToProcess.isEmpty()){
-            cellsToProcess.remove().executeLogicalSequence();
-            executeNextProcess();
-        }
-    }
-
-    public static void setFirstStep(EmptyCell firstCellToProcess){
-        if(cellsToProcess == null){
-            cellsToProcess = new ArrayDeque<>();
-        }
-        if(cellsToProcess.size() == 0){
-            cellsToProcess.add(firstCellToProcess);
-        }
-    }
 
     public void markAsMine(){
         if(revealed){
@@ -60,9 +38,9 @@ public abstract class Cell implements AdjacentCell{
         if(markedAsMine) board.reactToCellMarked(this);
     }
 
-    public static void addBoard(Board newBoard){
-        if(board == null){
-            board = newBoard;
+    public void addBoard(Board newBoard){
+        if(this.board == null){
+            this.board = newBoard;
         }  
     }
 
@@ -79,6 +57,8 @@ public abstract class Cell implements AdjacentCell{
         remainingAdjacentCells.remove(otherCell);
         otherCell.remainingAdjacentCells.remove(this);
     }
+
+    
 
     @Override public String toString(){
         return markedAsMine ? "■ " : "[]";

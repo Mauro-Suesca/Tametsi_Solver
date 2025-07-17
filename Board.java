@@ -1,8 +1,11 @@
+import java.util.ArrayDeque;
+
 public class Board implements CellObserver{
     private Cell[][] cellsInBoard;
     private ExternalCounter[] verticalLines;
     private ExternalCounter[] horizontalLines;
     private ExternalCounter totalMineCounter;
+    private ArrayDeque<EmptyCell> cellsToProcess;
     private int currentRow;
     private int currentColumn;
 
@@ -34,6 +37,26 @@ public class Board implements CellObserver{
     public void resetCurrentRowAndColumn(){
         currentRow = 0;
         currentColumn = 0;
+    }
+
+    public void addCellToProcess(EmptyCell cellToAdd){
+        cellsToProcess.add(cellToAdd);
+    }
+
+    public void setFirstStep(EmptyCell firstCellToProcess){
+        if(cellsToProcess == null){
+            cellsToProcess = new ArrayDeque<>();
+        }
+        if(cellsToProcess.size() == 0){
+            cellsToProcess.add(firstCellToProcess);
+        }
+    }
+
+    public void executeNextProcess(){
+        if(!cellsToProcess.isEmpty()){
+            cellsToProcess.remove().executeLogicalSequence();
+            executeNextProcess();
+        }
     }
 
     @Override public void reactToCellReveal(Cell revealedCell){
@@ -69,7 +92,7 @@ public class Board implements CellObserver{
 
     //Only works for Tametsi level 9, could be useful to check other ways for other levels
     public void autoAdjacencySetter(){
-        //Cell to Cell adjacency
+        //Cell and Board to Cell adjacency
         for(int row=0; row<6; row++){
             for(int column=0; column<6; column++){
                 Cell currentCell = cellsInBoard[row][column];
@@ -86,19 +109,24 @@ public class Board implements CellObserver{
                 addIfValidPosition(currentCell, row+1, column+1);
 
                 totalMineCounter.addAdjacent(currentCell);
+                currentCell.addBoard(this);
             }
         }
 
-        //Line to Cell adjacency
+        //Cell and Board to Line adjacency
         for(int row=0; row<cellsInBoard.length; row++){
             for(int column=0; column<cellsInBoard[row].length; column++){
                 verticalLines[column].addAdjacent(cellsInBoard[row][column]);
                 horizontalLines[row].addAdjacent(cellsInBoard[row][column]);
+
+                verticalLines[column].addBoard(this);
             }
+
+            horizontalLines[row].addBoard(this);
         }
 
-        //Board to all Cells adjacency
-        Cell.addBoard(this);
+        //Total mine counter to Board adjacency
+        totalMineCounter.addBoard(this);
     }
 
     private void addIfValidPosition(Cell currentCell, int row, int column){
