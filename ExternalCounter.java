@@ -9,6 +9,7 @@ public class ExternalCounter extends EmptyCell{
 
     @Override public void executeLogicalSequence(){
         countRemaining();
+        checkHypothesesForContradictions();
         //TODO Copy changes in EmptyCell to here
     }
 

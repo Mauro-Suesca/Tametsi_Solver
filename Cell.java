@@ -58,7 +58,7 @@ public abstract class Cell implements AdjacentCell{
         otherCell.remainingAdjacentCells.remove(this);
     }
 
-    
+    public abstract SimulatedCell simulateCell(SimulatedBoard board);
 
     @Override public String toString(){
         return markedAsMine ? "■ " : "[]";

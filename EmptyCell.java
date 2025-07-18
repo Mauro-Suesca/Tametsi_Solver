@@ -18,9 +18,9 @@ public class EmptyCell extends Cell{
         }
 
         if(!revealed){
-            revealed = true;            
+            revealed = true;   
+            board.addCellToProcess(this);         
             notifyAdjacentCells();
-            board.addCellToProcess(this);
         }
     }
 
@@ -41,12 +41,13 @@ public class EmptyCell extends Cell{
     public void executeLogicalSequence(){
         if(revealed && !unknown){
             countRemaining();
-            //TODO Make a way to implement hypothesis logic by contradiction
+            checkHypothesesForContradictions();
             //TODO Make a way to mark groups of Cells as having a certain number of mines, and make adjacent cells understand the number of mines in a group and apply logic.
             //TODO Maybe make a way to implement logic by cases
         }
     }
 
+    //Direct proof
     protected void countRemaining(){
         if(remainingMines == 0){
             for(int i=0; i<remainingAdjacentCells.size(); i++){
@@ -59,6 +60,58 @@ public class EmptyCell extends Cell{
                 i--;
             }
         }
+    }
+
+    //Proof by contradiction
+    protected void checkHypothesesForContradictions(){
+        boolean hypothesisIsHasMine;
+        
+        if(remainingMines == 0){
+            return;
+        }else if(remainingMines == 1){
+            hypothesisIsHasMine = true;
+        }else{
+            if(remainingAdjacentCells.size() - remainingMines == 1){
+                hypothesisIsHasMine = false;
+            }else{
+                return;
+            }
+        }
+
+        for(int i=0; i<remainingAdjacentCells.size(); i++){
+            if(!remainingAdjacentCells.get(i).revealed){
+                SimulatedBoard currentHypothesisSimulation = new SimulatedBoard();
+
+                SimulatedUnrevealedCell testCell = (SimulatedUnrevealedCell)remainingAdjacentCells.get(i).simulateCell(currentHypothesisSimulation);
+                if(!currentHypothesisSimulation.checkIfHypothesisIsPossible(testCell, hypothesisIsHasMine)){
+                    if(hypothesisIsHasMine){
+                        remainingAdjacentCells.get(i).reveal();
+                        i--;
+                    }else{
+                        remainingAdjacentCells.get(i).markAsMine();
+                        i--;
+                    }
+                }
+            }
+        }
+    }
+
+    @Override public SimulatedCell simulateCell(SimulatedBoard simulatedBoard){
+        SimulatedCell resultingSimulatedCell;
+
+        if(revealed){
+            resultingSimulatedCell = SimulatedRevealedCell.createSimulatedCell(simulatedBoard, this, remainingMines, unknown);
+        }else{
+            resultingSimulatedCell = SimulatedUnrevealedCell.createSimulatedCell(simulatedBoard, this, markedAsMine);
+        }
+
+        for(int i=0; i<remainingAdjacentCells.size(); i++){
+            if(!simulatedBoard.checkIfCellExistsInBoard(remainingAdjacentCells.get(i))){
+                resultingSimulatedCell.addAdjacent(remainingAdjacentCells.get(i).simulateCell(simulatedBoard));
+            }
+        }
+
+        return resultingSimulatedCell;
     }
 
     @Override public String toString(){

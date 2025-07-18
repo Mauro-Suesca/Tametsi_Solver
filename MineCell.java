@@ -18,4 +18,8 @@ public class MineCell extends Cell{
     @Override public void reactToCellMarked(Cell markedCell){
         return;
     }
+
+    @Override public SimulatedUnrevealedCell simulateCell(SimulatedBoard board){
+        return SimulatedUnrevealedCell.createSimulatedCell(board, this, markedAsMine);
+    }
 }

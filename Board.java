@@ -14,6 +14,7 @@ public class Board implements CellObserver{
         this.cellsInBoard = new Cell[columns][rows];
         this.verticalLines = new ExternalCounter[columns];
         this.horizontalLines = new ExternalCounter[rows];
+        this.cellsToProcess = new ArrayDeque<>();
         resetCurrentRowAndColumn();
     }
 
@@ -44,9 +45,6 @@ public class Board implements CellObserver{
     }
 
     public void setFirstStep(EmptyCell firstCellToProcess){
-        if(cellsToProcess == null){
-            cellsToProcess = new ArrayDeque<>();
-        }
         if(cellsToProcess.size() == 0){
             cellsToProcess.add(firstCellToProcess);
         }
@@ -93,8 +91,8 @@ public class Board implements CellObserver{
     //Only works for Tametsi level 9, could be useful to check other ways for other levels
     public void autoAdjacencySetter(){
         //Cell and Board to Cell adjacency
-        for(int row=0; row<6; row++){
-            for(int column=0; column<6; column++){
+        for(int row=0; row<cellsInBoard.length; row++){
+            for(int column=0; column<cellsInBoard[row].length; column++){
                 Cell currentCell = cellsInBoard[row][column];
 
                 addIfValidPosition(currentCell, row-1, column-1);
