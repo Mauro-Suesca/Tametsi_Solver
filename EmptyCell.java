@@ -37,13 +37,11 @@ public class EmptyCell extends Cell{
         board.addCellToProcess(this);
     }
 
-    //TODO Kickstarts the logic for this Cell. We must check if it's still valid to call this method for each method that calls this function every time a new step is added to the sequence
     public void executeLogicalSequence(){
         if(revealed && !unknown){
             countRemaining();
             checkHypothesesForContradictions();
-            //TODO Make a way to mark groups of Cells as having a certain number of mines, and make adjacent cells understand the number of mines in a group and apply logic.
-            //TODO Maybe make a way to implement logic by cases
+            proofByCases();
         }
     }
 
@@ -123,6 +121,11 @@ public class EmptyCell extends Cell{
         }
 
         return resultingSimulatedCell;
+    }
+
+    //TODO Implement logic for proof by cases
+    protected void proofByCases(){
+
     }
 
     @Override public String toString(){
