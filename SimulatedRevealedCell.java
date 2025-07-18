@@ -22,19 +22,22 @@ public class SimulatedRevealedCell extends SimulatedCell{
                 return false;
             }
             countRemaining();
+            if(countAndCheckIfThereAreContradictions()){
+                return false;
+            }
         }
         return true;
     }
 
     private boolean countAndCheckIfThereAreContradictions(){
         if(remainingMines < 0){
-            return false;
+            return true;
         }
         if(remainingMines > remainingAdjacentCells.size()){
-            return false;
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     private void countRemaining(){

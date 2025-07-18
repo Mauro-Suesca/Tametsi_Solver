@@ -40,11 +40,17 @@ public class SimulatedUnrevealedCell extends SimulatedCell{
     }
 
     @Override public void markAsEmpty(){
+        if(markedAsMine){
+            throw new GameOver("Contradiction");
+        }
         markedAsEmpty = true;
         notifyAdjacentCells();
     }
 
     @Override public void markAsMine(){
+        if(markedAsEmpty){
+            throw new GameOver("Contradiction");
+        }
         markedAsMine = true;
         notifyAdjacentCells();
     }

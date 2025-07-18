@@ -19,7 +19,21 @@ public class MineCell extends Cell{
         return;
     }
 
-    @Override public SimulatedUnrevealedCell simulateCell(SimulatedBoard board){
-        return SimulatedUnrevealedCell.createSimulatedCell(board, this, markedAsMine);
+    @Override public SimulatedUnrevealedCell simulateCell(SimulatedBoard simulatedBoard){
+        SimulatedUnrevealedCell resultingSimulatedCell = SimulatedUnrevealedCell.createSimulatedCell(simulatedBoard, this, markedAsMine);
+
+        for(int i=0; i<remainingAdjacentCells.size(); i++){
+            if(!simulatedBoard.checkIfCellExistsInBoard(remainingAdjacentCells.get(i))){
+                resultingSimulatedCell.addAdjacent(remainingAdjacentCells.get(i).simulateCell(simulatedBoard));
+            }else if(remainingAdjacentCells.get(i).revealed){
+                EmptyCell adjacentCell = (EmptyCell) remainingAdjacentCells.get(i);
+                resultingSimulatedCell.addAdjacent(SimulatedRevealedCell.createSimulatedCell(simulatedBoard, adjacentCell, adjacentCell.remainingMines, adjacentCell.unknown));
+            }else{
+                Cell adjacentCell = remainingAdjacentCells.get(i);
+                resultingSimulatedCell.addAdjacent(SimulatedUnrevealedCell.createSimulatedCell(simulatedBoard, adjacentCell, adjacentCell.markedAsMine));
+            }
+        }
+
+        return resultingSimulatedCell;
     }
 }

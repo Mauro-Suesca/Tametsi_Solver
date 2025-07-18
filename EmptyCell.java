@@ -83,7 +83,12 @@ public class EmptyCell extends Cell{
                 SimulatedBoard currentHypothesisSimulation = new SimulatedBoard();
 
                 SimulatedUnrevealedCell testCell = (SimulatedUnrevealedCell)remainingAdjacentCells.get(i).simulateCell(currentHypothesisSimulation);
-                if(!currentHypothesisSimulation.checkIfHypothesisIsPossible(testCell, hypothesisIsHasMine)){
+                
+                try{
+                    if(!currentHypothesisSimulation.checkIfHypothesisIsPossible(testCell, hypothesisIsHasMine)){
+                        throw new GameOver("Contradiction");
+                    }
+                }catch(GameOver e){
                     if(hypothesisIsHasMine){
                         remainingAdjacentCells.get(i).reveal();
                         i--;
@@ -108,6 +113,12 @@ public class EmptyCell extends Cell{
         for(int i=0; i<remainingAdjacentCells.size(); i++){
             if(!simulatedBoard.checkIfCellExistsInBoard(remainingAdjacentCells.get(i))){
                 resultingSimulatedCell.addAdjacent(remainingAdjacentCells.get(i).simulateCell(simulatedBoard));
+            }else if(remainingAdjacentCells.get(i).revealed){
+                EmptyCell adjacentCell = (EmptyCell) remainingAdjacentCells.get(i);
+                resultingSimulatedCell.addAdjacent(SimulatedRevealedCell.createSimulatedCell(simulatedBoard, adjacentCell, adjacentCell.remainingMines, adjacentCell.unknown));
+            }else{
+                Cell adjacentCell = remainingAdjacentCells.get(i);
+                resultingSimulatedCell.addAdjacent(SimulatedUnrevealedCell.createSimulatedCell(simulatedBoard, adjacentCell, adjacentCell.markedAsMine));
             }
         }
 

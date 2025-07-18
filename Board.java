@@ -1,4 +1,5 @@
 import java.util.ArrayDeque;
+import java.util.Scanner;
 
 public class Board implements CellObserver {
     private Cell[][] cellsInBoard;
@@ -8,6 +9,7 @@ public class Board implements CellObserver {
     private ArrayDeque<EmptyCell> cellsToProcess;
     private int currentRow;
     private int currentColumn;
+    private Scanner waitForUserInput;
 
     Board(int numberOfMinesInBoard, int columns, int rows) {
         this.totalMineCounter = new ExternalCounter(numberOfMinesInBoard);
@@ -15,6 +17,7 @@ public class Board implements CellObserver {
         this.verticalLines = new ExternalCounter[columns];
         this.horizontalLines = new ExternalCounter[rows];
         this.cellsToProcess = new ArrayDeque<>();
+        this.waitForUserInput = new Scanner(System.in);
         resetCurrentRowAndColumn();
     }
 
@@ -68,7 +71,7 @@ public class Board implements CellObserver {
     }
 
     public void render() {
-        clearScreen(); // Limpia la pantalla antes de dibujar el tablero
+        clearScreen();
 
         System.out.print("   ");
         for (ExternalCounter line : verticalLines) {
@@ -86,13 +89,16 @@ public class Board implements CellObserver {
 
         if (totalMineCounter.getRemainingNumberOfAdjacencies() == 0) {
             System.out.println("\nCongratulations, the level has been completed!");
+            System.out.print("\nPress 'ENTER' to finish");
+            waitForUserInput.close();
+            return;
         }
 
-        // TODO Ask for user input before continuing
+        System.out.print("\nPress 'ENTER' to continue");
+        waitForUserInput.nextLine();
     }
 
-    // Only works for Tametsi level 9, could be useful to check other ways for other
-    // levels
+    // Only works for Tametsi level 9, could be useful to check other ways for other levels
     public void autoAdjacencySetter() {
         // Cell and Board to Cell adjacency
         for (int row = 0; row < cellsInBoard.length; row++) {
@@ -142,12 +148,8 @@ public class Board implements CellObserver {
         currentCell.addAdjacent(cellsInBoard[row][column]);
     }
 
-    /**
-     * Borra la pantalla usando secuencias ANSI.
-     * Nota: Puede que no funcione en todas las consolas antiguas de Windows.
-     */
     private void clearScreen() {
-        System.out.print("\033[H\033[2J");
+        System.out.print("\033[H\033[2J"); //ANSI Code for clearing the screen
         System.out.flush();
     }
 }
