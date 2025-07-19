@@ -8,7 +8,7 @@ public class MineCell extends Cell{
     }
 
     public void reveal() throws GameOver{
-        throw new GameOver("Revealed a cell with a mine in it!");
+        throw new GameOver("¡Se reveló una celda con una mina!");
     }
 
     @Override public void reactToCellReveal(Cell revealedCell){
