@@ -73,6 +73,8 @@ public class Board implements CellObserver{
     public void render() {
         clearScreen();
 
+        System.out.println("Remaining mines in board: " + totalMineCounter + "\n");
+
         System.out.print("  ");
         for (ExternalCounter line : verticalLines){
             System.out.print(line);
