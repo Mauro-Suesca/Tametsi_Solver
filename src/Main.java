@@ -7,11 +7,11 @@ public class Main{
 
         while(true){
             try{
-                System.out.print("Choose the level you want to see: ");
+                System.out.print("Elige el nivel que quieres ver: ");
                 level = Integer.parseInt(input.nextLine());
                 break;
             }catch(NumberFormatException e){
-                System.out.println("\nInput was not a valid number, try again");
+                System.out.println("\nNo se ingresó un número válido, intenta de nuevo");
             }
         }
 

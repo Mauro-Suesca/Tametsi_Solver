@@ -116,7 +116,7 @@ public class Board implements CellObserver{
     private void renderLineless(){
         clearScreen();
 
-        System.out.println("Remaining mines in board: " + totalMineCounter + "\n");
+        System.out.println("Minas faltantes en el tablero: " + totalMineCounter + "\n");
 
         for(int row = 0; row < cellsInBoard.length; row++){
             for(int column = 0; column < cellsInBoard[row].length; column++){
@@ -126,8 +126,8 @@ public class Board implements CellObserver{
         }
 
         if(totalMineCounter.getRemainingNumberOfAdjacencies() == 0){
-            System.out.println("\nCongratulations, the level has been completed!");
-            System.out.print("\nPress 'ENTER' to finish");
+            System.out.println("\n¡Felicitaciones, se completó el nivel!");
+            System.out.print("\nPresiona 'ENTER' para terminar");
             waitForUserInput.nextLine();
 
             clearScreen();
@@ -135,7 +135,7 @@ public class Board implements CellObserver{
             return;
         }
 
-        System.out.print("\nPress 'ENTER' to continue");
+        System.out.print("\nPresiona 'ENTER' para terminar");
         waitForUserInput.nextLine();
     }
 
