@@ -7,10 +7,6 @@ public abstract class Cell implements AdjacentCell{
     protected boolean markedAsMine;
 
     public void markAsMine(){
-        if(revealed){
-            throw new GameOver("Tried to mark a revealed cell!");
-        }
-
         if(!markedAsMine){
             markedAsMine = true;
             notifyAdjacentCells();
@@ -46,7 +42,7 @@ public abstract class Cell implements AdjacentCell{
 
     //Acts like "subscribe" from Observer design pattern.
     public void addAdjacent(Cell otherCell){
-        if(!remainingAdjacentCells.contains(otherCell)){
+        if(!remainingAdjacentCells.contains(otherCell) && (!this.revealed || !otherCell.revealed)){
             remainingAdjacentCells.add(otherCell);
             otherCell.remainingAdjacentCells.add(this);
         }

@@ -48,13 +48,13 @@ public class Board implements CellObserver{
     }
 
     public void setFirstStep(EmptyCell firstCellToProcess){
-        if (cellsToProcess.size() == 0) {
+        if(cellsToProcess.size() == 0){
             cellsToProcess.add(firstCellToProcess);
         }
     }
 
     public void executeNextProcess(){
-        if (!cellsToProcess.isEmpty()){
+        if(!cellsToProcess.isEmpty()){
             cellsToProcess.remove().executeLogicalSequence();
             executeNextProcess();
         }

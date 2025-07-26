@@ -1,5 +1,9 @@
 public class Main{
     public static void main(String[] args){
+        level9();
+    }
+
+    private static void level9(){
         Board board = new Board(12, 6, 6);
 
         board.addCell(new EmptyCell(2, false, false));

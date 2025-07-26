@@ -13,10 +13,6 @@ public class EmptyCell extends Cell{
     }
 
     @Override public void reveal(){
-        if(markedAsMine){
-            throw new GameOver("Tried to reveal a marked mine!");
-        }
-
         if(!revealed){
             revealed = true;   
             board.addCellToProcess(this);         
@@ -40,6 +36,7 @@ public class EmptyCell extends Cell{
     public void executeLogicalSequence(){
         if(revealed && !unknown){
             countRemaining();
+            basicCheckSharedCells();
             checkHypothesesForContradictions();
             proofByCases();
         }
@@ -58,6 +55,11 @@ public class EmptyCell extends Cell{
                 i--;
             }
         }
+    }
+
+    //TODO Implement logic for checking if a different cell's adjacencies are contained within this cell, and to act upon it
+    protected void basicCheckSharedCells(){
+
     }
 
     //Proof by contradiction
