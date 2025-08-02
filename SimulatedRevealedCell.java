@@ -67,12 +67,12 @@ public class SimulatedRevealedCell extends SimulatedCell{
         board.addCellToProcess(this);
     }
 
-    @Override public void markAsEmpty(){
-        return;
+    @Override public boolean markAsEmpty(){
+        return true;
     }
 
-    @Override public void markAsMine(){
-        return;
+    @Override public boolean markAsMine(){
+        return false;
     }
 
     @Override public boolean equals(Object otherObject){

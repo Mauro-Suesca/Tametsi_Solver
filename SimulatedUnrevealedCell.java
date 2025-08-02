@@ -39,20 +39,24 @@ public class SimulatedUnrevealedCell extends SimulatedCell{
         return;
     }
 
-    @Override public void markAsEmpty(){
+    @Override public boolean markAsEmpty(){
         if(markedAsMine){
-            throw new GameOver("Contradiction");
+            return false;
         }
+
         markedAsEmpty = true;
         notifyAdjacentCells();
+        return true;
     }
 
-    @Override public void markAsMine(){
+    @Override public boolean markAsMine(){
         if(markedAsEmpty){
-            throw new GameOver("Contradiction");
+            return false;
         }
+
         markedAsMine = true;
         notifyAdjacentCells();
+        return true;
     }
 
     @Override public boolean equals(Object otherObject){

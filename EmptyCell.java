@@ -83,12 +83,8 @@ public class EmptyCell extends Cell{
                 SimulatedBoard currentHypothesisSimulation = new SimulatedBoard();
 
                 SimulatedUnrevealedCell testCell = (SimulatedUnrevealedCell)remainingAdjacentCells.get(i).simulateCell(currentHypothesisSimulation);
-                
-                try{
-                    if(!currentHypothesisSimulation.checkIfHypothesisIsPossible(testCell, hypothesisIsHasMine)){
-                        throw new GameOver("Contradiction");
-                    }
-                }catch(GameOver e){
+
+                if(!currentHypothesisSimulation.checkIfHypothesisIsPossible(testCell, hypothesisIsHasMine)){
                     if(hypothesisIsHasMine){
                         remainingAdjacentCells.get(i).reveal();
                         i--;

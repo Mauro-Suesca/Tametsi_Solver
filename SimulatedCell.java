@@ -27,9 +27,9 @@ public abstract class SimulatedCell{
 
     public abstract void reactToCellMarkedAsMine(SimulatedCell markedCell);
 
-    public abstract void markAsEmpty();
+    public abstract boolean markAsEmpty();
 
-    public abstract void markAsMine();
+    public abstract boolean markAsMine();
 
     @Override public abstract boolean equals(Object otherObject);
 }

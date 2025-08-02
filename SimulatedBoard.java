@@ -41,9 +41,13 @@ public class SimulatedBoard{
 
     public boolean checkIfHypothesisIsPossible(SimulatedUnrevealedCell testCell, boolean hypothesizedCellHasMine){
         if(hypothesizedCellHasMine){
-            testCell.markAsMine();
+            if(!testCell.markAsMine()){
+                return false;
+            }
         }else{
-            testCell.markAsEmpty();
+            if(!testCell.markAsEmpty()){
+                return false;
+            }
         }
 
         return checkIfNextProcessIsPossible();
