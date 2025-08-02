@@ -1,18 +1,26 @@
-# Resolución del Nivel 9 de Tametsi: Demostración Directa y por Contradicción
+# Tametsi Solver
 
-## 📘 Descripción del proyecto
+Tametsi is a minesweeper based puzzle game in which every level is solvable by using only logic, no luck required.
+This project's purpose is to discover and implement an algorithm capable of solving some of the levels of this game (namely the ones that have rectangular shapes only).
 
-Este repositorio contiene el código y la documentación del proyecto final de la asignatura **Matemáticas Discretas I**, desarrollado por **Mauro Suesca**, **Juan Camilo Rosero** y **Juan David Ardila**.
+# Currently implemented levels
 
-El propósito del proyecto es aplicar **técnicas de demostración formal**, específicamente **demostración directa** y **demostración por contradicción**, para resolver lógicamente el **nivel 9** del juego **Tametsi**, un juego de lógica y deducción desarrollado por Grip Top Games.
+## Level 9
+![image](./resources/level9_unsolved.png)
+![image](./resources/level9_solved.png)
 
-A diferencia del enfoque intuitivo o exploratorio típico de los videojuegos de lógica, este proyecto propone un método riguroso y formal para abordar la resolución del nivel, respetando los principios del razonamiento matemático formal.
+# Planned levels
 
-## Sobre el juego Tametsi
+## Level 6
+![image](./resources/level6_unsolved.png)
+![image](./resources/level6_solved.png)
 
-Tametsi es un juego independiente de lógica de deducción y resolución de acertijos, publicado por Grip Top Games. Cada nivel consiste en un tablero de celdas con reglas similares al buscaminas, pero con mayor complejidad lógica. El objetivo es marcar todas las celdas que contienen minas usando solo razonamiento lógico, sin adivinanzas.
+## Level 12
+![image](./resources/level12_unsolved.png)
+![image](./resources/level12_solved.png)
 
-    Referencia oficial:
-    Tametsi en Steam
-    Desarrollador: Grip Top Games
-    Año de lanzamiento: 2017
+    Official Reference:
+    Tametsi
+    Available on Steam
+    Developer: Grip Top Games
+    Release Year: 2017
