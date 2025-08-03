@@ -57,9 +57,58 @@ public class EmptyCell extends Cell{
         }
     }
 
-    //TODO Implement logic for checking if a different cell's adjacencies are contained within this cell, and to act upon it
-    protected void basicCheckSharedCells(){
-        
+    protected void basicCheckSharedCells(){      
+        for(int i=0; i<remainingAdjacentCells.size(); i++){
+            EmptyCell currentPossibleSharerCell = null;
+            ArrayList<Cell> currentPossibleSharerCellAdjacencies = null;
+            boolean foundCompletelyShared = false;
+
+            Cell adjacentCell = remainingAdjacentCells.get(i);
+            for(int j=0; j<adjacentCell.remainingAdjacentCells.size(); j++){
+                if(adjacentCell.remainingAdjacentCells.get(j).revealed){
+                    currentPossibleSharerCell = (EmptyCell)adjacentCell.remainingAdjacentCells.get(j);
+                    currentPossibleSharerCellAdjacencies = currentPossibleSharerCell.remainingAdjacentCells;
+
+                    if(this != adjacentCell && !currentPossibleSharerCell.unknown && this.remainingAdjacentCells.containsAll(currentPossibleSharerCellAdjacencies)){
+                        foundCompletelyShared = true;
+                        break;
+                    }
+                }
+            }            
+
+            if(foundCompletelyShared){
+                int numberOfCellsOutsideOfSharedOnes = this.remainingAdjacentCells.size() - currentPossibleSharerCellAdjacencies.size();
+                int minesOutsideOfSharedOnes = this.remainingMines - currentPossibleSharerCell.remainingMines;
+                
+                if(minesOutsideOfSharedOnes == 0){
+                    for(int j=0; j<remainingAdjacentCells.size(); j++){
+                        adjacentCell = remainingAdjacentCells.get(j);
+
+                        if(!currentPossibleSharerCellAdjacencies.contains(adjacentCell)){
+                            if(j <= i){
+                                i--;
+                            }
+
+                            adjacentCell.reveal();
+                            j--;
+                        }
+                    }
+                }else if(minesOutsideOfSharedOnes == numberOfCellsOutsideOfSharedOnes){
+                    for(int j=0; j<remainingAdjacentCells.size(); j++){
+                        adjacentCell = remainingAdjacentCells.get(j);
+
+                        if(!currentPossibleSharerCellAdjacencies.contains(adjacentCell)){
+                            if(j <= i){
+                                i--;
+                            }
+
+                            adjacentCell.markAsMine();
+                            j--;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     //Proof by contradiction
