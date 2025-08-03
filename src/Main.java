@@ -1,6 +1,31 @@
+import java.util.Scanner;
+
 public class Main{
     public static void main(String[] args){
-        level9();
+        int level;
+        Scanner input = new Scanner(System.in);
+
+        while(true){
+            try{
+                System.out.print("Choose the level you want to see: ");
+                level = Integer.parseInt(input.nextLine());
+                break;
+            }catch(NumberFormatException e){
+                System.out.println("\nInput was not a valid number, try again");
+            }
+        }
+
+        if(level == 6){
+            level6();
+        }else if(level == 9){
+            level9();
+        }
+        
+        input.close();
+    }
+
+    private static void level6(){
+        
     }
 
     private static void level9(){

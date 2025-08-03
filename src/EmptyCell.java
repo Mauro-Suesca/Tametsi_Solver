@@ -59,7 +59,7 @@ public class EmptyCell extends Cell{
 
     //TODO Implement logic for checking if a different cell's adjacencies are contained within this cell, and to act upon it
     protected void basicCheckSharedCells(){
-
+        
     }
 
     //Proof by contradiction
