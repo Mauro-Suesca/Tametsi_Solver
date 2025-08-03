@@ -5,15 +5,15 @@ This project's purpose is to discover and implement an algorithm capable of solv
 
 # Currently implemented levels
 
+## Level 6
+![image](./resources/level6_unsolved.png)
+![image](./resources/level6_solved.png)
+
 ## Level 9
 ![image](./resources/level9_unsolved.png)
 ![image](./resources/level9_solved.png)
 
 # Planned levels
-
-## Level 6
-![image](./resources/level6_unsolved.png)
-![image](./resources/level6_solved.png)
 
 ## Level 12
 ![image](./resources/level12_unsolved.png)

@@ -25,11 +25,44 @@ public class Main{
     }
 
     private static void level6(){
+        Board board = new Board(6, 5, 5, false);
+
+        board.addCell(new EmptyCell(1, false, false));
+        board.addCell(new EmptyCell(1, true, false));
+        board.addCell(new EmptyCell(0, true, false));
+        board.addCell(new EmptyCell(2, true, false));
+        board.addCell(new MineCell());
+
+        board.addCell(new MineCell());
+        EmptyCell firstStep = new EmptyCell(1, true, false);
+        board.addCell(firstStep);
+        board.addCell(new EmptyCell(1, true, false));
+        board.addCell(new EmptyCell(3, true, false));
+        board.addCell(new MineCell());
+
+        board.addCell(new EmptyCell(3, false, false));
+        board.addCell(new EmptyCell(3, false, false));
+        board.addCell(new EmptyCell(2, false, true));
+        board.addCell(new MineCell());
+        board.addCell(new EmptyCell(2, false, false));
+
+        board.addCell(new MineCell());
+        board.addCell(new MineCell());
+        board.addCell(new EmptyCell(2, false, false));
+        board.addCell(new EmptyCell(1, false, false));
+        board.addCell(new EmptyCell(1, false, false));
         
+        board.addCell(new EmptyCell(2, false, false));
+        board.addCell(new EmptyCell(2, false, false));
+        board.addCell(new EmptyCell(1, false, true));
+        board.addCell(new EmptyCell(0, false, false));
+        board.addCell(new EmptyCell(0, false, false));
+
+        board.start(firstStep);
     }
 
     private static void level9(){
-        Board board = new Board(12, 6, 6);
+        Board board = new Board(12, 6, 6, true);
 
         board.addCell(new EmptyCell(2, false, false));
         board.addCell(new MineCell());
@@ -90,9 +123,6 @@ public class Main{
         board.addHorizontalLine(new ExternalCounter(3));
         board.addHorizontalLine(new ExternalCounter(1));
         
-        board.setFirstStep(firstStep);
-        board.autoAdjacencySetter();
-        board.render();
-        board.executeNextProcess();
+        board.start(firstStep);
     }
 }
