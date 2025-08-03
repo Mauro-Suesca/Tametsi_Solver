@@ -9,9 +9,11 @@ public class Board implements CellObserver{
     private ArrayDeque<EmptyCell> cellsToProcess;
     private int currentRow;
     private int currentColumn;
+    private boolean hasLines;
     private Scanner waitForUserInput;
 
-    Board(int numberOfMinesInBoard, int columns, int rows){
+    Board(int numberOfMinesInBoard, int columns, int rows, boolean hasLines){
+        this.hasLines = hasLines;
         this.totalMineCounter = new ExternalCounter(numberOfMinesInBoard);
         this.cellsInBoard = new Cell[columns][rows];
         this.verticalLines = new ExternalCounter[columns];
@@ -47,13 +49,13 @@ public class Board implements CellObserver{
         cellsToProcess.add(cellToAdd);
     }
 
-    public void setFirstStep(EmptyCell firstCellToProcess){
+    private void setFirstStep(EmptyCell firstCellToProcess){
         if(cellsToProcess.size() == 0){
             cellsToProcess.add(firstCellToProcess);
         }
     }
 
-    public void executeNextProcess(){
+    private void executeNextProcess(){
         if(!cellsToProcess.isEmpty()){
             cellsToProcess.remove().executeLogicalSequence();
             executeNextProcess();
@@ -62,34 +64,42 @@ public class Board implements CellObserver{
 
     @Override
     public void reactToCellReveal(Cell revealedCell){
-        render();
+        if(hasLines){
+            render();
+        }else{
+            renderLineless();
+        }
     }
 
     @Override
     public void reactToCellMarked(Cell markedCell){
-        render();
+        if(hasLines){
+            render();
+        }else{
+            renderLineless();
+        }
     }
 
-    public void render() {
+    private void render(){
         clearScreen();
 
         System.out.println("Remaining mines in board: " + totalMineCounter + "\n");
 
         System.out.print("  ");
-        for (ExternalCounter line : verticalLines){
+        for(ExternalCounter line : verticalLines){
             System.out.print(line);
         }
         System.out.println();
 
-        for (int row = 0; row < cellsInBoard.length; row++){
+        for(int row = 0; row < cellsInBoard.length; row++){
             System.out.print(horizontalLines[row]);
-            for (int column = 0; column < cellsInBoard[row].length; column++) {
+            for(int column = 0; column < cellsInBoard[row].length; column++){
                 System.out.print(cellsInBoard[row][column]);
             }
             System.out.println();
         }
 
-        if (totalMineCounter.getRemainingNumberOfAdjacencies() == 0){
+        if(totalMineCounter.getRemainingNumberOfAdjacencies() == 0){
             System.out.println("\nCongratulations, the level has been completed!");
             System.out.print("\nPress 'ENTER' to finish");
             waitForUserInput.nextLine();
@@ -103,11 +113,75 @@ public class Board implements CellObserver{
         waitForUserInput.nextLine();
     }
 
+    private void renderLineless(){
+        clearScreen();
+
+        System.out.println("Remaining mines in board: " + totalMineCounter + "\n");
+
+        for(int row = 0; row < cellsInBoard.length; row++){
+            for(int column = 0; column < cellsInBoard[row].length; column++){
+                System.out.print(cellsInBoard[row][column]);
+            }
+            System.out.println();
+        }
+
+        if(totalMineCounter.getRemainingNumberOfAdjacencies() == 0){
+            System.out.println("\nCongratulations, the level has been completed!");
+            System.out.print("\nPress 'ENTER' to finish");
+            waitForUserInput.nextLine();
+
+            clearScreen();
+            waitForUserInput.close();
+            return;
+        }
+
+        System.out.print("\nPress 'ENTER' to continue");
+        waitForUserInput.nextLine();
+    }
+
+    public void start(EmptyCell firstStep){
+        setFirstStep(firstStep);
+        if(hasLines){
+            autoAdjacencySetter();
+            render();
+        }else{
+            autoAdjacencySetterLineless();
+            renderLineless();
+        }
+        executeNextProcess();
+    }
+
     // Only works for Tametsi level 9, could be useful to check other ways for other levels
-    public void autoAdjacencySetter(){
-        // Cell and Board to Cell adjacency
-        for (int row = 0; row < cellsInBoard.length; row++){
-            for (int column = 0; column < cellsInBoard[row].length; column++){
+    private void autoAdjacencySetter(){
+        cellAndBoardToCellAdjacency();
+
+        // Cell and Board to Line adjacency
+        for(int row = 0; row < cellsInBoard.length; row++){
+            for(int column = 0; column < cellsInBoard[row].length; column++){
+                verticalLines[column].addAdjacent(cellsInBoard[row][column]);
+                horizontalLines[row].addAdjacent(cellsInBoard[row][column]);
+
+                verticalLines[column].addBoard(this);
+            }
+
+            horizontalLines[row].addBoard(this);
+        }
+
+        // Total mine counter to Board adjacency
+        totalMineCounter.addBoard(this);
+    }
+
+    // Only works for Tametsi level 6, could be useful to check other ways for other levels
+    private void autoAdjacencySetterLineless(){
+        cellAndBoardToCellAdjacency();
+
+        // Total mine counter to Board adjacency
+        totalMineCounter.addBoard(this);
+    }
+
+    private void cellAndBoardToCellAdjacency(){
+        for(int row = 0; row < cellsInBoard.length; row++){
+            for(int column = 0; column < cellsInBoard[row].length; column++){
                 Cell currentCell = cellsInBoard[row][column];
 
                 addIfValidPosition(currentCell, row - 1, column - 1);
@@ -125,28 +199,13 @@ public class Board implements CellObserver{
                 currentCell.addBoard(this);
             }
         }
-
-        // Cell and Board to Line adjacency
-        for (int row = 0; row < cellsInBoard.length; row++){
-            for (int column = 0; column < cellsInBoard[row].length; column++){
-                verticalLines[column].addAdjacent(cellsInBoard[row][column]);
-                horizontalLines[row].addAdjacent(cellsInBoard[row][column]);
-
-                verticalLines[column].addBoard(this);
-            }
-
-            horizontalLines[row].addBoard(this);
-        }
-
-        // Total mine counter to Board adjacency
-        totalMineCounter.addBoard(this);
     }
 
     private void addIfValidPosition(Cell currentCell, int row, int column){
-        if (row < 0 || row >= horizontalLines.length) {
+        if(row < 0 || row >= horizontalLines.length){
             return;
         }
-        if (column < 0 || column >= verticalLines.length) {
+        if(column < 0 || column >= verticalLines.length){
             return;
         }
 
