@@ -5,12 +5,21 @@ public abstract class Cell implements AdjacentCell{
     protected ArrayList<Cell> remainingAdjacentCells;
     protected boolean revealed;
     protected boolean markedAsMine;
+    protected int horizontalSize;
+    protected int verticalSize;
 
-    public void markAsMine(){
-        if(!markedAsMine){
-            markedAsMine = true;
-            notifyAdjacentCells();
-        }
+    Cell(){
+        remainingAdjacentCells = new ArrayList<>();
+        horizontalSize = 1;
+        verticalSize = 1;
+    }
+
+    public int getHorizontalSize(){
+        return horizontalSize;
+    }
+
+    public int getVerticalSize(){
+        return verticalSize;
     }
 
     protected void notifyAdjacentCells(){

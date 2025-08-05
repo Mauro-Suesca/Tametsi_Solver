@@ -5,11 +5,17 @@ public class EmptyCell extends Cell{
     protected boolean unknown;
 
     EmptyCell(int remainingMines, boolean revealed, boolean unknown){
-        remainingAdjacentCells = new ArrayList<>();
+        super();
         this.remainingMines = remainingMines;
         this.revealed = revealed;
         this.unknown = unknown;
         this.markedAsMine = false;
+    }
+
+    EmptyCell(int remainingMines, boolean revealed, boolean unknown, int horizontalSize, int verticalSize){
+        this(remainingMines, revealed, unknown);
+        this.horizontalSize = horizontalSize;
+        this.verticalSize = verticalSize;
     }
 
     @Override public void reveal(){
