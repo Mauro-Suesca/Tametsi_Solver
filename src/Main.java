@@ -25,7 +25,7 @@ public class Main{
     }
 
     private static void level6(){
-        Board board = new Board(6, 5, 5, false);
+        Board board = new BoardLineless(6, 5, 5);
 
         board.addCell(new EmptyCell(1, false, false));
         board.addCell(new EmptyCell(1, true, false));
@@ -62,7 +62,7 @@ public class Main{
     }
 
     private static void level9(){
-        Board board = new Board(12, 6, 6, true);
+        BoardWithLines board = new BoardWithLines(12, 6, 6);
 
         board.addCell(new EmptyCell(2, false, false));
         board.addCell(new MineCell());
