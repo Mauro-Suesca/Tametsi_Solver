@@ -1,14 +1,25 @@
-import java.util.ArrayList;
-
 public class MineCell extends Cell{
     MineCell(){
-        remainingAdjacentCells = new ArrayList<>();
+        super();
         revealed = false;
         markedAsMine = false;
     }
 
-    public void reveal() throws GameOver{
+    MineCell(int horizontalSize, int verticalSize){
+        this();
+        this.horizontalSize = horizontalSize;
+        this.verticalSize = verticalSize;
+    }
+
+    @Override public void reveal() throws GameOver{
         throw new GameOver("Revealed a cell with a mine in it!");
+    }
+
+    @Override public void markAsMine(){
+        if(!markedAsMine){
+            markedAsMine = true;
+            notifyAdjacentCells();
+        }
     }
 
     @Override public void reactToCellReveal(Cell revealedCell){
