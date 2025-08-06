@@ -10,11 +10,13 @@ public abstract class Board implements CellObserver{
     protected int currentRow;
     protected int currentColumn;
     protected Scanner waitForUserInput;
+    protected boolean hasDiagonalAdjacencies;
 
-    Board(int numberOfMinesInBoard, int columns, int rows){
+    Board(int numberOfMinesInBoard, int columns, int rows, boolean hasDiagonalAdjacencies){
         this.totalMineCounter = new ExternalCounter(numberOfMinesInBoard);
         this.totalRows = rows;
         this.totalColumns = columns;
+        this.hasDiagonalAdjacencies = hasDiagonalAdjacencies;
         this.cellsInBoard = new Cell[columns][rows];
         this.cellsToProcess = new ArrayDeque<>();
         this.waitForUserInput = new Scanner(System.in);
@@ -22,19 +24,34 @@ public abstract class Board implements CellObserver{
     }
 
     public void addCell(Cell newCell){
-        if(++currentColumn == totalColumns){
-            currentColumn = 0;
-            currentRow++;
-        }
+        boolean placed = false;
 
-        if(cellsInBoard[currentRow][currentColumn] == null){
-            cellsInBoard[currentRow][currentColumn] = newCell;
+        while(!placed){
+            if(cellsInBoard[currentRow][currentColumn] == null){
+                cellsInBoard[currentRow][currentColumn] = newCell;
+
+                if(newCell.getHorizontalSize() > 1 || newCell.getVerticalSize() > 1){
+                    for(int row=0; row < newCell.getVerticalSize(); row++){
+                        for(int column=0; column < newCell.getHorizontalSize(); column++){
+                            if(row != 0 || column != 0){
+                                cellsInBoard[currentRow + row][currentColumn + column] = new CellExtension(newCell, column, row);
+                            }
+                        }
+                    }
+                }
+
+                placed = true;
+            }
+            if(++currentColumn == totalColumns){
+                currentColumn = 0;
+                currentRow++;
+            }
         }
     }
 
     public void resetCurrentRowAndColumn(){
         currentRow = 0;
-        currentColumn = -1;
+        currentColumn = 0;
     }
 
     public void addCellToProcess(EmptyCell cellToAdd){
@@ -66,14 +83,20 @@ public abstract class Board implements CellObserver{
 
     public void start(EmptyCell firstStep){
         setFirstStep(firstStep);
-        autoAdjacencySetter();
+
+        if(hasDiagonalAdjacencies){
+            autoAllAroundAdjacencySetter();
+        }else{
+            autoSideAdjacencySetter();
+        }
+        
         render();
         executeNextProcess();
     }
 
-    protected abstract void autoAdjacencySetter();
+    protected abstract void autoAllAroundAdjacencySetter();
 
-    protected void cellAndBoardToCellAdjacency(){
+    protected void allAroundCellAndBoardToCellAdjacency(){
         for(int row = 0; row < cellsInBoard.length; row++){
             for(int column = 0; column < cellsInBoard[row].length; column++){
                 Cell currentCell = cellsInBoard[row][column];
@@ -91,6 +114,33 @@ public abstract class Board implements CellObserver{
 
                 totalMineCounter.addAdjacent(currentCell);
                 currentCell.addBoard(this);
+            }
+        }
+    }
+
+    protected abstract void autoSideAdjacencySetter();
+
+    protected void sideCellAndBoardToCellAdjacency(){
+        for(int row = 0; row < cellsInBoard.length; row++){
+            for(int column = 0; column < cellsInBoard[row].length; column++){
+                Cell currentCell = cellsInBoard[row][column];
+
+                for(int adjacentRow=row-1; adjacentRow<row+currentCell.getVerticalSize()+1; adjacentRow+=currentCell.getVerticalSize()+1){
+                    for(int adjacentColumn=column; adjacentColumn<column+currentCell.getHorizontalSize(); adjacentColumn++){
+                        addIfValidPosition(currentCell, adjacentRow, adjacentColumn);
+                    }
+                }
+
+                for(int adjacentColumn=column-1; adjacentColumn<column+currentCell.getHorizontalSize()+1; adjacentColumn+=currentCell.getHorizontalSize()+1){
+                    for(int adjacentRow=row; adjacentRow<row+currentCell.getVerticalSize(); adjacentRow++){
+                        addIfValidPosition(currentCell, adjacentRow, adjacentColumn);
+                    }
+                }
+
+                if(!(currentCell instanceof CellExtension)){
+                    totalMineCounter.addAdjacent(currentCell);
+                    currentCell.addBoard(this);
+                }
             }
         }
     }
