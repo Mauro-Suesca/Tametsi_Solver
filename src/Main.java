@@ -19,13 +19,15 @@ public class Main{
             level6();
         }else if(level == 9){
             level9();
+        }else if(level == 12){
+            level12();
         }
         
         input.close();
     }
 
     private static void level6(){
-        Board board = new BoardLineless(6, 5, 5);
+        Board board = new BoardLineless(6, 5, 5, true);
 
         board.addCell(new EmptyCell(1, false, false));
         board.addCell(new EmptyCell(1, true, false));
@@ -62,7 +64,7 @@ public class Main{
     }
 
     private static void level9(){
-        BoardWithLines board = new BoardWithLines(12, 6, 6);
+        BoardWithLines board = new BoardWithLines(12, 6, 6, true);
 
         board.addCell(new EmptyCell(2, false, false));
         board.addCell(new MineCell());
@@ -123,6 +125,75 @@ public class Main{
         board.addHorizontalLine(new ExternalCounter(3));
         board.addHorizontalLine(new ExternalCounter(1));
         
+        board.start(firstStep);
+    }
+
+    private static void level12(){
+        Board board = new BoardLineless(18, 10, 10, false);
+
+        board.addCell(new EmptyCell(1, true, false));
+        board.addCell(new MineCell());
+        board.addCell(new MineCell(2, 2));
+        board.addCell(new MineCell(2, 2));
+        board.addCell(new EmptyCell(1, true, false));
+        board.addCell(new EmptyCell(1, false, false, 2, 2));
+        board.addCell(new MineCell());
+
+        board.addCell(new EmptyCell(3, true, false, 2, 2));
+        EmptyCell firstStep = new EmptyCell(1, true, false);
+        board.addCell(firstStep);
+        board.addCell(new EmptyCell(2, true, false));
+
+        board.addCell(new EmptyCell(1, false, false, 2, 2));
+        board.addCell(new EmptyCell(2, false, true, 2, 2));
+        board.addCell(new EmptyCell(1, false, false, 2, 2));
+        board.addCell(new EmptyCell(1, false, true));
+        board.addCell(new MineCell());
+
+        board.addCell(new MineCell());
+        board.addCell(new EmptyCell(1, true, true));
+        board.addCell(new EmptyCell(4, true, false, 2, 2));
+
+        board.addCell(new EmptyCell(3, true, false, 2, 2));
+        board.addCell(new EmptyCell(1, true, true));
+        board.addCell(new EmptyCell(1, true, false));
+        board.addCell(new MineCell());
+        board.addCell(new EmptyCell(2, true, false));
+        board.addCell(new EmptyCell(2, false, false));
+        board.addCell(new MineCell());
+
+        board.addCell(new MineCell());
+        board.addCell(new EmptyCell(3, false, false, 2, 2));
+        board.addCell(new MineCell(2, 2));
+        board.addCell(new MineCell(2, 2));
+        board.addCell(new MineCell());
+
+        board.addCell(new MineCell());
+        board.addCell(new EmptyCell(1, false, false));
+        board.addCell(new EmptyCell(1, true, false));
+        board.addCell(new EmptyCell(1, false, true));
+
+        board.addCell(new MineCell());
+        board.addCell(new EmptyCell(2, true, false, 2, 2));
+        board.addCell(new EmptyCell(2, false, true, 2, 2));
+        board.addCell(new EmptyCell(1, true, false, 2, 2));
+        board.addCell(new EmptyCell(2, false, false));
+        board.addCell(new MineCell());
+        board.addCell(new EmptyCell(1, true, false));
+
+        board.addCell(new MineCell());
+        board.addCell(new EmptyCell(2, false, false, 2, 2));
+        board.addCell(new EmptyCell(1, false, false));
+        
+        board.addCell(new EmptyCell(1, false, false));
+        board.addCell(new EmptyCell(0, false, false));
+        board.addCell(new EmptyCell(0, false, false));
+        board.addCell(new EmptyCell(1, false, false));
+        board.addCell(new MineCell());
+        board.addCell(new EmptyCell(1, true, false));
+        board.addCell(new EmptyCell(0, false, false));
+        board.addCell(new MineCell());
+
         board.start(firstStep);
     }
 }
