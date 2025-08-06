@@ -1,6 +1,6 @@
 public class BoardLineless extends Board{
-    BoardLineless(int numberOfMinesInBoard, int columns, int rows){
-        super(numberOfMinesInBoard, columns, rows);
+    BoardLineless(int numberOfMinesInBoard, int columns, int rows, boolean hasDiagonalAdjacencies){
+        super(numberOfMinesInBoard, columns, rows, hasDiagonalAdjacencies);
     }
 
     @Override protected void render(){
@@ -32,10 +32,17 @@ public class BoardLineless extends Board{
     /**
      * Only works for Tametsi level 6, could be useful to check other ways for other levels
      */
-    @Override protected void autoAdjacencySetter(){
-        cellAndBoardToCellAdjacency();
+    @Override protected void autoAllAroundAdjacencySetter(){
+        allAroundCellAndBoardToCellAdjacency();
 
-        // Total mine counter to Board adjacency
+        //Total mine counter to Board adjacency
+        totalMineCounter.addBoard(this);
+    }
+
+    @Override protected void autoSideAdjacencySetter(){
+        sideCellAndBoardToCellAdjacency();
+
+        //Total mine counter to Board adjacency
         totalMineCounter.addBoard(this);
     }
 }

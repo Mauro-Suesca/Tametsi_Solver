@@ -2,14 +2,14 @@ public class BoardWithLines extends Board{
     private ExternalCounter[] verticalLines;
     private ExternalCounter[] horizontalLines;
 
-    BoardWithLines(int numberOfMinesInBoard, int columns, int rows){
-        super(numberOfMinesInBoard, columns, rows);
+    BoardWithLines(int numberOfMinesInBoard, int columns, int rows, boolean hasDiagonalAdjacencies){
+        super(numberOfMinesInBoard, columns, rows, hasDiagonalAdjacencies);
         this.verticalLines = new ExternalCounter[columns];
         this.horizontalLines = new ExternalCounter[rows];
     }
 
     public void addVerticalLine(ExternalCounter newLine){
-        verticalLines[++currentColumn] = newLine;
+        verticalLines[currentColumn++] = newLine;
     }
 
     public void addHorizontalLine(ExternalCounter newLine){
@@ -52,10 +52,10 @@ public class BoardWithLines extends Board{
     /**
      * Only works for Tametsi level 9, could be useful to check other ways for other levels
      */
-    @Override protected void autoAdjacencySetter(){
-        cellAndBoardToCellAdjacency();
+    @Override protected void autoAllAroundAdjacencySetter(){
+        allAroundCellAndBoardToCellAdjacency();
 
-        // Cell and Board to Line adjacency
+        //Cell and Board to Line adjacency
         for(int row = 0; row < cellsInBoard.length; row++){
             for(int column = 0; column < cellsInBoard[row].length; column++){
                 verticalLines[column].addAdjacent(cellsInBoard[row][column]);
@@ -67,7 +67,26 @@ public class BoardWithLines extends Board{
             horizontalLines[row].addBoard(this);
         }
 
-        // Total mine counter to Board adjacency
+        //Total mine counter to Board adjacency
+        totalMineCounter.addBoard(this);
+    }
+
+    @Override protected void autoSideAdjacencySetter(){
+        sideCellAndBoardToCellAdjacency();
+
+        //Cell and Board to Line adjacency
+        for(int row = 0; row < cellsInBoard.length; row++){
+            for(int column = 0; column < cellsInBoard[row].length; column++){
+                verticalLines[column].addAdjacent(cellsInBoard[row][column]);
+                horizontalLines[row].addAdjacent(cellsInBoard[row][column]);
+
+                verticalLines[column].addBoard(this);
+            }
+
+            horizontalLines[row].addBoard(this);
+        }
+
+        //Total mine counter to Board adjacency
         totalMineCounter.addBoard(this);
     }
 }
