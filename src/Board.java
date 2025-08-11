@@ -1,9 +1,12 @@
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public abstract class Board implements CellObserver{
+    private static String DEFAULT_COLOR_ANSI = "\u001B[0m";
     protected Cell[][] cellsInBoard;
     protected ExternalCounter totalMineCounter;
+    protected ArrayList<ColorCounter> colorMineCounters;
     protected ArrayDeque<EmptyCell> cellsToProcess;
     protected int totalRows;
     protected int totalColumns;
@@ -13,7 +16,23 @@ public abstract class Board implements CellObserver{
     protected boolean hasDiagonalAdjacencies;
 
     Board(int numberOfMinesInBoard, int columns, int rows, boolean hasDiagonalAdjacencies){
-        this.totalMineCounter = new ExternalCounter(numberOfMinesInBoard);
+        this(columns, rows, hasDiagonalAdjacencies, new ColorCounter(numberOfMinesInBoard, "gris", DEFAULT_COLOR_ANSI));
+    }
+
+    Board(int columns, int rows, boolean hasDiagonalAdjacencies, ColorCounter ... colorMineCounters){
+        this(columns, rows, hasDiagonalAdjacencies);
+
+        int totalNumberOfMines = 0;
+        for(ColorCounter colorCounter : colorMineCounters){
+            this.colorMineCounters.add(colorCounter);
+            totalNumberOfMines += colorCounter.getRemainingMines();
+        }
+        
+        this.totalMineCounter = new ExternalCounter(totalNumberOfMines);
+    }
+
+    private Board(int columns, int rows, boolean hasDiagonalAdjacencies){
+        this.colorMineCounters = new ArrayList<>();
         this.totalRows = rows;
         this.totalColumns = columns;
         this.hasDiagonalAdjacencies = hasDiagonalAdjacencies;
@@ -28,6 +47,10 @@ public abstract class Board implements CellObserver{
 
         while(!placed){
             if(cellsInBoard[currentRow][currentColumn] == null){
+                if(newCell.getColorANSI().equals("")){
+                    newCell.addColor(colorMineCounters.get(0));
+                }
+
                 cellsInBoard[currentRow][currentColumn] = newCell;
 
                 if(newCell.getHorizontalSize() > 1 || newCell.getVerticalSize() > 1){

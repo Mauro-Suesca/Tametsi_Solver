@@ -8,6 +8,12 @@ public class BoardWithLines extends Board{
         this.horizontalLines = new ExternalCounter[rows];
     }
 
+    BoardWithLines(int columns, int rows, boolean hasDiagonalAdjacencies, ColorCounter ... colorMineCounters){
+        super(columns, rows, hasDiagonalAdjacencies, colorMineCounters);
+        this.verticalLines = new ExternalCounter[columns];
+        this.horizontalLines = new ExternalCounter[rows];
+    }
+
     public void addVerticalLine(ExternalCounter newLine){
         verticalLines[currentColumn++] = newLine;
     }
@@ -20,6 +26,14 @@ public class BoardWithLines extends Board{
         clearScreen();
 
         System.out.println("Minas faltantes en el tablero: " + totalMineCounter + "\n");
+
+        if(colorMineCounters.size() > 1){
+            for(ColorCounter colorCounter : colorMineCounters){
+                System.out.println("\u001B[0mMinas " + colorCounter.getColoredColor() + " faltantes en el tablero: " + colorCounter);
+            }
+        }
+
+        System.out.println();
 
         System.out.print("  ");
         for(ExternalCounter line : verticalLines){
@@ -35,8 +49,8 @@ public class BoardWithLines extends Board{
             System.out.println();
         }
 
-        if (totalMineCounter.getRemainingNumberOfAdjacencies() == 0){
-            System.out.println("\n¡Felicitaciones, se completó el nivel!");
+        if(totalMineCounter.getRemainingNumberOfAdjacencies() == 0){
+            System.out.println("\u001B[0m\n¡Felicitaciones, se completó el nivel!");
             System.out.print("\nPresiona 'ENTER' para terminar");
             waitForUserInput.nextLine();
 
@@ -45,7 +59,7 @@ public class BoardWithLines extends Board{
             return;
         }
 
-        System.out.print("\nPresiona 'ENTER' para continuar");
+        System.out.print("\u001B[0m\nPresiona 'ENTER' para continuar");
         waitForUserInput.nextLine();
     }
 
@@ -67,6 +81,11 @@ public class BoardWithLines extends Board{
             horizontalLines[row].addBoard(this);
         }
 
+        //ColorCounters to Board adjacency
+        for(ColorCounter colorCounter : colorMineCounters){
+            colorCounter.addBoard(this);
+        }
+
         //Total mine counter to Board adjacency
         totalMineCounter.addBoard(this);
     }
@@ -84,6 +103,11 @@ public class BoardWithLines extends Board{
             }
 
             horizontalLines[row].addBoard(this);
+        }
+
+        //ColorCounters to Board adjacency
+        for(ColorCounter colorCounter : colorMineCounters){
+            colorCounter.addBoard(this);
         }
 
         //Total mine counter to Board adjacency
