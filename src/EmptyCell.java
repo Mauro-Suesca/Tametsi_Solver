@@ -65,51 +65,51 @@ public class EmptyCell extends Cell{
 
     protected void basicCheckSharedCells(){      
         for(int i=0; i<remainingAdjacentCells.size(); i++){
-            EmptyCell currentPossibleSharerCell = null;
-            ArrayList<Cell> currentPossibleSharerCellAdjacencies = null;
-            boolean foundCompletelyShared = false;
+            ArrayList<EmptyCell> completelySharingCells = new ArrayList<>();
 
             Cell adjacentCell = remainingAdjacentCells.get(i);
             for(int j=0; j<adjacentCell.remainingAdjacentCells.size(); j++){
                 if(adjacentCell.remainingAdjacentCells.get(j).revealed){
-                    currentPossibleSharerCell = (EmptyCell)adjacentCell.remainingAdjacentCells.get(j);
-                    currentPossibleSharerCellAdjacencies = currentPossibleSharerCell.remainingAdjacentCells;
+                    EmptyCell currentPossibleSharerCell = (EmptyCell)adjacentCell.remainingAdjacentCells.get(j);
+                    ArrayList<Cell> currentPossibleSharerCellAdjacencies = currentPossibleSharerCell.remainingAdjacentCells;
 
                     if(this != adjacentCell && !currentPossibleSharerCell.unknown && this.remainingAdjacentCells.containsAll(currentPossibleSharerCellAdjacencies)){
-                        foundCompletelyShared = true;
-                        break;
+                        completelySharingCells.add(currentPossibleSharerCell);
+                    }else if(this != adjacentCell && !currentPossibleSharerCell.unknown && currentPossibleSharerCellAdjacencies.containsAll(this.remainingAdjacentCells)){
+                        board.addCellToProcess(currentPossibleSharerCell);
                     }
                 }
             }            
 
-            if(foundCompletelyShared){
-                int numberOfCellsOutsideOfSharedOnes = this.remainingAdjacentCells.size() - currentPossibleSharerCellAdjacencies.size();
-                int minesOutsideOfSharedOnes = this.remainingMines - currentPossibleSharerCell.remainingMines;
+            for(EmptyCell completelySharingCell : completelySharingCells){
+                ArrayList<Cell> completelySharingCellAdjacencies = completelySharingCell.remainingAdjacentCells;
+                int numberOfCellsOutsideOfSharedOnes = this.remainingAdjacentCells.size() - completelySharingCellAdjacencies.size();
+                int minesOutsideOfSharedOnes = this.remainingMines - completelySharingCell.remainingMines;
                 
                 if(minesOutsideOfSharedOnes == 0){
-                    for(int j=0; j<remainingAdjacentCells.size(); j++){
-                        adjacentCell = remainingAdjacentCells.get(j);
+                    for(int k=0; k<remainingAdjacentCells.size(); k++){
+                        adjacentCell = remainingAdjacentCells.get(k);
 
-                        if(!currentPossibleSharerCellAdjacencies.contains(adjacentCell)){
-                            if(j <= i){
+                        if(!completelySharingCellAdjacencies.contains(adjacentCell)){
+                            if(k <= i){
                                 i--;
                             }
 
                             adjacentCell.reveal();
-                            j--;
+                            k--;
                         }
                     }
                 }else if(minesOutsideOfSharedOnes == numberOfCellsOutsideOfSharedOnes){
-                    for(int j=0; j<remainingAdjacentCells.size(); j++){
-                        adjacentCell = remainingAdjacentCells.get(j);
+                    for(int k=0; k<remainingAdjacentCells.size(); k++){
+                        adjacentCell = remainingAdjacentCells.get(k);
 
-                        if(!currentPossibleSharerCellAdjacencies.contains(adjacentCell)){
-                            if(j <= i){
+                        if(!completelySharingCellAdjacencies.contains(adjacentCell)){
+                            if(k <= i){
                                 i--;
                             }
 
                             adjacentCell.markAsMine();
-                            j--;
+                            k--;
                         }
                     }
                 }
