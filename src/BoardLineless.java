@@ -3,10 +3,22 @@ public class BoardLineless extends Board{
         super(numberOfMinesInBoard, columns, rows, hasDiagonalAdjacencies);
     }
 
+    BoardLineless(int columns, int rows, boolean hasDiagonalAdjacencies, ColorCounter ... colorMineCounters){
+        super(columns, rows, hasDiagonalAdjacencies, colorMineCounters);
+    }
+
     @Override protected void render(){
         clearScreen();
 
-        System.out.println("Remaining mines in board: " + totalMineCounter + "\n");
+        System.out.println("Remaining mines in board: " + totalMineCounter);
+
+        if(colorMineCounters.size() > 1){
+            for(ColorCounter colorCounter : colorMineCounters){
+                System.out.println("\u001B[0mRemaining " + colorCounter.getColoredColor() + " mines in board: " + colorCounter);
+            }
+        }
+
+        System.out.println();
 
         for(int row = 0; row < cellsInBoard.length; row++){
             for(int column = 0; column < cellsInBoard[row].length; column++){
@@ -16,7 +28,7 @@ public class BoardLineless extends Board{
         }
 
         if(totalMineCounter.getRemainingNumberOfAdjacencies() == 0){
-            System.out.println("\nCongratulations, the level has been completed!");
+            System.out.println("\u001B[0m\nCongratulations, the level has been completed!");
             System.out.print("\nPress 'ENTER' to finish");
             waitForUserInput.nextLine();
 
@@ -25,7 +37,7 @@ public class BoardLineless extends Board{
             return;
         }
 
-        System.out.print("\nPress 'ENTER' to continue");
+        System.out.print("\u001B[0m\nPress 'ENTER' to continue");
         waitForUserInput.nextLine();
     }
 
@@ -35,12 +47,22 @@ public class BoardLineless extends Board{
     @Override protected void autoAllAroundAdjacencySetter(){
         allAroundCellAndBoardToCellAdjacency();
 
+        //ColorCounters to Board adjacency
+        for(ColorCounter colorCounter : colorMineCounters){
+            colorCounter.addBoard(this);
+        }
+
         //Total mine counter to Board adjacency
         totalMineCounter.addBoard(this);
     }
 
     @Override protected void autoSideAdjacencySetter(){
         sideCellAndBoardToCellAdjacency();
+
+        //ColorCounters to Board adjacency
+        for(ColorCounter colorCounter : colorMineCounters){
+            colorCounter.addBoard(this);
+        }
 
         //Total mine counter to Board adjacency
         totalMineCounter.addBoard(this);
