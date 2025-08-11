@@ -16,7 +16,7 @@ public abstract class Board implements CellObserver{
     protected boolean hasDiagonalAdjacencies;
 
     Board(int numberOfMinesInBoard, int columns, int rows, boolean hasDiagonalAdjacencies){
-        this(columns, rows, hasDiagonalAdjacencies, new ColorCounter(numberOfMinesInBoard, "gris", DEFAULT_COLOR_ANSI));
+        this(columns, rows, hasDiagonalAdjacencies, new ColorCounter(numberOfMinesInBoard, "grises", DEFAULT_COLOR_ANSI));
     }
 
     Board(int columns, int rows, boolean hasDiagonalAdjacencies, ColorCounter ... colorMineCounters){
