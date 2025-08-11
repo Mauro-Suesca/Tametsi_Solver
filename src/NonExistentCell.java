@@ -1,10 +1,7 @@
-public class NonExistentCell extends CellExtension{
+public class NonExistentCell extends ExternalCounter{
     NonExistentCell(){
-        super(1, 1);
-    }
-
-    @Override public void addAdjacent(Cell otherCell){
-        return;
+        super(0);
+        this.unknown = true;
     }
 
     @Override public String toString(){
