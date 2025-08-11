@@ -11,6 +11,15 @@ public class MineCell extends Cell{
         this.verticalSize = verticalSize;
     }
 
+    MineCell(ColorCounter color, int horizontalSize, int verticalSize){
+        this(horizontalSize, verticalSize);
+        this.addColor(color);
+    }
+
+    MineCell(ColorCounter color){
+        this(color, 1, 1);
+    }
+
     @Override public void reveal() throws GameOver{
         throw new GameOver("¡Se reveló una celda con una mina!");
     }

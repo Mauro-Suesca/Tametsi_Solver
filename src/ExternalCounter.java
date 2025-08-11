@@ -1,17 +1,11 @@
 public class ExternalCounter extends EmptyCell{
     ExternalCounter(int remainingMines){
         super(remainingMines, true, false);
+        this.colorANSI = "\u001B[0m";
     }
 
     @Override public void reveal(){
         return;
-    }
-
-    @Override public void executeLogicalSequence(){
-        countRemaining();
-        basicCheckSharedCells();
-        checkHypothesesForContradictions();
-        proofByCases();
     }
 
     public int getRemainingNumberOfAdjacencies(){
