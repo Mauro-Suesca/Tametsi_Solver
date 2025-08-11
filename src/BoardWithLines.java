@@ -16,10 +16,12 @@ public class BoardWithLines extends Board{
 
     public void addVerticalLine(ExternalCounter newLine){
         verticalLines[currentColumn++] = newLine;
+        this.addCellToProcess(newLine);
     }
 
     public void addHorizontalLine(ExternalCounter newLine){
         horizontalLines[currentRow++] = newLine;
+        this.addCellToProcess(newLine);
     }
 
     @Override protected void render(){
