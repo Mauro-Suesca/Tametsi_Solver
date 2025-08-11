@@ -53,6 +53,10 @@ public abstract class Board implements CellObserver{
 
                 cellsInBoard[currentRow][currentColumn] = newCell;
 
+                if(newCell.revealed){
+                    this.addCellToProcess((EmptyCell)newCell);
+                }
+
                 if(newCell.getHorizontalSize() > 1 || newCell.getVerticalSize() > 1){
                     for(int row=0; row < newCell.getVerticalSize(); row++){
                         for(int column=0; column < newCell.getHorizontalSize(); column++){
@@ -81,12 +85,6 @@ public abstract class Board implements CellObserver{
         cellsToProcess.add(cellToAdd);
     }
 
-    protected void setFirstStep(EmptyCell firstCellToProcess){
-        if(cellsToProcess.size() == 0){
-            cellsToProcess.add(firstCellToProcess);
-        }
-    }
-
     protected void executeNextProcess(){
         if(!cellsToProcess.isEmpty()){
             cellsToProcess.remove().executeLogicalSequence();
@@ -104,9 +102,7 @@ public abstract class Board implements CellObserver{
 
     protected abstract void render();
 
-    public void start(EmptyCell firstStep){
-        setFirstStep(firstStep);
-
+    public void start(){
         if(hasDiagonalAdjacencies){
             autoAllAroundAdjacencySetter();
         }else{

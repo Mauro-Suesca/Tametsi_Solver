@@ -38,8 +38,7 @@ public class Main{
         board.addCell(new MineCell());
 
         board.addCell(new MineCell());
-        EmptyCell firstStep = new EmptyCell(1, true, false);
-        board.addCell(firstStep);
+        board.addCell(new EmptyCell(1, true, false));
         board.addCell(new EmptyCell(1, true, false));
         board.addCell(new EmptyCell(3, true, false));
         board.addCell(new MineCell());
@@ -62,7 +61,7 @@ public class Main{
         board.addCell(new EmptyCell(0, false, false));
         board.addCell(new EmptyCell(0, false, false));
 
-        board.start(firstStep);
+        board.start();
     }
 
     private static void level9(){
@@ -117,8 +116,7 @@ public class Main{
         board.addVerticalLine(new ExternalCounter(2));
         board.addVerticalLine(new ExternalCounter(2));
         board.addVerticalLine(new ExternalCounter(2));
-        ExternalCounter firstStep = new ExternalCounter(0);
-        board.addVerticalLine(firstStep);
+        board.addVerticalLine(new ExternalCounter(0));
 
         board.addHorizontalLine(new ExternalCounter(1));
         board.addHorizontalLine(new ExternalCounter(1));
@@ -127,7 +125,7 @@ public class Main{
         board.addHorizontalLine(new ExternalCounter(3));
         board.addHorizontalLine(new ExternalCounter(1));
         
-        board.start(firstStep);
+        board.start();
     }
 
     private static void level12(){
@@ -142,8 +140,7 @@ public class Main{
         board.addCell(new MineCell());
 
         board.addCell(new EmptyCell(3, true, false, 2, 2));
-        EmptyCell firstStep = new EmptyCell(1, true, false);
-        board.addCell(firstStep);
+        board.addCell(new EmptyCell(1, true, false));
         board.addCell(new EmptyCell(2, true, false));
 
         board.addCell(new EmptyCell(1, false, false, 2, 2));
@@ -196,7 +193,7 @@ public class Main{
         board.addCell(new EmptyCell(0, false, false));
         board.addCell(new MineCell());
 
-        board.start(firstStep);
+        board.start();
     }
 
     private static void level13(){
@@ -234,8 +231,7 @@ public class Main{
         board.addCell(new MineCell(gray));
         board.addCell(new EmptyCell(gray, 4, false, false));
 
-        EmptyCell firstStep = new EmptyCell(blue, 4, true, false);
-        board.addCell(firstStep);
+        board.addCell(new EmptyCell(blue, 4, true, false));
         board.addCell(new MineCell(blue));
         board.addCell(new EmptyCell(gray, 4, false, false));
         board.addCell(new MineCell(gray));
@@ -265,6 +261,6 @@ public class Main{
         board.addHorizontalLine(new ExternalCounter(4));
         board.addHorizontalLine(new NonExistentCell());
 
-        board.start(firstStep);
+        board.start();
     }
 }
