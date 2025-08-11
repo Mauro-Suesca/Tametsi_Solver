@@ -12,10 +12,20 @@ public class EmptyCell extends Cell{
         this.markedAsMine = false;
     }
 
+    EmptyCell(ColorCounter color, int remainingMines, boolean revealed, boolean unknown){
+        this(remainingMines, revealed, unknown);
+        this.addColor(color);
+    }
+
     EmptyCell(int remainingMines, boolean revealed, boolean unknown, int horizontalSize, int verticalSize){
         this(remainingMines, revealed, unknown);
         this.horizontalSize = horizontalSize;
         this.verticalSize = verticalSize;
+    }
+
+    EmptyCell(ColorCounter color, int remainingMines, boolean revealed, boolean unknown, int horizontalSize, int verticalSize){
+        this(remainingMines, revealed, unknown, horizontalSize, verticalSize);
+        this.addColor(color);
     }
 
     @Override public void reveal(){
@@ -183,7 +193,7 @@ public class EmptyCell extends Cell{
 
     @Override public String toString(){
         if(revealed){
-            return (unknown ? "? " : String.valueOf(remainingMines) + " ");
+            return colorANSI + (unknown ? "? " : String.valueOf(remainingMines) + " ");
         }else{
             return super.toString();
         }

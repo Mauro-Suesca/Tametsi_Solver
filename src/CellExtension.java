@@ -3,14 +3,11 @@ public class CellExtension extends Cell{
     private int horizontalPosition;
     private int verticalPosition;
 
-    CellExtension(int horizontalPosition, int verticalPosition){
+    CellExtension(Cell originCell, int horizontalPosition, int verticalPosition){
         this.horizontalPosition = horizontalPosition;
         this.verticalPosition = verticalPosition;
-    }
-
-    CellExtension(Cell originCell, int horizontalPosition, int verticalPosition){
-        this(horizontalPosition, verticalPosition);
         this.originCell = originCell;
+        this.colorANSI = originCell.getColorANSI();
     }
 
     @Override public void reveal(){
@@ -41,16 +38,20 @@ public class CellExtension extends Cell{
     }
 
     @Override public String toString(){
+        String result = colorANSI;
+
         if(horizontalPosition == verticalPosition){
-            return "┘ ";
+            result += "┘ ";
         }else if(horizontalPosition == 0){
-            return "└ ";
+            result += "└ ";
         }else if(verticalPosition == 0){
-            return "┐ ";
+            result += "┐ ";
         }else if(horizontalPosition > verticalPosition){
-            return "│ ";
+            result += "│ ";
         }else{
-            return "─ ";
+            result += "─ ";
         }
+
+        return result;
     }
 }
