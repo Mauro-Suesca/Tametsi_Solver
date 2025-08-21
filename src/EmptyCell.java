@@ -92,37 +92,13 @@ public class EmptyCell extends Cell{
             }            
 
             for(EmptyCell completelySharingCell : completelySharingCells){
-                ArrayList<Cell> completelySharingCellAdjacencies = completelySharingCell.remainingAdjacentCells;
-                int numberOfCellsOutsideOfSharedOnes = this.remainingAdjacentCells.size() - completelySharingCellAdjacencies.size();
+                ArrayList<Cell> adjacenciesOutsideOfSharingCell = new ArrayList<>(this.remainingAdjacentCells);
+                adjacenciesOutsideOfSharingCell.removeAll(completelySharingCell.remainingAdjacentCells);
                 int minesOutsideOfSharedOnes = this.remainingMines - completelySharingCell.remainingMines;
                 
-                if(minesOutsideOfSharedOnes == 0){
-                    for(int k=0; k<remainingAdjacentCells.size(); k++){
-                        adjacentCell = remainingAdjacentCells.get(k);
+                ImaginaryCell cellWithAdjacenciesOutsideOfSharingCell = new ImaginaryCell(minesOutsideOfSharedOnes, adjacenciesOutsideOfSharingCell);
 
-                        if(!completelySharingCellAdjacencies.contains(adjacentCell)){
-                            if(k <= i){
-                                i--;
-                            }
-
-                            adjacentCell.reveal();
-                            k--;
-                        }
-                    }
-                }else if(minesOutsideOfSharedOnes == numberOfCellsOutsideOfSharedOnes){
-                    for(int k=0; k<remainingAdjacentCells.size(); k++){
-                        adjacentCell = remainingAdjacentCells.get(k);
-
-                        if(!completelySharingCellAdjacencies.contains(adjacentCell)){
-                            if(k <= i){
-                                i--;
-                            }
-
-                            adjacentCell.markAsMine();
-                            k--;
-                        }
-                    }
-                }
+                board.addImaginaryCell(cellWithAdjacenciesOutsideOfSharingCell);
             }
         }
     }
@@ -189,6 +165,34 @@ public class EmptyCell extends Cell{
     //TODO Implement logic for proof by cases
     protected void proofByCases(){
 
+    }
+
+    @Override public boolean equals(Object otherObject){
+        if(!(otherObject instanceof EmptyCell)){
+            return false;
+        }
+
+        EmptyCell otherCell = (EmptyCell)otherObject;
+
+        if(otherCell.revealed != this.revealed){
+            return false;
+        }
+
+        if(otherCell.unknown != this.unknown){
+            return false;
+        }
+
+        if(otherCell.remainingAdjacentCells.size() != this.remainingAdjacentCells.size()){
+            return false;
+        }        
+
+        for(int i=0; i<remainingAdjacentCells.size(); i++){
+            if(otherCell.remainingAdjacentCells.get(i) != this.remainingAdjacentCells.get(i)){
+                return false;
+            }
+        }
+
+        return true;
     }
 
     @Override public String toString(){
