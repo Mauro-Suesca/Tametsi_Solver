@@ -52,6 +52,10 @@ public class EmptyCell extends Cell{
     public void startLogicalSequence(){
         if(revealed && !unknown){
             board.addOperationToProcess(new CountRemainingOperation(this));
+            board.addOperationToProcess(new BasicCheckSharedCellsOperation(this));
+            board.addOperationToProcess(new IntermediateCheckSharedCellsOperation(this));
+            board.addOperationToProcess(new ProofByContradictionOperation(this));
+            board.addOperationToProcess(new ProofByCasesOperation(this));
         }
     }
 
@@ -68,8 +72,6 @@ public class EmptyCell extends Cell{
                 i--;
             }
         }
-
-        board.addOperationToProcess(new BasicCheckSharedCellsOperation(this));
     }
 
     public void basicCheckSharedCells(){      
@@ -111,8 +113,6 @@ public class EmptyCell extends Cell{
                 }
             }
         }
-
-       board.addOperationToProcess(new ProofByContradictionOperation(this));
     }
     
     public void intermediateCheckSharedCells(){
@@ -131,8 +131,6 @@ public class EmptyCell extends Cell{
                 }
             }
         }
-
-        board.addOperationToProcess(new ProofByCasesOperation(this));
     }
 
     private ArrayList<EmptyCell> findCompletelySharingCells(Cell adjacentCell){
@@ -187,8 +185,6 @@ public class EmptyCell extends Cell{
                 }
             }
         }
-
-        board.addOperationToProcess(new IntermediateCheckSharedCellsOperation(this));
     }
 
     @Override public SimulatedCell simulateCell(SimulatedBoard simulatedBoard){
