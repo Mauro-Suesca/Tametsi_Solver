@@ -95,7 +95,7 @@ public abstract class Board implements CellObserver{
     }
 
     protected void executeNextProcess(){
-        if(!cellsToProcess.isEmpty()){
+        if(!cellsToProcess.isEmpty() && totalMineCounter.getRemainingNumberOfAdjacencies() != 0){
             cellsToProcess.remove().executeLogicalSequence();
             executeNextProcess();
         }

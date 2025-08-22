@@ -167,34 +167,6 @@ public class EmptyCell extends Cell{
 
     }
 
-    @Override public boolean equals(Object otherObject){
-        if(!(otherObject instanceof EmptyCell)){
-            return false;
-        }
-
-        EmptyCell otherCell = (EmptyCell)otherObject;
-
-        if(otherCell.revealed != this.revealed){
-            return false;
-        }
-
-        if(otherCell.unknown != this.unknown){
-            return false;
-        }
-
-        if(otherCell.remainingAdjacentCells.size() != this.remainingAdjacentCells.size()){
-            return false;
-        }        
-
-        for(int i=0; i<remainingAdjacentCells.size(); i++){
-            if(otherCell.remainingAdjacentCells.get(i) != this.remainingAdjacentCells.get(i)){
-                return false;
-            }
-        }
-
-        return true;
-    }
-
     @Override public String toString(){
         if(revealed){
             return colorANSI + (unknown ? "? " : String.valueOf(remainingMines) + " ");
