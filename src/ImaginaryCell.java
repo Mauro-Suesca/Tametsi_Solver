@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class ImaginaryCell extends EmptyCell{
     private ArrayList<Cell> originalAdjacencies;
-
+    
     ImaginaryCell(int remainingMines, ArrayList<Cell> remainingAdjacentCells){
         super(remainingMines, true, false);
         this.originalAdjacencies = remainingAdjacentCells;
@@ -17,7 +17,7 @@ public class ImaginaryCell extends EmptyCell{
             this.addAdjacent(cell);
         }
 
-        this.board.addCellToProcess(this);
+        this.board.addOperationToProcess(new StartOperation(this));
     }
 
     @Override public boolean equals(Object otherObject){
