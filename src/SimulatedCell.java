@@ -20,7 +20,7 @@ public abstract class SimulatedCell{
     }
 
     public boolean isSameOriginalCell(Cell possibleOriginalCell){
-        return this.originalCell.equals(possibleOriginalCell);
+        return this.originalCell == possibleOriginalCell;
     }
 
     public abstract void reactToCellMarkedAsEmpty(SimulatedCell emptyCell);

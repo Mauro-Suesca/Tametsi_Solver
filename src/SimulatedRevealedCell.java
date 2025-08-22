@@ -81,7 +81,7 @@ public class SimulatedRevealedCell extends SimulatedCell{
         }
 
         SimulatedRevealedCell otherCell = (SimulatedRevealedCell)otherObject;
-        if(otherCell.board.equals(this.board) && otherCell.originalCell.equals(this.originalCell)){
+        if(otherCell.board.equals(this.board) && otherCell.originalCell == this.originalCell){
             return true;
         }
 
