@@ -24,4 +24,14 @@ public abstract class LogicalOperation implements Comparable<LogicalOperation>{
             return 1;
         }
     }
+
+    @Override public boolean equals(Object otherObject){
+        if(!(otherObject instanceof LogicalOperation)){
+            return false;
+        }
+
+        LogicalOperation otherOperation = (LogicalOperation)otherObject;
+
+        return this.type == otherOperation.type && this.callingCell == otherOperation.callingCell;
+    }
 }
