@@ -31,6 +31,30 @@ This project's purpose is to discover and implement an algorithm capable of solv
 ![image](./resources/level20_unsolved.png)
 ![image](./resources/level20_solved.png)
 
+## Level 21
+![image](./resources/level21_unsolved.png)
+![image](./resources/level21_solved.png)
+
+## Level 23
+![image](./resources/level23_unsolved.png)
+![image](./resources/level23_solved.png)
+
+## Level 25
+![image](./resources/level25_unsolved.png)
+![image](./resources/level25_solved.png)
+
+## Level 27
+![image](./resources/level27_unsolved.png)
+![image](./resources/level27_solved.png)
+
+## Level 28
+![image](./resources/level28_unsolved.png)
+![image](./resources/level28_solved.png)
+
+## Level 30
+![image](./resources/level30_unsolved.png)
+![image](./resources/level30_solved.png)
+
     Official Reference:
     Tametsi
     Available on Steam
