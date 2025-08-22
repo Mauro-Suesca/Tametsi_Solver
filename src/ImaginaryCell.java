@@ -29,15 +29,14 @@ public class ImaginaryCell extends EmptyCell{
                 return false;
             }
 
-            //I have no clue why, but if I replace this try catch with a check to see if both lists have the same size, the code becomes SLOWER, so I'm leaving it in
-            try{
-                for(int i=0; i<this.remainingAdjacentCells.size(); i++){
-                    if(otherCell.remainingAdjacentCells.get(i) != this.remainingAdjacentCells.get(i)){
-                        return false;
-                    }
-                }
-            }catch(IndexOutOfBoundsException e){
+            if(otherCell.remainingAdjacentCells.size() != this.remainingAdjacentCells.size()){
                 return false;
+            }
+
+            for(int i=0; i<this.remainingAdjacentCells.size(); i++){
+                if(otherCell.remainingAdjacentCells.get(i) != this.remainingAdjacentCells.get(i)){
+                    return false;
+                }
             }
 
             return true;
