@@ -91,11 +91,13 @@ public abstract class Board implements CellObserver{
     }
 
     public void addOperationToProcess(LogicalOperation operationToAdd){
-        operationToProcess.add(operationToAdd);
+        if(!operationToProcess.contains(operationToAdd)){
+            operationToProcess.add(operationToAdd);
+        }
     }
 
     protected void executeNextProcess(){
-        if(!operationToProcess.isEmpty() && totalMineCounter.getRemainingNumberOfAdjacencies() > 0){
+        if(!operationToProcess.isEmpty()){
             operationToProcess.poll().executeOperation();
             executeNextProcess();
         }
