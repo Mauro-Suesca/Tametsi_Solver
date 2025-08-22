@@ -1,5 +1,5 @@
-import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 import java.util.Scanner;
 
 public abstract class Board implements CellObserver{
@@ -7,7 +7,7 @@ public abstract class Board implements CellObserver{
     protected Cell[][] cellsInBoard;
     protected ExternalCounter totalMineCounter;
     protected ArrayList<ColorCounter> colorMineCounters;
-    protected ArrayDeque<EmptyCell> cellsToProcess;
+    protected PriorityQueue<LogicalOperation> operationToProcess;
     protected ArrayList<ImaginaryCell> existingImaginaryCells;
     protected int totalRows;
     protected int totalColumns;
@@ -38,7 +38,7 @@ public abstract class Board implements CellObserver{
         this.totalColumns = columns;
         this.hasDiagonalAdjacencies = hasDiagonalAdjacencies;
         this.cellsInBoard = new Cell[columns][rows];
-        this.cellsToProcess = new ArrayDeque<>();
+        this.operationToProcess = new PriorityQueue<>();
         this.existingImaginaryCells = new ArrayList<>();
         this.waitForUserInput = new Scanner(System.in);
         resetCurrentRowAndColumn();
@@ -56,7 +56,7 @@ public abstract class Board implements CellObserver{
                 cellsInBoard[currentRow][currentColumn] = newCell;
 
                 if(newCell.revealed){
-                    this.addCellToProcess((EmptyCell)newCell);
+                    this.addOperationToProcess(new StartOperation((EmptyCell)newCell));
                 }
 
                 if(newCell.getHorizontalSize() > 1 || newCell.getVerticalSize() > 1){
@@ -90,13 +90,13 @@ public abstract class Board implements CellObserver{
         }
     }
 
-    public void addCellToProcess(EmptyCell cellToAdd){
-        cellsToProcess.add(cellToAdd);
+    public void addOperationToProcess(LogicalOperation operationToAdd){
+        operationToProcess.add(operationToAdd);
     }
 
     protected void executeNextProcess(){
-        if(!cellsToProcess.isEmpty() && totalMineCounter.getRemainingNumberOfAdjacencies() != 0){
-            cellsToProcess.remove().executeLogicalSequence();
+        if(!operationToProcess.isEmpty() && totalMineCounter.getRemainingNumberOfAdjacencies() > 0){
+            operationToProcess.poll().executeOperation();
             executeNextProcess();
         }
     }
