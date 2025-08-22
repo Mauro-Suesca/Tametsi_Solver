@@ -30,8 +30,8 @@ public class EmptyCell extends Cell{
 
     @Override public void reveal(){
         if(!revealed){
-            revealed = true;   
-            board.addCellToProcess(this);         
+            revealed = true; 
+            board.addOperationToProcess(new StartOperation(this));       
             notifyAdjacentCells();
         }
     }
@@ -41,25 +41,22 @@ public class EmptyCell extends Cell{
     }
 
     @Override public void reactToCellReveal(Cell revealedCell){
-        board.addCellToProcess(this);
+        board.addOperationToProcess(new StartOperation(this));
     }
 
     @Override public void reactToCellMarked(Cell markedCell){
         remainingMines--;
-        board.addCellToProcess(this);
+        board.addOperationToProcess(new StartOperation(this));
     }
 
-    public void executeLogicalSequence(){
+    public void startLogicalSequence(){
         if(revealed && !unknown){
-            countRemaining();
-            basicCheckSharedCells();
-            checkHypothesesForContradictions();
-            proofByCases();
+            board.addOperationToProcess(new CountRemainingOperation(this));
         }
     }
 
     //Direct proof
-    protected void countRemaining(){
+    public void countRemaining(){
         if(remainingMines == 0){
             for(int i=0; i<remainingAdjacentCells.size(); i++){
                 remainingAdjacentCells.get(i).reveal();
@@ -71,40 +68,94 @@ public class EmptyCell extends Cell{
                 i--;
             }
         }
+
+        board.addOperationToProcess(new BasicCheckSharedCellsOperation(this));
     }
 
-    protected void basicCheckSharedCells(){      
+    public void basicCheckSharedCells(){      
         for(int i=0; i<remainingAdjacentCells.size(); i++){
-            ArrayList<EmptyCell> completelySharingCells = new ArrayList<>();
-
             Cell adjacentCell = remainingAdjacentCells.get(i);
-            for(int j=0; j<adjacentCell.remainingAdjacentCells.size(); j++){
-                if(adjacentCell.remainingAdjacentCells.get(j).revealed){
-                    EmptyCell currentPossibleSharerCell = (EmptyCell)adjacentCell.remainingAdjacentCells.get(j);
-                    ArrayList<Cell> currentPossibleSharerCellAdjacencies = currentPossibleSharerCell.remainingAdjacentCells;
+            ArrayList<EmptyCell> completelySharingCells = findCompletelySharingCells(adjacentCell);
 
-                    if(this != adjacentCell && !currentPossibleSharerCell.unknown && this.remainingAdjacentCells.containsAll(currentPossibleSharerCellAdjacencies)){
-                        completelySharingCells.add(currentPossibleSharerCell);
-                    }else if(this != adjacentCell && !currentPossibleSharerCell.unknown && currentPossibleSharerCellAdjacencies.containsAll(this.remainingAdjacentCells)){
-                        board.addCellToProcess(currentPossibleSharerCell);
+            for(EmptyCell completelySharingCell : completelySharingCells){
+                ArrayList<Cell> completelySharingCellAdjacencies = completelySharingCell.remainingAdjacentCells;
+                int numberOfCellsOutsideOfSharedOnes = this.remainingAdjacentCells.size() - completelySharingCellAdjacencies.size();
+                int minesOutsideOfSharedOnes = this.remainingMines - completelySharingCell.remainingMines;
+                
+                if(minesOutsideOfSharedOnes == 0){
+                    for(int k=0; k<remainingAdjacentCells.size(); k++){
+                        adjacentCell = remainingAdjacentCells.get(k);
+
+                        if(!completelySharingCellAdjacencies.contains(adjacentCell)){
+                            if(k <= i){
+                                i--;
+                            }
+
+                            adjacentCell.reveal();
+                            k--;
+                        }
+                    }
+                }else if(minesOutsideOfSharedOnes == numberOfCellsOutsideOfSharedOnes){
+                    for(int k=0; k<remainingAdjacentCells.size(); k++){
+                        adjacentCell = remainingAdjacentCells.get(k);
+
+                        if(!completelySharingCellAdjacencies.contains(adjacentCell)){
+                            if(k <= i){
+                                i--;
+                            }
+
+                            adjacentCell.markAsMine();
+                            k--;
+                        }
                     }
                 }
-            }            
+            }
+        }
+
+       board.addOperationToProcess(new ProofByContradictionOperation(this));
+    }
+    
+    public void intermediateCheckSharedCells(){
+        for(int i=0; i<remainingAdjacentCells.size(); i++){
+            ArrayList<EmptyCell> completelySharingCells = findCompletelySharingCells(remainingAdjacentCells.get(i));
 
             for(EmptyCell completelySharingCell : completelySharingCells){
                 ArrayList<Cell> adjacenciesOutsideOfSharingCell = new ArrayList<>(this.remainingAdjacentCells);
                 adjacenciesOutsideOfSharingCell.removeAll(completelySharingCell.remainingAdjacentCells);
                 int minesOutsideOfSharedOnes = this.remainingMines - completelySharingCell.remainingMines;
                 
-                ImaginaryCell cellWithAdjacenciesOutsideOfSharingCell = new ImaginaryCell(minesOutsideOfSharedOnes, adjacenciesOutsideOfSharingCell);
+                if(adjacenciesOutsideOfSharingCell.size() > 0){
+                    ImaginaryCell cellWithAdjacenciesOutsideOfSharingCell = new ImaginaryCell(minesOutsideOfSharedOnes, adjacenciesOutsideOfSharingCell);
 
-                board.addImaginaryCell(cellWithAdjacenciesOutsideOfSharingCell);
+                    board.addImaginaryCell(cellWithAdjacenciesOutsideOfSharingCell);
+                }
             }
         }
+
+        board.addOperationToProcess(new ProofByCasesOperation(this));
+    }
+
+    private ArrayList<EmptyCell> findCompletelySharingCells(Cell adjacentCell){
+        ArrayList<EmptyCell> completelySharingCells = new ArrayList<>();
+
+        for(int i=0; i<adjacentCell.remainingAdjacentCells.size(); i++){
+            if(adjacentCell.remainingAdjacentCells.get(i).revealed){
+                EmptyCell currentPossibleSharerCell = (EmptyCell)adjacentCell.remainingAdjacentCells.get(i);
+                ArrayList<Cell> currentPossibleSharerCellAdjacencies = currentPossibleSharerCell.remainingAdjacentCells;
+
+                if(this != adjacentCell && !currentPossibleSharerCell.unknown && this.remainingAdjacentCells.containsAll(currentPossibleSharerCellAdjacencies)){
+                    completelySharingCells.add(currentPossibleSharerCell);
+                }else if(this != adjacentCell && !currentPossibleSharerCell.unknown && currentPossibleSharerCellAdjacencies.containsAll(this.remainingAdjacentCells)){
+                    board.addOperationToProcess(new StartOperation(currentPossibleSharerCell));
+                }
+            }
+        }
+
+        return completelySharingCells;
     }
 
     //Proof by contradiction
-    protected void checkHypothesesForContradictions(){
+    public void checkHypothesesForContradictions(){
         boolean hypothesisIsHasMine;
         
         if(remainingMines == 0){
@@ -136,6 +187,8 @@ public class EmptyCell extends Cell{
                 }
             }
         }
+
+        board.addOperationToProcess(new IntermediateCheckSharedCellsOperation(this));
     }
 
     @Override public SimulatedCell simulateCell(SimulatedBoard simulatedBoard){
@@ -163,8 +216,8 @@ public class EmptyCell extends Cell{
     }
 
     //TODO Implement logic for proof by cases
-    protected void proofByCases(){
-
+    public void proofByCases(){
+        
     }
 
     @Override public String toString(){
