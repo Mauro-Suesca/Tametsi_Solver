@@ -27,6 +27,8 @@ public class Main{
             level18();
         }else if(level == 20){
             level20();
+        }else if(level == 21){
+            level21();
         }
         
         input.close();
@@ -661,6 +663,87 @@ public class Main{
         board.addHorizontalLine(new NonExistentCell());
         board.addHorizontalLine(new NonExistentCell());
         board.addHorizontalLine(new NonExistentCell());
+
+        board.start();
+    }
+
+    private static void level21(){
+        ColorCounter gray = new ColorCounter(8, "gray", "\u001B[0m");
+        ColorCounter red = new ColorCounter(4, "red", "\u001B[31m");
+
+        Board board = new BoardLineless(8, 8, true, gray, red);
+
+        board.addCell(new EmptyCell(gray, 0, true, false));
+        board.addCell(new EmptyCell(gray, 1, true, false));
+        board.addCell(new EmptyCell(gray, 1, false, false));
+        board.addCell(new EmptyCell(gray, 2, false, false));
+        board.addCell(new EmptyCell(red, 2, false, false));
+        board.addCell(new EmptyCell(red, 2, false, false));
+        board.addCell(new NonExistentCell());
+        board.addCell(new EmptyCell(gray, 0, false, false));
+
+        board.addCell(new EmptyCell(gray, 0, true, false));
+        board.addCell(new EmptyCell(gray, 2, true, false));
+        board.addCell(new MineCell(gray));
+        board.addCell(new NonExistentCell());
+        board.addCell(new MineCell(red));
+        board.addCell(new MineCell(red));
+        board.addCell(new EmptyCell(gray, 2, false, true));
+        board.addCell(new EmptyCell(gray, 0, false, false));
+
+        board.addCell(new EmptyCell(gray, 0, true, false));
+        board.addCell(new NonExistentCell());
+        board.addCell(new MineCell(gray));
+        board.addCell(new EmptyCell(gray, 3, false, false));
+        board.addCell(new NonExistentCell());
+        board.addCell(new MineCell(red));
+        board.addCell(new EmptyCell(gray, 3, false, false));
+        board.addCell(new EmptyCell(gray, 1, false, true));
+        
+        board.addCell(new EmptyCell(gray, 1, true, false));
+        board.addCell(new EmptyCell(gray, 2, true, false));
+        board.addCell(new EmptyCell(gray, 1, false, false));
+        board.addCell(new EmptyCell(gray, 1, false, false));
+        board.addCell(new EmptyCell(red, 1, false, false));
+        board.addCell(new EmptyCell(red, 2, false, false));
+        board.addCell(new MineCell(gray));
+        board.addCell(new EmptyCell(gray, 1, false, false));
+
+        board.addCell(new MineCell(gray));
+        board.addCell(new EmptyCell(gray, 2, false, false));
+        board.addCell(new EmptyCell(gray, 1, false, false));
+        board.addCell(new EmptyCell(gray, 0, false, false));
+        board.addCell(new NonExistentCell());
+        board.addCell(new NonExistentCell());
+        board.addCell(new EmptyCell(gray, 1, false, false));
+        board.addCell(new EmptyCell(gray, 1, false, false));
+
+        board.addCell(new EmptyCell(gray, 3, false, false));
+        board.addCell(new MineCell(gray));
+        board.addCell(new NonExistentCell());
+        board.addCell(new EmptyCell(gray, 2, false, false));
+        board.addCell(new EmptyCell(red, 1, false, false));
+        board.addCell(new EmptyCell(red, 1, false, false));
+        board.addCell(new EmptyCell(gray, 0, false, false));
+        board.addCell(new NonExistentCell());
+
+        board.addCell(new EmptyCell(gray, 2, false, false));
+        board.addCell(new MineCell(gray));
+        board.addCell(new MineCell(gray));
+        board.addCell(new EmptyCell(gray, 2, false, true));
+        board.addCell(new MineCell(red));
+        board.addCell(new EmptyCell(red, 1, false, false));
+        board.addCell(new EmptyCell(gray, 1, false, false));
+        board.addCell(new NonExistentCell());
+
+        board.addCell(new NonExistentCell());
+        board.addCell(new EmptyCell(gray, 2, false, false));
+        board.addCell(new EmptyCell(gray, 2, false, false));
+        board.addCell(new EmptyCell(gray, 2, false, false));
+        board.addCell(new NonExistentCell());
+        board.addCell(new EmptyCell(red, 1, false, false));
+        board.addCell(new EmptyCell(gray, 1, false, false));
+        board.addCell(new MineCell(gray));
 
         board.start();
     }
