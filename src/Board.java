@@ -119,6 +119,10 @@ public abstract class Board implements CellObserver{
         }else{
             autoSideAdjacencySetter();
         }
+
+        for(ColorCounter color : colorMineCounters){
+            this.addOperationToProcess(new StartOperation(color));
+        }
         
         render();
         executeNextProcess();
