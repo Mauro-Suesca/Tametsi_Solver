@@ -29,11 +29,11 @@ This project's purpose is to discover and implement an algorithm capable of solv
 ![image](./resources/level20_unsolved.png)
 ![image](./resources/level20_solved.png)
 
-# Planned levels
-
 ## Level 21
 ![image](./resources/level21_unsolved.png)
 ![image](./resources/level21_solved.png)
+
+# Planned levels
 
 ## Level 23
 ![image](./resources/level23_unsolved.png)
