@@ -33,6 +33,8 @@ public class Main{
             level23();
         }else if(level == 25){
             level25();
+        }else if(level == 27){
+            level27();
         }
         
         input.close();
@@ -982,6 +984,174 @@ public class Main{
         board.addHorizontalLine(new ExternalCounter(3));
         board.addHorizontalLine(new NonExistentCell());
         board.addHorizontalLine(new ExternalCounter(7));
+
+        board.start();
+    }
+
+    private static void level27(){
+        ColorCounter gray = new ColorCounter(15, "gray", "\u001B[0m");
+        ColorCounter cyan = new ColorCounter(3, "cyan", "\u001B[36m");
+        ColorCounter blue = new ColorCounter(4, "blue", "\u001B[34m");
+        ColorCounter pink = new ColorCounter(1, "pink", "\u001B[38;5;212m");
+        ColorCounter purple = new ColorCounter(4, "purple", "\u001B[35m");
+
+        Board board = new BoardLineless(12, 12, true, gray, cyan, blue, pink, purple);
+
+        board.addCell(new EmptyCell(gray, 0, true, false));
+        board.addCell(new EmptyCell(gray, 0, true, false));
+        board.addCell(new EmptyCell(gray, 0, true, false));
+        board.addCell(new EmptyCell(cyan, 0, true, false));
+        board.addCell(new NonExistentCell());
+        board.addCell(new NonExistentCell());
+        board.addCell(new NonExistentCell());
+        board.addCell(new NonExistentCell());
+        board.addCell(new EmptyCell(purple, 1, false, false));
+        board.addCell(new EmptyCell(gray, 2, false, false));
+        board.addCell(new EmptyCell(gray, 2, false, false));
+        board.addCell(new MineCell(gray));
+
+        board.addCell(new EmptyCell(gray, 1, true, false));
+        board.addCell(new EmptyCell(gray, 2, true, false));
+        board.addCell(new EmptyCell(gray, 3, true, false));
+        board.addCell(new EmptyCell(cyan, 2, true, false));
+        board.addCell(new NonExistentCell());
+        board.addCell(new NonExistentCell());
+        board.addCell(new NonExistentCell());
+        board.addCell(new NonExistentCell());
+        board.addCell(new MineCell(purple));
+        board.addCell(new EmptyCell(gray, 2, false, false));
+        board.addCell(new MineCell(gray));
+        board.addCell(new EmptyCell(gray, 2, false, false));
+
+        board.addCell(new EmptyCell(gray, 2, false, false));
+        board.addCell(new MineCell(gray));
+        board.addCell(new MineCell(gray));
+        board.addCell(new MineCell(cyan));
+        board.addCell(new NonExistentCell());
+        board.addCell(new NonExistentCell());
+        board.addCell(new NonExistentCell());
+        board.addCell(new NonExistentCell());
+        board.addCell(new EmptyCell(purple, 1, false, false));
+        board.addCell(new EmptyCell(gray, 2, false, false));
+        board.addCell(new EmptyCell(gray, 1, false, false));
+        board.addCell(new EmptyCell(gray, 1, false, false));
+
+        board.addCell(new EmptyCell(pink, 2, false, false));
+        board.addCell(new MineCell(pink));
+        board.addCell(new EmptyCell(pink, 5, false, false));
+        board.addCell(new EmptyCell(cyan, 3, false, false));
+        board.addCell(new EmptyCell(pink, 2, false, false));
+        board.addCell(new EmptyCell(pink, 0, false, false));
+        board.addCell(new EmptyCell(pink, 0, false, false));
+        board.addCell(new EmptyCell(pink, 1, false, false));
+        board.addCell(new EmptyCell(pink, 1, false, false));
+        board.addCell(new EmptyCell(pink, 1, false, false));
+        board.addCell(new EmptyCell(pink, 0, false, false));
+        board.addCell(new EmptyCell(pink, 0, false, false));
+
+        board.addCell(new NonExistentCell());
+        board.addCell(new NonExistentCell());
+        board.addCell(new NonExistentCell());
+        board.addCell(new MineCell(cyan));
+        board.addCell(new EmptyCell(gray, 2, false, false));
+        board.addCell(new EmptyCell(gray, 1, false, false));
+        board.addCell(new EmptyCell(gray, 2, false, false));
+        board.addCell(new EmptyCell(gray, 2, false, false));
+        board.addCell(new MineCell(purple));
+        board.addCell(new NonExistentCell());
+        board.addCell(new NonExistentCell());
+        board.addCell(new NonExistentCell());
+
+        board.addCell(new NonExistentCell());
+        board.addCell(new NonExistentCell());
+        board.addCell(new NonExistentCell());
+        board.addCell(new EmptyCell(cyan, 1, false, false));
+        board.addCell(new EmptyCell(gray, 2, false, false));
+        board.addCell(new MineCell(gray));
+        board.addCell(new EmptyCell(gray, 3, false, false));
+        board.addCell(new MineCell(gray));
+        board.addCell(new EmptyCell(purple, 2, false, false));
+        board.addCell(new NonExistentCell());
+        board.addCell(new NonExistentCell());
+        board.addCell(new NonExistentCell());
+
+        board.addCell(new NonExistentCell());
+        board.addCell(new NonExistentCell());
+        board.addCell(new NonExistentCell());
+        board.addCell(new EmptyCell(cyan, 2, false, false));
+        board.addCell(new EmptyCell(gray, 3, false, false));
+        board.addCell(new EmptyCell(gray, 3, false, false));
+        board.addCell(new MineCell(gray));
+        board.addCell(new EmptyCell(gray, 3, false, false));
+        board.addCell(new EmptyCell(purple, 2, false, false));
+        board.addCell(new NonExistentCell());
+        board.addCell(new NonExistentCell());
+        board.addCell(new NonExistentCell());
+
+        board.addCell(new NonExistentCell());
+        board.addCell(new NonExistentCell());
+        board.addCell(new NonExistentCell());
+        board.addCell(new MineCell(cyan));
+        board.addCell(new MineCell(gray));
+        board.addCell(new EmptyCell(gray, 3, false, false));
+        board.addCell(new EmptyCell(gray, 1, false, false));
+        board.addCell(new EmptyCell(gray, 2, false, false));
+        board.addCell(new MineCell(purple));
+        board.addCell(new NonExistentCell());
+        board.addCell(new NonExistentCell());
+        board.addCell(new NonExistentCell());
+
+        board.addCell(new MineCell(blue));
+        board.addCell(new EmptyCell(blue, 2, false, false));
+        board.addCell(new EmptyCell(blue, 1, false, false));
+        board.addCell(new EmptyCell(blue, 3, false, false));
+        board.addCell(new MineCell(blue));
+        board.addCell(new EmptyCell(blue, 2, false, false));
+        board.addCell(new EmptyCell(blue, 0, false, false));
+        board.addCell(new EmptyCell(blue, 1, false, false));
+        board.addCell(new EmptyCell(purple, 2, false, false));
+        board.addCell(new MineCell(blue));
+        board.addCell(new EmptyCell(blue, 3, false, false));
+        board.addCell(new MineCell(blue));
+
+        board.addCell(new MineCell(gray));
+        board.addCell(new EmptyCell(gray, 4, false, false));
+        board.addCell(new EmptyCell(gray, 1, false, false));
+        board.addCell(new EmptyCell(cyan, 2, false, false));
+        board.addCell(new NonExistentCell());
+        board.addCell(new NonExistentCell());
+        board.addCell(new NonExistentCell());
+        board.addCell(new NonExistentCell());
+        board.addCell(new EmptyCell(purple, 1, false, false));
+        board.addCell(new EmptyCell(gray, 3, false, false));
+        board.addCell(new MineCell(gray));
+        board.addCell(new EmptyCell(gray, 3, false, false));
+        
+        board.addCell(new MineCell(gray));
+        board.addCell(new EmptyCell(gray, 5, false, false));
+        board.addCell(new MineCell(gray));
+        board.addCell(new EmptyCell(cyan, 1, false, false));
+        board.addCell(new NonExistentCell());
+        board.addCell(new NonExistentCell());
+        board.addCell(new NonExistentCell());
+        board.addCell(new NonExistentCell());
+        board.addCell(new EmptyCell(purple, 1, false, false));
+        board.addCell(new EmptyCell(gray, 3, false, false));
+        board.addCell(new MineCell(gray));
+        board.addCell(new EmptyCell(gray, 2, false, false));
+
+        board.addCell(new MineCell(gray));
+        board.addCell(new MineCell(gray));
+        board.addCell(new EmptyCell(gray, 2, false, false));
+        board.addCell(new EmptyCell(cyan, 1, false, false));
+        board.addCell(new NonExistentCell());
+        board.addCell(new NonExistentCell());
+        board.addCell(new NonExistentCell());
+        board.addCell(new NonExistentCell());
+        board.addCell(new MineCell(purple));
+        board.addCell(new EmptyCell(gray, 2, false, false));
+        board.addCell(new EmptyCell(gray, 1, false, false));
+        board.addCell(new EmptyCell(gray, 1, false, false));
 
         board.start();
     }
