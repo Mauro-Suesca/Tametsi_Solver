@@ -1,10 +1,12 @@
+package cellLogic;
+
 import java.util.ArrayList;
 
 public class EmptyCell extends Cell{
     protected int remainingMines;
     protected boolean unknown;
 
-    EmptyCell(int remainingMines, boolean revealed, boolean unknown){
+    public EmptyCell(int remainingMines, boolean revealed, boolean unknown){
         super();
         this.remainingMines = remainingMines;
         this.revealed = revealed;
@@ -12,18 +14,18 @@ public class EmptyCell extends Cell{
         this.markedAsMine = false;
     }
 
-    EmptyCell(ColorCounter color, int remainingMines, boolean revealed, boolean unknown){
+    public EmptyCell(ColorCounter color, int remainingMines, boolean revealed, boolean unknown){
         this(remainingMines, revealed, unknown);
         this.addColor(color);
     }
 
-    EmptyCell(int remainingMines, boolean revealed, boolean unknown, int horizontalSize, int verticalSize){
+    public EmptyCell(int remainingMines, boolean revealed, boolean unknown, int horizontalSize, int verticalSize){
         this(remainingMines, revealed, unknown);
         this.horizontalSize = horizontalSize;
         this.verticalSize = verticalSize;
     }
 
-    EmptyCell(ColorCounter color, int remainingMines, boolean revealed, boolean unknown, int horizontalSize, int verticalSize){
+    public EmptyCell(ColorCounter color, int remainingMines, boolean revealed, boolean unknown, int horizontalSize, int verticalSize){
         this(remainingMines, revealed, unknown, horizontalSize, verticalSize);
         this.addColor(color);
     }

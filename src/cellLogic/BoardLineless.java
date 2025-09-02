@@ -1,9 +1,11 @@
+package cellLogic;
+
 public class BoardLineless extends Board{
-    BoardLineless(int numberOfMinesInBoard, int columns, int rows, boolean hasDiagonalAdjacencies){
+    public BoardLineless(int numberOfMinesInBoard, int columns, int rows, boolean hasDiagonalAdjacencies){
         super(numberOfMinesInBoard, columns, rows, hasDiagonalAdjacencies);
     }
 
-    BoardLineless(int columns, int rows, boolean hasDiagonalAdjacencies, ColorCounter ... colorMineCounters){
+    public BoardLineless(int columns, int rows, boolean hasDiagonalAdjacencies, ColorCounter ... colorMineCounters){
         super(columns, rows, hasDiagonalAdjacencies, colorMineCounters);
     }
 

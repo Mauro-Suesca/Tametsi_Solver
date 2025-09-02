@@ -1,14 +1,16 @@
+package cellLogic;
+
 public class BoardWithLines extends Board{
     private ExternalCounter[] verticalLines;
     private ExternalCounter[] horizontalLines;
 
-    BoardWithLines(int numberOfMinesInBoard, int columns, int rows, boolean hasDiagonalAdjacencies){
+    public BoardWithLines(int numberOfMinesInBoard, int columns, int rows, boolean hasDiagonalAdjacencies){
         super(numberOfMinesInBoard, columns, rows, hasDiagonalAdjacencies);
         this.verticalLines = new ExternalCounter[columns];
         this.horizontalLines = new ExternalCounter[rows];
     }
 
-    BoardWithLines(int columns, int rows, boolean hasDiagonalAdjacencies, ColorCounter ... colorMineCounters){
+    public BoardWithLines(int columns, int rows, boolean hasDiagonalAdjacencies, ColorCounter ... colorMineCounters){
         super(columns, rows, hasDiagonalAdjacencies, colorMineCounters);
         this.verticalLines = new ExternalCounter[columns];
         this.horizontalLines = new ExternalCounter[rows];

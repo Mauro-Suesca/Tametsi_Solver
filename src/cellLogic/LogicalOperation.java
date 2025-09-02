@@ -1,3 +1,5 @@
+package cellLogic;
+
 public abstract class LogicalOperation implements Comparable<LogicalOperation>{
     protected static final int START = 0;
     protected static final int COUNT_REMAINING = 1;

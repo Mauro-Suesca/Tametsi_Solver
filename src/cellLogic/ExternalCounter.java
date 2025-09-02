@@ -1,5 +1,7 @@
+package cellLogic;
+
 public class ExternalCounter extends EmptyCell{
-    ExternalCounter(int remainingMines){
+    public ExternalCounter(int remainingMines){
         super(remainingMines, true, false);
         this.colorANSI = "\u001B[0m";
     }
