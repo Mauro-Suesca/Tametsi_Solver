@@ -1,22 +1,24 @@
+package cellLogic;
+
 public class MineCell extends Cell{
-    MineCell(){
+    public MineCell(){
         super();
         revealed = false;
         markedAsMine = false;
     }
 
-    MineCell(int horizontalSize, int verticalSize){
+    public MineCell(int horizontalSize, int verticalSize){
         this();
         this.horizontalSize = horizontalSize;
         this.verticalSize = verticalSize;
     }
 
-    MineCell(ColorCounter color, int horizontalSize, int verticalSize){
+    public MineCell(ColorCounter color, int horizontalSize, int verticalSize){
         this(horizontalSize, verticalSize);
         this.addColor(color);
     }
 
-    MineCell(ColorCounter color){
+    public MineCell(ColorCounter color){
         this(color, 1, 1);
     }
 

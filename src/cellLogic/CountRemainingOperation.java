@@ -1,3 +1,5 @@
+package cellLogic;
+
 public class CountRemainingOperation extends LogicalOperation{
     CountRemainingOperation(EmptyCell callingCell){
         super(callingCell, COUNT_REMAINING);

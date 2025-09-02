@@ -1,3 +1,5 @@
+package cellLogic;
+
 public class CellExtension extends Cell{
     private Cell originCell;
     private int horizontalPosition;

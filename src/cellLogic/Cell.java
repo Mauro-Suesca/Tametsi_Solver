@@ -1,3 +1,5 @@
+package cellLogic;
+
 import java.util.ArrayList;
 
 public abstract class Cell implements AdjacentCell{

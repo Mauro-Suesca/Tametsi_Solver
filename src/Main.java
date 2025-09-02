@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+import cellLogic.*;
+
 public class Main{
     public static void main(String[] args){
         int level;

@@ -1,3 +1,5 @@
+package cellLogic;
+
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 import java.util.Scanner;
@@ -16,11 +18,11 @@ public abstract class Board implements CellObserver{
     protected Scanner waitForUserInput;
     protected boolean hasDiagonalAdjacencies;
 
-    Board(int numberOfMinesInBoard, int columns, int rows, boolean hasDiagonalAdjacencies){
+    public Board(int numberOfMinesInBoard, int columns, int rows, boolean hasDiagonalAdjacencies){
         this(columns, rows, hasDiagonalAdjacencies, new ColorCounter(numberOfMinesInBoard, "grises", DEFAULT_COLOR_ANSI));
     }
 
-    Board(int columns, int rows, boolean hasDiagonalAdjacencies, ColorCounter ... colorMineCounters){
+    public Board(int columns, int rows, boolean hasDiagonalAdjacencies, ColorCounter ... colorMineCounters){
         this(columns, rows, hasDiagonalAdjacencies);
 
         int totalNumberOfMines = 0;

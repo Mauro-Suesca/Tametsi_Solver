@@ -1,3 +1,5 @@
+package cellLogic;
+
 import java.util.ArrayList;
 
 public class ImaginaryCell extends EmptyCell{

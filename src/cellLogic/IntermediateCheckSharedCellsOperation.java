@@ -1,3 +1,5 @@
+package cellLogic;
+
 public class IntermediateCheckSharedCellsOperation extends LogicalOperation{
     IntermediateCheckSharedCellsOperation(EmptyCell callingCell){
         super(callingCell, INTERMEDIATE_CHECK_SHARED_CELLS);

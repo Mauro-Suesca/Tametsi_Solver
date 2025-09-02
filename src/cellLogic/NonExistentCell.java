@@ -1,5 +1,7 @@
+package cellLogic;
+
 public class NonExistentCell extends ExternalCounter{
-    NonExistentCell(){
+    public NonExistentCell(){
         super(0);
         this.unknown = true;
     }
