@@ -17,6 +17,7 @@ public abstract class Board implements CellObserver{
     protected int currentColumn;
     protected Scanner waitForUserInput;
     protected boolean hasDiagonalAdjacencies;
+    protected boolean isTesting;
 
     public Board(int numberOfMinesInBoard, int columns, int rows, boolean hasDiagonalAdjacencies){
         this(columns, rows, hasDiagonalAdjacencies, new ColorCounter(numberOfMinesInBoard, "gray", DEFAULT_COLOR_ANSI));
@@ -39,6 +40,7 @@ public abstract class Board implements CellObserver{
         this.totalRows = rows;
         this.totalColumns = columns;
         this.hasDiagonalAdjacencies = hasDiagonalAdjacencies;
+        this.isTesting = false;
         this.cellsInBoard = new Cell[columns][rows];
         this.operationToProcess = new PriorityQueue<>();
         this.existingImaginaryCells = new ArrayList<>();
@@ -106,11 +108,15 @@ public abstract class Board implements CellObserver{
     }
 
     @Override public void reactToCellReveal(Cell revealedCell){
-        render();
+        if(!isTesting){
+            render();
+        }
     }
 
     @Override public void reactToCellMarked(Cell markedCell){
-        render();
+        if(!isTesting){
+            render();
+        }
     }
 
     protected abstract void render();
@@ -128,6 +134,25 @@ public abstract class Board implements CellObserver{
         
         render();
         executeNextProcess();
+    }
+
+    public boolean startTest(){
+        this.isTesting = true;
+        waitForUserInput.close();
+
+        if(hasDiagonalAdjacencies){
+            autoAllAroundAdjacencySetter();
+        }else{
+            autoSideAdjacencySetter();
+        }
+
+        for(ColorCounter color : colorMineCounters){
+            this.addOperationToProcess(new StartOperation(color));
+        }
+        
+        executeNextProcess();
+
+        return totalMineCounter.getRemainingNumberOfAdjacencies() == 0;
     }
 
     protected abstract void autoAllAroundAdjacencySetter();
