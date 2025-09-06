@@ -220,7 +220,7 @@ public class EmptyCell extends Cell{
 
     @Override public String toString(){
         if(revealed){
-            return colorANSI + (unknown ? "? " : String.valueOf(remainingMines) + " ");
+            return this.getColorANSI() + (unknown ? "? " : String.valueOf(remainingMines) + " ");
         }else{
             return super.toString();
         }

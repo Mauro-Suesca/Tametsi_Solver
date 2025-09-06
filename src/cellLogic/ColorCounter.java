@@ -1,16 +1,21 @@
 package cellLogic;
 
 public class ColorCounter extends ExternalCounter{
-    private String color;
+    private String colorWord;
+    private String colorANSI;
 
-    public ColorCounter(int remainingMines, String color, String colorANSI){
+    public ColorCounter(int remainingMines, String colorWord, String colorANSI){
         super(remainingMines);
-        this.color = color;
+        this.colorWord = colorWord;
         this.colorANSI = colorANSI;
     }
 
-    public String getColoredColor(){
-        return colorANSI + color + "\u001B[0m";
+    @Override public String getColorANSI(){
+        return colorANSI;
+    }
+
+    public String getColoredColorWord(){
+        return colorANSI + colorWord + "\u001B[0m";
     }
 
     public int getRemainingMines(){

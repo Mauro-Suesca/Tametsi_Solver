@@ -33,7 +33,7 @@ public class BoardWithLines extends Board{
 
         if(colorMineCounters.size() > 1){
             for(ColorCounter colorCounter : colorMineCounters){
-                System.out.println("\u001B[0mMinas " + colorCounter.getColoredColor() + " faltantes en el tablero: " + colorCounter);
+                System.out.println("\u001B[0mMinas " + colorCounter.getColoredColorWord() + " faltantes en el tablero: " + colorCounter);
             }
         }
 
