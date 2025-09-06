@@ -9,13 +9,12 @@ public abstract class Cell implements AdjacentCell{
     protected boolean markedAsMine;
     protected int horizontalSize;
     protected int verticalSize;
-    protected String colorANSI;
+    protected ColorCounter color;
 
     Cell(){
         remainingAdjacentCells = new ArrayList<>();
         horizontalSize = 1;
         verticalSize = 1;
-        colorANSI = "";
     }
 
     public int getHorizontalSize(){
@@ -27,7 +26,7 @@ public abstract class Cell implements AdjacentCell{
     }
 
     public String getColorANSI(){
-        return colorANSI;
+        return color.getColorANSI();
     }
 
     protected void notifyAdjacentCells(){
@@ -58,8 +57,8 @@ public abstract class Cell implements AdjacentCell{
     }
 
     public void addColor(ColorCounter color){
-        if(this.colorANSI.equals("")){
-            this.colorANSI = color.getColorANSI();
+        if(this.color == null){
+            this.color = color;
             this.addAdjacent(color);
         }
     }
@@ -85,6 +84,6 @@ public abstract class Cell implements AdjacentCell{
     public abstract SimulatedCell simulateCell(SimulatedBoard board);
 
     @Override public String toString(){
-        return colorANSI + (markedAsMine ? "■ " : "[]");
+        return this.getColorANSI() + (markedAsMine ? "■ " : "[]");
     }
 }

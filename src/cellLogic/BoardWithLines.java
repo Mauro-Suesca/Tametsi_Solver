@@ -33,7 +33,7 @@ public class BoardWithLines extends Board{
 
         if(colorMineCounters.size() > 1){
             for(ColorCounter colorCounter : colorMineCounters){
-                System.out.println("\u001B[0mRemaining " + colorCounter.getColoredColor() + " mines in board: " + colorCounter);
+                System.out.println("\u001B[0mRemaining " + colorCounter.getColoredColorWord() + " mines in board: " + colorCounter);
             }
         }
 

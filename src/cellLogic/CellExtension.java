@@ -9,7 +9,7 @@ public class CellExtension extends Cell{
         this.horizontalPosition = horizontalPosition;
         this.verticalPosition = verticalPosition;
         this.originCell = originCell;
-        this.colorANSI = originCell.getColorANSI();
+        this.color = originCell.color;
     }
 
     @Override public void reveal(){
@@ -40,7 +40,7 @@ public class CellExtension extends Cell{
     }
 
     @Override public String toString(){
-        String result = colorANSI;
+        String result = getColorANSI();
 
         if(horizontalPosition == verticalPosition){
             result += "┘ ";

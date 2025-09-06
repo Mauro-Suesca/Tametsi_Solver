@@ -53,9 +53,7 @@ public abstract class Board implements CellObserver{
 
         while(!placed){
             if(cellsInBoard[currentRow][currentColumn] == null){
-                if(newCell.getColorANSI().equals("")){
-                    newCell.addColor(colorMineCounters.get(0));
-                }
+                newCell.addColor(colorMineCounters.get(0));
 
                 cellsInBoard[currentRow][currentColumn] = newCell;
 
