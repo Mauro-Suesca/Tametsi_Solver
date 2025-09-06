@@ -101,9 +101,8 @@ public abstract class Board implements CellObserver{
     }
 
     protected void executeNextProcess(){
-        if(!operationToProcess.isEmpty()){
+        while(!operationToProcess.isEmpty()){
             operationToProcess.poll().executeOperation();
-            executeNextProcess();
         }
     }
 
