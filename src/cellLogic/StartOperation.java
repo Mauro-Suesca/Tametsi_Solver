@@ -1,7 +1,7 @@
 package cellLogic;
 
 public class StartOperation extends LogicalOperation{
-    StartOperation(EmptyCell callingCell){
+    public StartOperation(EmptyCell callingCell){
         super(callingCell, START);
     }
 
