@@ -55,6 +55,42 @@ This project's purpose is to discover and implement an algorithm capable of solv
 ![image](./resources/level30_unsolved.png)
 ![image](./resources/level30_solved.png)
 
+## Level 32
+![image](./resources/level32_unsolved.png)
+![image](./resources/level32_solved.png)
+
+## Level 34
+![image](./resources/level34_unsolved.png)
+![image](./resources/level34_solved.png)
+
+## Level 36
+![image](./resources/level36_unsolved.png)
+![image](./resources/level36_solved.png)
+
+## Level 37
+![image](./resources/level37_unsolved.png)
+![image](./resources/level37_solved.png)
+
+## Level 38
+![image](./resources/level38_unsolved.png)
+![image](./resources/level38_solved.png)
+
+## Level 42
+![image](./resources/level42_unsolved.png)
+![image](./resources/level42_solved.png)
+
+## Level 43
+![image](./resources/level43_unsolved.png)
+![image](./resources/level43_solved.png)
+
+## Level 44
+![image](./resources/level44_unsolved.png)
+![image](./resources/level44_solved.png)
+
+## Level 46
+![image](./resources/level46_unsolved.png)
+![image](./resources/level46_solved.png)
+
     Official Reference:
     Tametsi
     Available on Steam
