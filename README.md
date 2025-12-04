@@ -119,6 +119,78 @@ This project's purpose is to discover and implement an algorithm capable of solv
 ![image](./resources/level55_unsolved.png)
 ![image](./resources/level55_solved.png)
 
+## Level 56
+![image](./resources/level56_unsolved.png)
+![image](./resources/level56_solved.png)
+
+## Level 57
+![image](./resources/level57_unsolved.png)
+![image](./resources/level57_solved.png)
+
+## Level 59
+![image](./resources/level59_unsolved.png)
+![image](./resources/level59_solved.png)
+
+## Level 60
+![image](./resources/level60_unsolved.png)
+![image](./resources/level60_solved.png)
+
+## Level 61
+![image](./resources/level61_unsolved.png)
+![image](./resources/level61_solved.png)
+
+## Level 63
+![image](./resources/level63_unsolved.png)
+![image](./resources/level63_solved.png)
+
+## Level 64
+![image](./resources/level64_unsolved.png)
+![image](./resources/level64_solved.png)
+
+## Level 65
+![image](./resources/level65_unsolved.png)
+![image](./resources/level65_solved.png)
+
+## Level 67
+![image](./resources/level67_unsolved.jpg)
+![image](./resources/level67_solved.jpg)
+
+## Level 69
+![image](./resources/level69_unsolved.jpg)
+![image](./resources/level69_solved.jpg)
+
+## Level 70
+![image](./resources/level70_unsolved.jpg)
+![image](./resources/level70_solved.jpg)
+
+## Level 71
+![image](./resources/level71_unsolved.jpg)
+![image](./resources/level71_solved.jpg)
+
+## Level 73
+![image](./resources/level73_unsolved.jpg)
+![image](./resources/level73_solved.jpg)
+
+## Level 75
+![image](./resources/level75_unsolved.png)
+![image](./resources/level75_solved.png)
+
+## Level 76
+![image](./resources/level76_unsolved.png)
+![image](./resources/level76_solved.png)
+
+## Level 78
+![image](./resources/level78_unsolved.png)
+![image](./resources/level78_solved.png)
+
+## Level 79
+![image](./resources/level79_unsolved.png)
+![image](./resources/level79_solved.png)
+
+## Level 80
+![image](./resources/level80_unsolved.png)
+![image](./resources/level80_solved.png)
+
     Official Reference:
     Tametsi
     Available on Steam
