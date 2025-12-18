@@ -67,9 +67,6 @@ public class BoardWithLines extends Board{
         waitForUserInput.nextLine();
     }
 
-    /**
-     * Only works for Tametsi level 9, could be useful to check other ways for other levels
-     */
     @Override protected void autoAllAroundAdjacencySetter(){
         allAroundCellAndBoardToCellAdjacency();
 

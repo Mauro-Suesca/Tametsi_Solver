@@ -172,8 +172,6 @@ public class Level27 extends Level{
         board.addCell(new EmptyCell(gray, 2, false, false));
         board.addCell(new EmptyCell(gray, 1, false, false));
         board.addCell(new EmptyCell(gray, 1, false, false));
-
-        board.start();
         
         return board;
     }

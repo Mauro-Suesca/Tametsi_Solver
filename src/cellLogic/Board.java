@@ -41,7 +41,7 @@ public abstract class Board implements CellObserver{
         this.totalColumns = columns;
         this.hasDiagonalAdjacencies = hasDiagonalAdjacencies;
         this.isTesting = false;
-        this.cellsInBoard = new Cell[columns][rows];
+        this.cellsInBoard = new Cell[rows][columns];
         this.operationToProcess = new PriorityQueue<>();
         this.existingImaginaryCells = new ArrayList<>();
         this.waitForUserInput = new Scanner(System.in);
