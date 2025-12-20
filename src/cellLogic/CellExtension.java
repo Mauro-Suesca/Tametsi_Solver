@@ -28,7 +28,6 @@ public class CellExtension extends Cell{
         return;
     }
 
-    //Acts like "subscribe" from Observer design pattern.
     @Override public void addAdjacent(Cell otherCell){
         if(otherCell != originCell){
             originCell.addAdjacent(otherCell);
