@@ -5,13 +5,16 @@ import java.util.ArrayList;
 public class EmptyCell extends Cell{
     protected int remainingMines;
     protected boolean unknown;
+    protected boolean needsToCountAdjacentMines;
 
+    //Constructors for EmptyCells that already know their adjacent mines from the get-go
     public EmptyCell(int remainingMines, boolean revealed, boolean unknown){
         super();
         this.remainingMines = remainingMines;
         this.revealed = revealed;
         this.unknown = unknown;
         this.markedAsMine = false;
+        this.needsToCountAdjacentMines = false;
     }
 
     public EmptyCell(ColorCounter color, int remainingMines, boolean revealed, boolean unknown){
@@ -28,6 +31,43 @@ public class EmptyCell extends Cell{
     public EmptyCell(ColorCounter color, int remainingMines, boolean revealed, boolean unknown, int horizontalSize, int verticalSize){
         this(remainingMines, revealed, unknown, horizontalSize, verticalSize);
         this.addColor(color);
+    }
+
+    //Constructors for EmptyCells that don't know how many mines they have adjacent and thus have to count them
+    public EmptyCell(boolean revealed, boolean unknown){
+        this(0, revealed, unknown);
+        this.needsToCountAdjacentMines = true;
+    }
+
+    public EmptyCell(ColorCounter color, boolean revealed, boolean unknown){
+        this(revealed, unknown);
+        this.addColor(color);
+    }
+
+    public EmptyCell(boolean revealed, boolean unknown, int horizontalSize, int verticalSize){
+        this(revealed, unknown);
+        this.horizontalSize = horizontalSize;
+        this.verticalSize = verticalSize;
+    }
+
+    public EmptyCell(ColorCounter color, boolean revealed, boolean unknown, int horizontalSize, int verticalSize){
+        this(revealed, unknown, horizontalSize, verticalSize);
+        this.addColor(color);
+    }
+
+    @Override public void addAdjacent(Cell otherCell){
+        if(!remainingAdjacentCells.contains(otherCell) && (!this.revealed || !otherCell.revealed)){
+            if(otherCell instanceof CellExtension){
+                otherCell.addAdjacent(this);
+            }else{
+                remainingAdjacentCells.add(otherCell);
+                otherCell.remainingAdjacentCells.add(this);
+            }
+
+            if(needsToCountAdjacentMines && otherCell instanceof MineCell){
+                this.remainingMines++;
+            }
+        }
     }
 
     @Override public void reveal(){

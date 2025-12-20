@@ -22,6 +22,24 @@ public class MineCell extends Cell{
         this(color, 1, 1);
     }
 
+    @Override public void addAdjacent(Cell otherCell){
+        if(!remainingAdjacentCells.contains(otherCell)){
+            if(otherCell instanceof CellExtension){
+                otherCell.addAdjacent(this);
+            }else{
+                remainingAdjacentCells.add(otherCell);
+                otherCell.remainingAdjacentCells.add(this);
+            }
+
+            if(otherCell instanceof EmptyCell){
+                EmptyCell otherEmptyCell = (EmptyCell)otherCell;
+                if(otherEmptyCell.needsToCountAdjacentMines){
+                    otherEmptyCell.remainingMines++;
+                }
+            }
+        }
+    }
+
     @Override public void reveal() throws GameOver{
         throw new GameOver("¡Se reveló una celda con una mina!");
     }

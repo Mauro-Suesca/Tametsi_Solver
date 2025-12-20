@@ -64,16 +64,7 @@ public abstract class Cell implements AdjacentCell{
     }
 
     //Acts like "subscribe" from Observer design pattern.
-    public void addAdjacent(Cell otherCell){
-        if(!remainingAdjacentCells.contains(otherCell) && (!this.revealed || !otherCell.revealed)){
-            if(otherCell instanceof CellExtension){
-                otherCell.addAdjacent(this);
-            }else{
-                remainingAdjacentCells.add(otherCell);
-                otherCell.remainingAdjacentCells.add(this);
-            }
-        }
-    }
+    public abstract void addAdjacent(Cell otherCell);
 
     //Acts like "unsubscribe" from Observer design pattern.
     public void removeAdjacent(Cell otherCell){
