@@ -5,6 +5,10 @@ public class ExternalCounter extends EmptyCell{
         super(remainingMines, true, false);
     }
 
+    public ExternalCounter(){
+        super(true, false);
+    }
+
     @Override public String getColorANSI(){
         return "\u001B[0m";
     }

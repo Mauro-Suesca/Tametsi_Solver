@@ -57,7 +57,7 @@ public class EmptyCell extends Cell{
 
     @Override public void addAdjacent(Cell otherCell){
         if(!remainingAdjacentCells.contains(otherCell) && (!this.revealed || !otherCell.revealed)){
-            if(otherCell instanceof CellExtension){
+            if(otherCell instanceof DifferentlyAdjacentCell){
                 otherCell.addAdjacent(this);
             }else{
                 remainingAdjacentCells.add(otherCell);
