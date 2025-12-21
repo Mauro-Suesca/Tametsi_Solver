@@ -1,6 +1,6 @@
 package cellLogic;
 
-public class CellExtension extends Cell{
+public class CellExtension extends Cell implements DifferentlyAdjacentCell{
     private Cell originCell;
     private int horizontalPosition;
     private int verticalPosition;

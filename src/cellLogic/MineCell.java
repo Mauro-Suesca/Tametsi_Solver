@@ -24,7 +24,7 @@ public class MineCell extends Cell{
 
     @Override public void addAdjacent(Cell otherCell){
         if(!remainingAdjacentCells.contains(otherCell)){
-            if(otherCell instanceof CellExtension){
+            if(otherCell instanceof DifferentlyAdjacentCell){
                 otherCell.addAdjacent(this);
             }else{
                 remainingAdjacentCells.add(otherCell);
