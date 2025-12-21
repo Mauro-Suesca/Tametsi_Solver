@@ -1,6 +1,7 @@
 package cellLogic;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Scanner;
 
@@ -77,6 +78,12 @@ public abstract class Board implements CellObserver{
                 currentColumn = 0;
                 currentRow++;
             }
+        }
+    }
+
+    public void addCell(List<? extends Cell> newCells){
+        for(Cell cell : newCells){
+            this.addCell(cell);
         }
     }
 
