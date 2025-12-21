@@ -1,5 +1,7 @@
 package cellLogic;
 
+import java.util.ArrayList;
+
 public class BoardWithLines extends Board{
     private ExternalCounter[] verticalLines;
     private ExternalCounter[] horizontalLines;
@@ -21,9 +23,21 @@ public class BoardWithLines extends Board{
         this.addOperationToProcess(new StartOperation(newLine));
     }
 
+    public void addVerticalLine(ArrayList<? extends ExternalCounter> newLines){
+        for(ExternalCounter newLine : newLines){
+            this.addVerticalLine(newLine);
+        }
+    }
+
     public void addHorizontalLine(ExternalCounter newLine){
         horizontalLines[currentRow++] = newLine;
         this.addOperationToProcess(new StartOperation(newLine));
+    }
+
+    public void addHorizontalLine(ArrayList<? extends ExternalCounter> newLines){
+        for(ExternalCounter newLine : newLines){
+            this.addHorizontalLine(newLine);
+        }
     }
 
     @Override protected void render(){
