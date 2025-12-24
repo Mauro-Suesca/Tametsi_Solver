@@ -41,8 +41,6 @@ This project's purpose is to discover and implement an algorithm capable of solv
 ![image](./resources/level25_unsolved.png)
 ![image](./resources/level25_solved.png)
 
-# Planned levels
-
 ## Level 27
 ![image](./resources/level27_unsolved.png)
 ![image](./resources/level27_solved.png)
@@ -54,6 +52,8 @@ This project's purpose is to discover and implement an algorithm capable of solv
 ## Level 30
 ![image](./resources/level30_unsolved.png)
 ![image](./resources/level30_solved.png)
+
+# Planned levels
 
 ## Level 32
 ![image](./resources/level32_unsolved.png)
