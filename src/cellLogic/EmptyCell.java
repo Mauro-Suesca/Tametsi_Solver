@@ -95,8 +95,8 @@ public class EmptyCell extends Cell{
         if(revealed && !unknown){
             board.addOperationToProcess(new CountRemainingOperation(this));
             board.addOperationToProcess(new BasicCheckSharedCellsOperation(this));
-            board.addOperationToProcess(new IntermediateCheckSharedCellsOperation(this));
             board.addOperationToProcess(new ProofByContradictionOperation(this));
+            board.addOperationToProcess(new IntermediateCheckSharedCellsOperation(this));
             board.addOperationToProcess(new ProofByCasesOperation(this));
         }
     }
@@ -169,10 +169,13 @@ public class EmptyCell extends Cell{
                 if(adjacenciesOutsideOfSharingCell.size() > 0){
                     ImaginaryCell cellWithAdjacenciesOutsideOfSharingCell = new ImaginaryCell(minesOutsideOfSharedOnes, adjacenciesOutsideOfSharingCell);
 
-                    board.addImaginaryCell(cellWithAdjacenciesOutsideOfSharingCell);
+                    if(!cellWithAdjacenciesOutsideOfSharingCell.isRepeated()){
+                        cellWithAdjacenciesOutsideOfSharingCell.addToBoard(board);
+                    }
                 }
             }
         }
+        board.addOperationToProcess(new ProofByContradictionOperation(this));
     }
 
     private ArrayList<EmptyCell> findCompletelySharingCells(Cell adjacentCell){
