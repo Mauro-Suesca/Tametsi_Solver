@@ -2,7 +2,7 @@ package cellLogic;
 
 import java.util.ArrayList;
 
-public abstract class Cell implements AdjacentCell{
+public abstract class Cell implements CellObserver{
     protected Board board;
     protected ArrayList<Cell> remainingAdjacentCells;
     protected boolean revealed;
@@ -72,7 +72,12 @@ public abstract class Cell implements AdjacentCell{
         otherCell.remainingAdjacentCells.remove(this);
     }
 
+    public abstract void reveal();
+    
+    public abstract void markAsMine();
+
     public abstract SimulatedCell simulateCell(SimulatedBoard board);
+
 
     @Override public String toString(){
         return this.getColorANSI() + (markedAsMine ? "■ " : "[]");

@@ -8,7 +8,7 @@ public class NonExistentCell extends ExternalCounter implements DifferentlyAdjac
     }
 
     @Override public void addAdjacent(Cell otherCell){
-        
+        //Purposefully left empty because NonExistentCells aren't supposed to be adjacent to any other Cell
     }
 
     @Override public String toString(){
