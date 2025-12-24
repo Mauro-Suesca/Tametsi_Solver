@@ -11,7 +11,6 @@ public abstract class Board implements CellObserver{
     protected ExternalCounter totalMineCounter;
     protected ArrayList<ColorCounter> colorMineCounters;
     protected PriorityQueue<LogicalOperation> operationToProcess;
-    protected ArrayList<ImaginaryCell> existingImaginaryCells;
     protected int totalRows;
     protected int totalColumns;
     protected int currentRow;
@@ -44,7 +43,6 @@ public abstract class Board implements CellObserver{
         this.isTesting = false;
         this.cellsInBoard = new Cell[rows][columns];
         this.operationToProcess = new PriorityQueue<>();
-        this.existingImaginaryCells = new ArrayList<>();
         this.waitForUserInput = new Scanner(System.in);
         resetCurrentRowAndColumn();
     }
@@ -90,13 +88,6 @@ public abstract class Board implements CellObserver{
     public void resetCurrentRowAndColumn(){
         currentRow = 0;
         currentColumn = 0;
-    }
-
-    public void addImaginaryCell(ImaginaryCell newImaginaryCell){
-        if(!this.existingImaginaryCells.contains(newImaginaryCell)){
-            newImaginaryCell.addToBoard(this);
-            this.existingImaginaryCells.add(newImaginaryCell);
-        }
     }
 
     public void addOperationToProcess(LogicalOperation operationToAdd){

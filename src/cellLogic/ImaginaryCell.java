@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class ImaginaryCell extends EmptyCell{
     private ArrayList<Cell> originalAdjacencies;
     
-    ImaginaryCell(int remainingMines, ArrayList<Cell> remainingAdjacentCells){
+    public ImaginaryCell(int remainingMines, ArrayList<Cell> remainingAdjacentCells){
         super(remainingMines, true, false);
         this.originalAdjacencies = remainingAdjacentCells;
     }
@@ -22,21 +22,38 @@ public class ImaginaryCell extends EmptyCell{
         this.board.addOperationToProcess(new StartOperation(this));
     }
 
-    @Override public boolean equals(Object otherObject){
-        if(otherObject instanceof ImaginaryCell){
-            ImaginaryCell otherCell = (ImaginaryCell)otherObject;
+    public boolean isRepeated(){
+        boolean isRepeated = false;
 
+        //If there's an EmptyCell that has the same adjacencies as this ImaginaryCell, it must be among the adjacent cells of any of this ImaginaryCells adjacencies. As such, we check for matches within the adjacencies of the first Cell adjacent to this ImaginaryCell
+        ArrayList<Cell> potentiallyEquivalentCells = this.originalAdjacencies.get(0).remainingAdjacentCells;
 
-            if(otherCell.originalAdjacencies.size() != this.originalAdjacencies.size()){
+        for(Cell cellToCheck : potentiallyEquivalentCells){
+            if(this.isEquivalentTo(cellToCheck)){
+                isRepeated = true;
+                break;
+            }
+        }
+
+        return isRepeated;
+    }
+
+    //equals(Object) doesn't work because we need the check to happen only within isRepeated(), and overriding equals(Object) would be too much because it would check for all adjacencies when using contains() in collections
+    private boolean isEquivalentTo(Cell otherCell){
+        if(otherCell instanceof EmptyCell){
+            EmptyCell otherEmptyCell = (EmptyCell)otherCell;
+
+            if(!otherEmptyCell.revealed || otherEmptyCell.unknown){
                 return false;
             }
 
-            if(otherCell.remainingAdjacentCells.size() != this.remainingAdjacentCells.size()){
+            if(otherEmptyCell.remainingAdjacentCells.size() != this.originalAdjacencies.size()){
                 return false;
             }
 
-            for(int i=0; i<this.remainingAdjacentCells.size(); i++){
-                if(otherCell.remainingAdjacentCells.get(i) != this.remainingAdjacentCells.get(i)){
+            
+            for(int i=0; i<this.originalAdjacencies.size(); i++){
+                if(otherEmptyCell.remainingAdjacentCells.get(i) != this.originalAdjacencies.get(i)){
                     return false;
                 }
             }
