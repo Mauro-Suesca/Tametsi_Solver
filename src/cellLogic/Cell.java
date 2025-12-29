@@ -2,6 +2,9 @@ package cellLogic;
 
 import java.util.ArrayList;
 
+import cellLogic.simulation.cells.SimulatedBoard;
+import cellLogic.simulation.cells.SimulatedCell;
+
 public abstract class Cell implements CellObserver{
     protected Board board;
     protected ArrayList<Cell> remainingAdjacentCells;

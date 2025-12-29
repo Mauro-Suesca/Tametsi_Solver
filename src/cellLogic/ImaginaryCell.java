@@ -2,6 +2,8 @@ package cellLogic;
 
 import java.util.ArrayList;
 
+import cellLogic.logicalOperations.StartOperation;
+
 public class ImaginaryCell extends EmptyCell{
     private ArrayList<Cell> originalAdjacencies;
     

@@ -1,5 +1,8 @@
 package cellLogic;
 
+import cellLogic.simulation.cells.SimulatedBoard;
+import cellLogic.simulation.cells.SimulatedCell;
+
 public class CellExtension extends Cell implements DifferentlyAdjacentCell{
     private Cell originCell;
     private int horizontalPosition;

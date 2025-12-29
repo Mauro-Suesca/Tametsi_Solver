@@ -2,6 +2,8 @@ package cellLogic;
 
 import java.util.ArrayList;
 
+import cellLogic.logicalOperations.StartOperation;
+
 public class BoardWithLines extends Board{
     private ExternalCounter[] verticalLines;
     private ExternalCounter[] horizontalLines;

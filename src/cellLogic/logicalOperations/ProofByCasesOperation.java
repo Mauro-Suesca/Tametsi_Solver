@@ -1,7 +1,9 @@
-package cellLogic;
+package cellLogic.logicalOperations;
+
+import cellLogic.EmptyCell;
 
 public class ProofByCasesOperation extends LogicalOperation{
-    ProofByCasesOperation(EmptyCell callingCell){
+    public ProofByCasesOperation(EmptyCell callingCell){
         super(callingCell, PROOF_BY_CASES);
     }
 
