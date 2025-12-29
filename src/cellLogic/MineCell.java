@@ -1,5 +1,9 @@
 package cellLogic;
 
+import cellLogic.simulation.cells.SimulatedBoard;
+import cellLogic.simulation.cells.SimulatedRevealedCell;
+import cellLogic.simulation.cells.SimulatedUnrevealedCell;
+
 public class MineCell extends Cell{
     public MineCell(){
         super();

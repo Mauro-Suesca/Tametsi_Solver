@@ -1,4 +1,6 @@
-package cellLogic;
+package cellLogic.logicalOperations;
+
+import cellLogic.EmptyCell;
 
 public class StartOperation extends LogicalOperation{
     public StartOperation(EmptyCell callingCell){

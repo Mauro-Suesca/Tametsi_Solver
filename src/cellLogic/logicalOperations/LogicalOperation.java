@@ -1,4 +1,6 @@
-package cellLogic;
+package cellLogic.logicalOperations;
+
+import cellLogic.EmptyCell;
 
 public abstract class LogicalOperation implements Comparable<LogicalOperation>{
     protected static final int START = 0;
@@ -6,7 +8,8 @@ public abstract class LogicalOperation implements Comparable<LogicalOperation>{
     protected static final int BASIC_CHECK_SHARED_CELLS = 2;
     protected static final int PROOF_BY_CONTRADICTION = 3;
     protected static final int INTERMEDIATE_CHECK_SHARED_CELLS = 4;
-    protected static final int PROOF_BY_CASES = 5;
+    protected static final int PROOF_BY_DOUBLE_HYPOTHESIS = 5;
+    protected static final int PROOF_BY_CASES = 6;
     protected EmptyCell callingCell;
     protected int type;
 

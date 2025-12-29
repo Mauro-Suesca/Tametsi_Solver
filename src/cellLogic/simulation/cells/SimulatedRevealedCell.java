@@ -1,6 +1,9 @@
-package cellLogic;
+package cellLogic.simulation.cells;
 
 import java.util.ArrayList;
+
+import cellLogic.Cell;
+import cellLogic.simulation.operations.*;
 
 public class SimulatedRevealedCell extends SimulatedCell{
     private int remainingMines;
@@ -18,20 +21,23 @@ public class SimulatedRevealedCell extends SimulatedCell{
         return (SimulatedRevealedCell)board.getAlreadyExistingSimulatedCell(new SimulatedRevealedCell(board, originalCell, remainingMines, unknown));
     }
 
-    public boolean executeLogicalSequence(){
+    public void executeLogicalSequence(){
         if(!unknown){
-            if(countAndCheckIfThereAreContradictions()){
-                return false;
-            }
-            countRemaining();
-            if(countAndCheckIfThereAreContradictions()){
-                return false;
-            }
+            board.addOperationToProcess(new SimulatedCountForContradictionsOperation(this));
+            board.addOperationToProcess(new SimulatedCountRemainingOperation(this));
+        }
+    }
+
+    public boolean executeLogicalSequenceForDoubleHypothesis(){
+        if(!unknown){
+            board.addOperationToProcess(new SimulatedCountForContradictionsOperation(this));
+            board.addOperationToProcess(new SimulatedCountRemainingOperation(this));
+            board.addOperationToProcess(new SimulatedProofByContradictionOperation(this));
         }
         return true;
     }
 
-    private boolean countAndCheckIfThereAreContradictions(){
+    public boolean countAndCheckIfThereAreContradictions(){
         if(remainingMines < 0){
             return true;
         }
@@ -42,7 +48,7 @@ public class SimulatedRevealedCell extends SimulatedCell{
         return false;
     }
 
-    private void countRemaining(){
+    public void countRemaining(){
         if(remainingMines == 0){
             for(int i=0; i<remainingAdjacentCells.size(); i++){
                 remainingAdjacentCells.get(i).markAsEmpty();
@@ -54,6 +60,14 @@ public class SimulatedRevealedCell extends SimulatedCell{
                 i--;
             }
         }
+
+        board.addOperationToProcess(new SimulatedCountForContradictionsOperation(this));
+    }
+
+    //TODO Implement proof by contradiction on SimulatedCells
+    public boolean proofByContradiction(){
+        board.addOperationToProcess(new SimulatedCountForContradictionsOperation(this));
+        return true;
     }
 
     @Override public void notifyAdjacentCells(){
@@ -61,12 +75,20 @@ public class SimulatedRevealedCell extends SimulatedCell{
     }
 
     @Override public void reactToCellMarkedAsEmpty(SimulatedCell revealedCell){
-        board.addCellToProcess(this);
+        react();
     }
 
     @Override public void reactToCellMarkedAsMine(SimulatedCell markedCell){
         remainingMines--;
-        board.addCellToProcess(this);
+        react();
+    }
+
+    private void react(){
+        if(board.getNeedsToUseDoubleHypothesis()){
+            board.addOperationToProcess(new SimulatedStartDoubleHypothesisOperation(this));
+        }else{
+            board.addOperationToProcess(new SimulatedStartOperation(this));
+        }
     }
 
     @Override public boolean markAsEmpty(){

@@ -7,7 +7,7 @@ import cellLogic.Board;
 import cellLogic.BoardLineless;
 import cellLogic.ColorCounter;
 import cellLogic.EmptyCell;
-import cellLogic.StartOperation;
+import cellLogic.logicalOperations.StartOperation;
 
 public class Level34 extends Level{
     @Override protected Board setup(){

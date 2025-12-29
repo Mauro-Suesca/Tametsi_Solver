@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Scanner;
 
+import cellLogic.logicalOperations.LogicalOperation;
+import cellLogic.logicalOperations.StartOperation;
+
 public abstract class Board implements CellObserver{
     private static String DEFAULT_COLOR_ANSI = "\u001B[0m";
     protected Cell[][] cellsInBoard;

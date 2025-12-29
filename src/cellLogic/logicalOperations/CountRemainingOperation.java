@@ -1,7 +1,9 @@
-package cellLogic;
+package cellLogic.logicalOperations;
+
+import cellLogic.EmptyCell;
 
 public class CountRemainingOperation extends LogicalOperation{
-    CountRemainingOperation(EmptyCell callingCell){
+    public CountRemainingOperation(EmptyCell callingCell){
         super(callingCell, COUNT_REMAINING);
     }
 

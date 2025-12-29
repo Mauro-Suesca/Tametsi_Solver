@@ -1,5 +1,8 @@
 package cellLogic;
 
+import cellLogic.logicalOperations.*;
+import cellLogic.simulation.cells.*;
+
 import java.util.ArrayList;
 
 public class EmptyCell extends Cell{
@@ -97,6 +100,7 @@ public class EmptyCell extends Cell{
             board.addOperationToProcess(new BasicCheckSharedCellsOperation(this));
             board.addOperationToProcess(new ProofByContradictionOperation(this));
             board.addOperationToProcess(new IntermediateCheckSharedCellsOperation(this));
+            board.addOperationToProcess(new ProofByDoubleHypothesisOperation(this));
             board.addOperationToProcess(new ProofByCasesOperation(this));
         }
     }
@@ -198,7 +202,7 @@ public class EmptyCell extends Cell{
     }
 
     //Proof by contradiction
-    public void checkHypothesesForContradictions(){
+    public void checkHypothesesForContradictions(boolean needsToUseDoubleHypothesis){
         boolean hypothesisIsHasMine;
         
         if(remainingMines == 0){
@@ -215,7 +219,7 @@ public class EmptyCell extends Cell{
 
         for(int i=0; i<remainingAdjacentCells.size(); i++){
             if(!remainingAdjacentCells.get(i).revealed){
-                SimulatedBoard currentHypothesisSimulation = new SimulatedBoard();
+                SimulatedBoard currentHypothesisSimulation = new SimulatedBoard(needsToUseDoubleHypothesis);
 
                 SimulatedUnrevealedCell testCell = (SimulatedUnrevealedCell)remainingAdjacentCells.get(i).simulateCell(currentHypothesisSimulation);
 

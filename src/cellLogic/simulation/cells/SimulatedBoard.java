@@ -1,15 +1,24 @@
-package cellLogic;
+package cellLogic.simulation.cells;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 
-public class SimulatedBoard{
-    private ArrayDeque<SimulatedRevealedCell> cellsToProcess;
-    private ArrayList<SimulatedCell> alreadyExistingCells;
+import cellLogic.Cell;
+import cellLogic.simulation.operations.SimulatedOperation;
 
-    SimulatedBoard(){
-        this.cellsToProcess = new ArrayDeque<>();
+public class SimulatedBoard{
+    private ArrayDeque<SimulatedOperation> operationsToProcess;
+    private ArrayList<SimulatedCell> alreadyExistingCells;
+    private boolean needsToUseDoubleHypothesis;
+
+    public SimulatedBoard(boolean needsToUseDoubleHypothesis){
+        this.operationsToProcess = new ArrayDeque<>();
         this.alreadyExistingCells = new ArrayList<>();
+        this.needsToUseDoubleHypothesis = needsToUseDoubleHypothesis;
+    }
+
+    protected boolean getNeedsToUseDoubleHypothesis(){
+        return needsToUseDoubleHypothesis;
     }
 
     public boolean checkIfCellExistsInBoard(Cell originalCell){
@@ -37,8 +46,8 @@ public class SimulatedBoard{
         return resultingSimulatedCell;
     }
 
-    public void addCellToProcess(SimulatedRevealedCell cellToAdd){
-        cellsToProcess.add(cellToAdd);
+    public void addOperationToProcess(SimulatedOperation operationToAdd){
+        operationsToProcess.add(operationToAdd);
     }
 
     public boolean checkIfHypothesisIsPossible(SimulatedUnrevealedCell testCell, boolean hypothesizedCellHasMine){
@@ -56,8 +65,8 @@ public class SimulatedBoard{
     }
 
     public boolean checkIfNextProcessIsPossible(){
-        if(!cellsToProcess.isEmpty()){
-            return cellsToProcess.remove().executeLogicalSequence() && checkIfNextProcessIsPossible();
+        if(!operationsToProcess.isEmpty()){
+            return operationsToProcess.remove().executeOperation() && checkIfNextProcessIsPossible();
         }else{
             return true;
         }

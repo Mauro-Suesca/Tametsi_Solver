@@ -1,6 +1,8 @@
-package cellLogic;
+package cellLogic.simulation.cells;
 
 import java.util.ArrayList;
+
+import cellLogic.Cell;
 
 public abstract class SimulatedCell{
     protected ArrayList<SimulatedCell> remainingAdjacentCells;
