@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import cellLogic.simulation.cells.SimulatedBoard;
 import cellLogic.simulation.cells.SimulatedCell;
+import cellLogic.simulation.cells.SimulatedRevealedCell;
+import cellLogic.simulation.cells.SimulatedUnrevealedCell;
 
 public abstract class Cell implements CellObserver{
     protected Board board;
@@ -81,6 +83,21 @@ public abstract class Cell implements CellObserver{
 
     public abstract SimulatedCell simulateCell(SimulatedBoard board);
 
+    protected SimulatedCell simulateAdjacentCells(SimulatedBoard simulatedBoard, SimulatedCell resultingSimulatedCell){
+        for(int i=0; i<remainingAdjacentCells.size(); i++){
+            if(!simulatedBoard.checkIfCellExistsInBoard(remainingAdjacentCells.get(i))){
+                resultingSimulatedCell.addAdjacent(remainingAdjacentCells.get(i).simulateCell(simulatedBoard));
+            }else if(remainingAdjacentCells.get(i).revealed){
+                EmptyCell adjacentCell = (EmptyCell) remainingAdjacentCells.get(i);
+                resultingSimulatedCell.addAdjacent(SimulatedRevealedCell.createSimulatedCell(simulatedBoard, adjacentCell, adjacentCell.remainingMines, adjacentCell.unknown));
+            }else{
+                Cell adjacentCell = remainingAdjacentCells.get(i);
+                resultingSimulatedCell.addAdjacent(SimulatedUnrevealedCell.createSimulatedCell(simulatedBoard, adjacentCell, adjacentCell.markedAsMine));
+            }
+        }
+
+        return resultingSimulatedCell;
+    }
 
     @Override public String toString(){
         return this.getColorANSI() + (markedAsMine ? "■ " : "[]");
