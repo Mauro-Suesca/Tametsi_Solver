@@ -9,6 +9,10 @@ public abstract class SimulatedCell{
     protected SimulatedBoard board;
     protected Cell originalCell;
 
+    public Cell getOriginalCell(){
+        return originalCell;
+    }
+
     protected abstract void notifyAdjacentCells();
     
     public void addAdjacent(SimulatedCell otherCell){
@@ -34,6 +38,24 @@ public abstract class SimulatedCell{
     public abstract boolean markAsEmpty();
 
     public abstract boolean markAsMine();
+
+    protected abstract SimulatedCell simulateCell(SimulatedBoard board);
+
+    protected SimulatedCell simulateAdjacentCells(SimulatedBoard simulatedBoard, SimulatedCell resultingSimulatedCell){
+        for(int i=0; i<remainingAdjacentCells.size(); i++){
+            if(!simulatedBoard.checkIfCellExistsInBoard(remainingAdjacentCells.get(i).getOriginalCell())){
+                resultingSimulatedCell.addAdjacent(remainingAdjacentCells.get(i).simulateCell(simulatedBoard));
+            }else if(remainingAdjacentCells.get(i) instanceof SimulatedRevealedCell){
+                SimulatedRevealedCell adjacentCell = (SimulatedRevealedCell) remainingAdjacentCells.get(i);
+                resultingSimulatedCell.addAdjacent(SimulatedRevealedCell.createSimulatedCell(simulatedBoard, adjacentCell));
+            }else{
+                SimulatedUnrevealedCell adjacentCell = (SimulatedUnrevealedCell)remainingAdjacentCells.get(i);
+                resultingSimulatedCell.addAdjacent(SimulatedUnrevealedCell.createSimulatedCell(simulatedBoard, adjacentCell));
+            }
+        }
+
+        return resultingSimulatedCell;
+    }
 
     @Override public abstract boolean equals(Object otherObject);
 }

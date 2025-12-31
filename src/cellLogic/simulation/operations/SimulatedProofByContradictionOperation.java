@@ -8,6 +8,7 @@ public class SimulatedProofByContradictionOperation extends SimulatedOperation{
     }
 
     @Override public boolean executeOperation(){
-        return callingCell.proofByContradiction();
+        callingCell.proofByContradiction();
+        return true;
     }
 }

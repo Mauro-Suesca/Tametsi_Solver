@@ -1,18 +1,18 @@
 package cellLogic.simulation.cells;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 
 import cellLogic.Cell;
 import cellLogic.simulation.operations.SimulatedOperation;
 
 public class SimulatedBoard{
-    private ArrayDeque<SimulatedOperation> operationsToProcess;
+    private PriorityQueue<SimulatedOperation> operationsToProcess;
     private ArrayList<SimulatedCell> alreadyExistingCells;
     private boolean needsToUseDoubleHypothesis;
 
     public SimulatedBoard(boolean needsToUseDoubleHypothesis){
-        this.operationsToProcess = new ArrayDeque<>();
+        this.operationsToProcess = new PriorityQueue<>();
         this.alreadyExistingCells = new ArrayList<>();
         this.needsToUseDoubleHypothesis = needsToUseDoubleHypothesis;
     }
