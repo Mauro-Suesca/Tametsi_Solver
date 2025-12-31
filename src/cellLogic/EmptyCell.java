@@ -179,7 +179,6 @@ public class EmptyCell extends Cell{
                 }
             }
         }
-        board.addOperationToProcess(new ProofByContradictionOperation(this));
     }
 
     private ArrayList<EmptyCell> findCompletelySharingCells(Cell adjacentCell){

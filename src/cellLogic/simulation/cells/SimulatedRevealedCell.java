@@ -17,8 +17,16 @@ public class SimulatedRevealedCell extends SimulatedCell{
         this.remainingAdjacentCells = new ArrayList<>();
     }
 
+    private SimulatedRevealedCell(SimulatedBoard board, SimulatedRevealedCell cellToCopy){
+        this(board, cellToCopy.originalCell, cellToCopy.remainingMines, cellToCopy.unknown);
+    }
+
     public static SimulatedRevealedCell createSimulatedCell(SimulatedBoard board, Cell originalCell, int remainingMines, boolean unknown){
         return (SimulatedRevealedCell)board.getAlreadyExistingSimulatedCell(new SimulatedRevealedCell(board, originalCell, remainingMines, unknown));
+    }
+
+    public static SimulatedRevealedCell createSimulatedCell(SimulatedBoard board, SimulatedRevealedCell originalCell){
+        return (SimulatedRevealedCell)board.getAlreadyExistingSimulatedCell(new SimulatedRevealedCell(board, originalCell));
     }
 
     public void executeLogicalSequence(){
@@ -64,10 +72,49 @@ public class SimulatedRevealedCell extends SimulatedCell{
         board.addOperationToProcess(new SimulatedCountForContradictionsOperation(this));
     }
 
-    //TODO Implement proof by contradiction on SimulatedCells
-    public boolean proofByContradiction(){
+    public void proofByContradiction(){
+        boolean hypothesisIsHasMine;
+        
+        if(remainingMines == 0){
+            return;
+        }else if(remainingMines == 1){
+            hypothesisIsHasMine = true;
+        }else{
+            if(remainingAdjacentCells.size() - remainingMines == 1){
+                hypothesisIsHasMine = false;
+            }else{
+                return;
+            }
+        }
+
+        for(int i=0; i<remainingAdjacentCells.size(); i++){
+            boolean canBeHypothesizedOn = true;
+
+            if(remainingAdjacentCells.get(i) instanceof SimulatedUnrevealedCell){
+                SimulatedUnrevealedCell cellToHypothesizeOn = (SimulatedUnrevealedCell)remainingAdjacentCells.get(i);
+                canBeHypothesizedOn = !cellToHypothesizeOn.hasBeenMarked();
+            }else{
+                canBeHypothesizedOn = false;
+            }
+                
+            if(canBeHypothesizedOn){
+                SimulatedBoard currentHypothesisSimulation = new SimulatedBoard(false);
+
+                SimulatedUnrevealedCell testCell = (SimulatedUnrevealedCell)remainingAdjacentCells.get(i).simulateCell(currentHypothesisSimulation);
+
+                if(!currentHypothesisSimulation.checkIfHypothesisIsPossible(testCell, hypothesisIsHasMine)){
+                    if(hypothesisIsHasMine){
+                        remainingAdjacentCells.get(i).markAsEmpty();
+                        i--;
+                    }else{
+                        remainingAdjacentCells.get(i).markAsMine();
+                        i--;
+                    }
+                }
+            }
+        }
+
         board.addOperationToProcess(new SimulatedCountForContradictionsOperation(this));
-        return true;
     }
 
     @Override public void notifyAdjacentCells(){
@@ -97,6 +144,12 @@ public class SimulatedRevealedCell extends SimulatedCell{
 
     @Override public boolean markAsMine(){
         return false;
+    }
+
+    @Override protected SimulatedRevealedCell simulateCell(SimulatedBoard board){
+        SimulatedRevealedCell resultingSimulatedCell = SimulatedRevealedCell.createSimulatedCell(board, this);
+
+        return (SimulatedRevealedCell)simulateAdjacentCells(board, resultingSimulatedCell);
     }
 
     @Override public boolean equals(Object otherObject){

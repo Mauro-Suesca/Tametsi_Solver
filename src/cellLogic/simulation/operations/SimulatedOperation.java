@@ -35,6 +35,6 @@ public abstract class SimulatedOperation implements Comparable<SimulatedOperatio
 
         SimulatedOperation otherOperation = (SimulatedOperation)otherObject;
 
-        return this.type == otherOperation.type && this.callingCell == otherOperation.callingCell;
+        return this.type == otherOperation.type && this.callingCell.getOriginalCell() == otherOperation.callingCell.getOriginalCell();
     }
 }
