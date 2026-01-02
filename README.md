@@ -215,6 +215,34 @@ This project's purpose is to discover and implement an algorithm capable of solv
 ![image](./resources/level89_unsolved.png)
 ![image](./resources/level89_solved.png)
 
+## Level 92
+![image](./resources/level92_unsolved.png)
+![image](./resources/level92_solved.png)
+
+## Level 93
+![image](./resources/level93_unsolved.png)
+![image](./resources/level93_solved.png)
+
+## Level 94
+![image](./resources/level94_unsolved.png)
+![image](./resources/level94_solved.png)
+
+## Level 95
+![image](./resources/level95_unsolved.png)
+![image](./resources/level95_solved.png)
+
+## Level 97
+![image](./resources/level97_unsolved.png)
+![image](./resources/level97_solved.png)
+
+## Level 98
+![image](./resources/level98_unsolved.png)
+![image](./resources/level98_solved.png)
+
+## Level 100
+![image](./resources/level100_unsolved.png)
+![image](./resources/level100_solved.png)
+
     Official Reference:
     Tametsi
     Available on Steam
