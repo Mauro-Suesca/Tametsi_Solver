@@ -2,8 +2,6 @@ package cellLogic;
 
 import java.util.ArrayList;
 
-import cellLogic.logicalOperations.StartOperation;
-
 public class BoardWithLines extends Board{
     private ExternalCounter[] verticalLines;
     private ExternalCounter[] horizontalLines;
@@ -22,7 +20,8 @@ public class BoardWithLines extends Board{
 
     public void addVerticalLine(ExternalCounter newLine){
         verticalLines[currentColumn++] = newLine;
-        this.addOperationToProcess(new StartOperation(newLine));
+        newLine.addBoard(this);
+        newLine.addToBoardForProcessing();
     }
 
     public void addVerticalLine(ArrayList<? extends ExternalCounter> newLines){
@@ -33,7 +32,8 @@ public class BoardWithLines extends Board{
 
     public void addHorizontalLine(ExternalCounter newLine){
         horizontalLines[currentRow++] = newLine;
-        this.addOperationToProcess(new StartOperation(newLine));
+        newLine.addBoard(this);
+        newLine.addToBoardForProcessing();
     }
 
     public void addHorizontalLine(ArrayList<? extends ExternalCounter> newLines){
@@ -84,18 +84,14 @@ public class BoardWithLines extends Board{
     }
 
     @Override protected void autoAllAroundAdjacencySetter(){
-        allAroundCellAndBoardToCellAdjacency();
+        allAroundCellToCellAdjacency();
 
         //Cell and Board to Line adjacency
         for(int row = 0; row < cellsInBoard.length; row++){
             for(int column = 0; column < cellsInBoard[row].length; column++){
                 verticalLines[column].addAdjacent(cellsInBoard[row][column]);
                 horizontalLines[row].addAdjacent(cellsInBoard[row][column]);
-
-                verticalLines[column].addBoard(this);
             }
-
-            horizontalLines[row].addBoard(this);
         }
 
         //ColorCounters to Board adjacency
@@ -108,18 +104,14 @@ public class BoardWithLines extends Board{
     }
 
     @Override protected void autoSideAdjacencySetter(){
-        sideCellAndBoardToCellAdjacency();
+        sideCellToCellAdjacency();
 
         //Cell and Board to Line adjacency
         for(int row = 0; row < cellsInBoard.length; row++){
             for(int column = 0; column < cellsInBoard[row].length; column++){
                 verticalLines[column].addAdjacent(cellsInBoard[row][column]);
                 horizontalLines[row].addAdjacent(cellsInBoard[row][column]);
-
-                verticalLines[column].addBoard(this);
             }
-
-            horizontalLines[row].addBoard(this);
         }
 
         //ColorCounters to Board adjacency

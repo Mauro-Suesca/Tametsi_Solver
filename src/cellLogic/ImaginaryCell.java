@@ -2,8 +2,6 @@ package cellLogic;
 
 import java.util.ArrayList;
 
-import cellLogic.logicalOperations.StartOperation;
-
 public class ImaginaryCell extends EmptyCell{
     private ArrayList<Cell> originalAdjacencies;
     
@@ -21,7 +19,7 @@ public class ImaginaryCell extends EmptyCell{
             this.addAdjacent(cell);
         }
 
-        this.board.addOperationToProcess(new StartOperation(this));
+        addToBoardForProcessing();
     }
 
     public boolean isRepeated(){

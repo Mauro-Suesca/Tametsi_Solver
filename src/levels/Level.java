@@ -1,7 +1,5 @@
 package levels;
 
-import java.util.Scanner;
-
 import cellLogic.*;
 
 public abstract class Level{
@@ -20,17 +18,9 @@ public abstract class Level{
                 System.out.println("Level " + this + " was not completed");
             }
         }catch(Exception e){
-            System.out.println("Level " + this + " had an exception occur, press 'ENTER' to see stack trace");
-
-            Scanner input = new Scanner(System.in);
-            input.nextLine();
+            System.out.println("Level " + this + " had an exception occur, stack trace: ");
 
             e.printStackTrace();
-
-            System.out.println("\nPress 'ENTER' to continue the tests");
-            input.nextLine();
-
-            input.close();
         }
     }
 

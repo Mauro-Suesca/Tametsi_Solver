@@ -4,7 +4,7 @@ import cellLogic.simulation.cells.SimulatedRevealedCell;
 
 public class SimulatedCountRemainingOperation extends SimulatedOperation{
     public SimulatedCountRemainingOperation(SimulatedRevealedCell callingCell){
-        super(callingCell, START);
+        super(callingCell, COUNT_REMAINING);
     }
 
     @Override public boolean executeOperation(){

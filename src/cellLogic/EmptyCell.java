@@ -76,7 +76,7 @@ public class EmptyCell extends Cell{
     @Override public void reveal(){
         if(!revealed){
             revealed = true; 
-            board.addOperationToProcess(new StartOperation(this));       
+            addToBoardForProcessing();      
             notifyAdjacentCells();
         }
     }
@@ -86,23 +86,27 @@ public class EmptyCell extends Cell{
     }
 
     @Override public void reactToCellReveal(Cell revealedCell){
-        board.addOperationToProcess(new StartOperation(this));
+        addToBoardForProcessing();
     }
 
     @Override public void reactToCellMarked(Cell markedCell){
         remainingMines--;
-        board.addOperationToProcess(new StartOperation(this));
+        addToBoardForProcessing();
+    }
+
+    protected void addToBoardForProcessing(){
+        if(revealed && !unknown){
+            board.addOperationToProcess(new StartOperation(this));
+        }
     }
 
     public void startLogicalSequence(){
-        if(revealed && !unknown){
-            board.addOperationToProcess(new CountRemainingOperation(this));
-            board.addOperationToProcess(new BasicCheckSharedCellsOperation(this));
-            board.addOperationToProcess(new ProofByContradictionOperation(this));
-            board.addOperationToProcess(new IntermediateCheckSharedCellsOperation(this));
-            board.addOperationToProcess(new ProofByDoubleHypothesisOperation(this));
-            board.addOperationToProcess(new ProofByCasesOperation(this));
-        }
+        board.addOperationToProcess(new CountRemainingOperation(this));
+        board.addOperationToProcess(new BasicCheckSharedCellsOperation(this));
+        board.addOperationToProcess(new ProofByContradictionOperation(this));
+        board.addOperationToProcess(new IntermediateCheckSharedCellsOperation(this));
+        board.addOperationToProcess(new ProofByDoubleHypothesisOperation(this));
+        board.addOperationToProcess(new ProofByCasesOperation(this));
     }
 
     //Direct proof
@@ -179,6 +183,7 @@ public class EmptyCell extends Cell{
                 }
             }
         }
+        board.addOperationToProcess(new ProofByContradictionOperation(this));
     }
 
     private ArrayList<EmptyCell> findCompletelySharingCells(Cell adjacentCell){
@@ -192,7 +197,7 @@ public class EmptyCell extends Cell{
                 if(this != adjacentCell && !currentPossibleSharerCell.unknown && this.remainingAdjacentCells.containsAll(currentPossibleSharerCellAdjacencies)){
                     completelySharingCells.add(currentPossibleSharerCell);
                 }else if(this != adjacentCell && !currentPossibleSharerCell.unknown && currentPossibleSharerCellAdjacencies.containsAll(this.remainingAdjacentCells)){
-                    board.addOperationToProcess(new StartOperation(currentPossibleSharerCell));
+                    currentPossibleSharerCell.addToBoardForProcessing();
                 }
             }
         }
@@ -225,11 +230,10 @@ public class EmptyCell extends Cell{
                 if(!currentHypothesisSimulation.checkIfHypothesisIsPossible(testCell, hypothesisIsHasMine)){
                     if(hypothesisIsHasMine){
                         remainingAdjacentCells.get(i).reveal();
-                        i--;
                     }else{
                         remainingAdjacentCells.get(i).markAsMine();
-                        i--;
                     }
+                    i--;
                 }
             }
         }
