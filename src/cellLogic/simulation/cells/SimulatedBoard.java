@@ -47,7 +47,9 @@ public class SimulatedBoard{
     }
 
     public void addOperationToProcess(SimulatedOperation operationToAdd){
-        operationsToProcess.add(operationToAdd);
+        if(!operationsToProcess.contains(operationToAdd)){
+            operationsToProcess.add(operationToAdd);
+        }
     }
 
     public boolean checkIfHypothesisIsPossible(SimulatedUnrevealedCell testCell, boolean hypothesizedCellHasMine){

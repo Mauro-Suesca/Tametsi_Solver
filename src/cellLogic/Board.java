@@ -6,7 +6,6 @@ import java.util.PriorityQueue;
 import java.util.Scanner;
 
 import cellLogic.logicalOperations.LogicalOperation;
-import cellLogic.logicalOperations.StartOperation;
 
 public abstract class Board implements CellObserver{
     private static String DEFAULT_COLOR_ANSI = "\u001B[0m";
@@ -58,9 +57,10 @@ public abstract class Board implements CellObserver{
                 newCell.addColor(colorMineCounters.get(0));
 
                 cellsInBoard[currentRow][currentColumn] = newCell;
+                newCell.addBoard(this);
 
                 if(newCell.revealed){
-                    this.addOperationToProcess(new StartOperation((EmptyCell)newCell));
+                    ((EmptyCell)newCell).addToBoardForProcessing();
                 }
 
                 if(newCell.getHorizontalSize() > 1 || newCell.getVerticalSize() > 1){
@@ -147,7 +147,7 @@ public abstract class Board implements CellObserver{
 
     protected abstract void autoAllAroundAdjacencySetter();
 
-    protected void allAroundCellAndBoardToCellAdjacency(){
+    protected void allAroundCellToCellAdjacency(){
         for(int row = 0; row < cellsInBoard.length; row++){
             for(int column = 0; column < cellsInBoard[row].length; column++){
                 Cell currentCell = cellsInBoard[row][column];
@@ -164,14 +164,13 @@ public abstract class Board implements CellObserver{
                 addIfValidPosition(currentCell, row + 1, column + 1);
 
                 totalMineCounter.addAdjacent(currentCell);
-                currentCell.addBoard(this);
             }
         }
     }
 
     protected abstract void autoSideAdjacencySetter();
 
-    protected void sideCellAndBoardToCellAdjacency(){
+    protected void sideCellToCellAdjacency(){
         for(int row = 0; row < cellsInBoard.length; row++){
             for(int column = 0; column < cellsInBoard[row].length; column++){
                 Cell currentCell = cellsInBoard[row][column];
@@ -190,7 +189,6 @@ public abstract class Board implements CellObserver{
 
                 if(!(currentCell instanceof CellExtension)){
                     totalMineCounter.addAdjacent(currentCell);
-                    currentCell.addBoard(this);
                 }
             }
         }

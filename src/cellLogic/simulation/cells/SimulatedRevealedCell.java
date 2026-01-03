@@ -30,19 +30,14 @@ public class SimulatedRevealedCell extends SimulatedCell{
     }
 
     public void executeLogicalSequence(){
-        if(!unknown){
-            board.addOperationToProcess(new SimulatedCountForContradictionsOperation(this));
-            board.addOperationToProcess(new SimulatedCountRemainingOperation(this));
-        }
+        board.addOperationToProcess(new SimulatedCountForContradictionsOperation(this));
+        board.addOperationToProcess(new SimulatedCountRemainingOperation(this));
     }
 
-    public boolean executeLogicalSequenceForDoubleHypothesis(){
-        if(!unknown){
-            board.addOperationToProcess(new SimulatedCountForContradictionsOperation(this));
-            board.addOperationToProcess(new SimulatedCountRemainingOperation(this));
-            board.addOperationToProcess(new SimulatedProofByContradictionOperation(this));
-        }
-        return true;
+    public void executeLogicalSequenceForDoubleHypothesis(){
+        board.addOperationToProcess(new SimulatedCountForContradictionsOperation(this));
+        board.addOperationToProcess(new SimulatedCountRemainingOperation(this));
+        board.addOperationToProcess(new SimulatedProofByContradictionOperation(this));
     }
 
     public boolean countAndCheckIfThereAreContradictions(){
@@ -88,7 +83,7 @@ public class SimulatedRevealedCell extends SimulatedCell{
         }
 
         for(int i=0; i<remainingAdjacentCells.size(); i++){
-            boolean canBeHypothesizedOn = true;
+            boolean canBeHypothesizedOn;
 
             if(remainingAdjacentCells.get(i) instanceof SimulatedUnrevealedCell){
                 SimulatedUnrevealedCell cellToHypothesizeOn = (SimulatedUnrevealedCell)remainingAdjacentCells.get(i);
@@ -104,12 +99,11 @@ public class SimulatedRevealedCell extends SimulatedCell{
 
                 if(!currentHypothesisSimulation.checkIfHypothesisIsPossible(testCell, hypothesisIsHasMine)){
                     if(hypothesisIsHasMine){
-                        remainingAdjacentCells.get(i).markAsEmpty();
-                        i--;
+                        remainingAdjacentCells.get(i).markAsEmpty();                        
                     }else{
                         remainingAdjacentCells.get(i).markAsMine();
-                        i--;
                     }
+                    i--;
                 }
             }
         }
@@ -131,10 +125,12 @@ public class SimulatedRevealedCell extends SimulatedCell{
     }
 
     private void react(){
-        if(board.getNeedsToUseDoubleHypothesis()){
-            board.addOperationToProcess(new SimulatedStartDoubleHypothesisOperation(this));
-        }else{
-            board.addOperationToProcess(new SimulatedStartOperation(this));
+        if(!unknown){
+            if(board.getNeedsToUseDoubleHypothesis()){
+                board.addOperationToProcess(new SimulatedStartDoubleHypothesisOperation(this));
+            }else{
+                board.addOperationToProcess(new SimulatedStartOperation(this));
+            }
         }
     }
 
