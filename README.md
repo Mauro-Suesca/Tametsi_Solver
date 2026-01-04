@@ -69,15 +69,15 @@ This project's purpose is to discover and implement an algorithm capable of solv
 ![image](./resources/level38_unsolved.png)
 ![image](./resources/level38_solved.png)
 
+## Level 42
+![image](./resources/level42_unsolved.png)
+![image](./resources/level42_solved.png)
+
 # Planned levels
 
 ## Level 34
 ![image](./resources/level34_unsolved.png)
 ![image](./resources/level34_solved.png)
-
-## Level 42
-![image](./resources/level42_unsolved.png)
-![image](./resources/level42_solved.png)
 
 ## Level 43
 ![image](./resources/level43_unsolved.png)
