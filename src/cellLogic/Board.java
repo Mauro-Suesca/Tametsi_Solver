@@ -10,6 +10,7 @@ import cellLogic.logicalOperations.LogicalOperation;
 public abstract class Board implements CellObserver{
     private static String DEFAULT_COLOR_ANSI = "\u001B[0m";
     protected Cell[][] cellsInBoard;
+    protected EmptyCell lastActingCell;
     protected ExternalCounter totalMineCounter;
     protected ArrayList<ColorCounter> colorMineCounters;
     protected PriorityQueue<LogicalOperation> operationToProcess;
@@ -97,6 +98,15 @@ public abstract class Board implements CellObserver{
         if(!operationToProcess.contains(operationToAdd)){
             operationToProcess.add(operationToAdd);
         }
+    }
+
+    public void updateLastActingCell(EmptyCell newLastActingCell){
+        if(!(lastActingCell == null)){
+            lastActingCell.setIsLastActingCell(false);
+        }
+
+        lastActingCell = newLastActingCell;
+        newLastActingCell.setIsLastActingCell(true);
     }
 
     protected void executeNextProcess(){

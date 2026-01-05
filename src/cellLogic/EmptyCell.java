@@ -9,6 +9,7 @@ public class EmptyCell extends Cell{
     protected int remainingMines;
     protected boolean unknown;
     protected boolean needsToCountAdjacentMines;
+    protected boolean isLastActingCell;
 
     //Constructors for EmptyCells that already know their adjacent mines from the get-go
     public EmptyCell(int remainingMines, boolean revealed, boolean unknown){
@@ -18,6 +19,7 @@ public class EmptyCell extends Cell{
         this.unknown = unknown;
         this.markedAsMine = false;
         this.needsToCountAdjacentMines = false;
+        this.isLastActingCell = false;
     }
 
     public EmptyCell(ColorCounter color, int remainingMines, boolean revealed, boolean unknown){
@@ -56,6 +58,10 @@ public class EmptyCell extends Cell{
     public EmptyCell(ColorCounter color, boolean revealed, boolean unknown, int horizontalSize, int verticalSize){
         this(revealed, unknown, horizontalSize, verticalSize);
         this.addColor(color);
+    }
+
+    public void setIsLastActingCell(boolean isLastActingCell){
+        this.isLastActingCell = isLastActingCell;
     }
 
     @Override public void addAdjacent(Cell otherCell){
@@ -112,11 +118,13 @@ public class EmptyCell extends Cell{
     //Direct proof
     public void countRemaining(){
         if(remainingMines == 0){
+            board.updateLastActingCell(this);
             for(int i=0; i<remainingAdjacentCells.size(); i++){
                 remainingAdjacentCells.get(i).reveal();
                 i--;
             }
         }else if(remainingAdjacentCells.size() == remainingMines){
+            board.updateLastActingCell(this);
             for(int i=0; i<remainingAdjacentCells.size(); i++){
                 remainingAdjacentCells.get(i).markAsMine();
                 i--;
@@ -135,6 +143,7 @@ public class EmptyCell extends Cell{
                 int minesOutsideOfSharedOnes = this.remainingMines - completelySharingCell.remainingMines;
                 
                 if(minesOutsideOfSharedOnes == 0){
+                    board.updateLastActingCell(this);
                     for(int k=0; k<remainingAdjacentCells.size(); k++){
                         adjacentCell = remainingAdjacentCells.get(k);
 
@@ -148,6 +157,7 @@ public class EmptyCell extends Cell{
                         }
                     }
                 }else if(minesOutsideOfSharedOnes == numberOfCellsOutsideOfSharedOnes){
+                    board.updateLastActingCell(this);
                     for(int k=0; k<remainingAdjacentCells.size(); k++){
                         adjacentCell = remainingAdjacentCells.get(k);
 
@@ -228,6 +238,7 @@ public class EmptyCell extends Cell{
                 SimulatedUnrevealedCell testCell = (SimulatedUnrevealedCell)remainingAdjacentCells.get(i).simulateCell(currentHypothesisSimulation);
 
                 if(!currentHypothesisSimulation.checkIfHypothesisIsPossible(testCell, hypothesisIsHasMine)){
+                    board.updateLastActingCell(this);
                     if(hypothesisIsHasMine){
                         remainingAdjacentCells.get(i).reveal();
                     }else{
@@ -258,7 +269,7 @@ public class EmptyCell extends Cell{
 
     @Override public String toString(){
         if(revealed){
-            return this.getColorANSI() + (unknown ? "? " : String.valueOf(remainingMines) + " ");
+            return this.getColorANSI() + (isLastActingCell ? "\u001B[4m" : "") + (unknown ? "?" : String.valueOf(remainingMines)) + (isLastActingCell ? "\u001B[0m " : " ");
         }else{
             return super.toString();
         }
