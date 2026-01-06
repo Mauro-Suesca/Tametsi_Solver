@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-import levels.*;
+import levels.LevelHandler;
 
 public class Main{
     public static void main(String[] args){
