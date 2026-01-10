@@ -7,6 +7,7 @@ import cellLogic.Cell;
 public class SimulatedUnrevealedCell extends SimulatedCell{
     private boolean markedAsMine;
     private boolean markedAsEmpty;
+    private ArrayList<SimulatedCell> preHypothesisRemainingAdjacentCells;
 
     private SimulatedUnrevealedCell(SimulatedBoard board, Cell originalCell, boolean markedAsMine){
         this.board = board;
@@ -26,10 +27,6 @@ public class SimulatedUnrevealedCell extends SimulatedCell{
 
     public static SimulatedUnrevealedCell createSimulatedCell(SimulatedBoard board, SimulatedUnrevealedCell originalCell){
         return (SimulatedUnrevealedCell)board.getAlreadyExistingSimulatedCell(new SimulatedUnrevealedCell(board, originalCell));
-    }
-
-    public boolean hasBeenMarked(){
-        return markedAsEmpty || markedAsMine;
     }
 
     @Override protected void notifyAdjacentCells(){
@@ -62,7 +59,13 @@ public class SimulatedUnrevealedCell extends SimulatedCell{
         }
 
         markedAsEmpty = true;
+
+        if(board.getIsHypothesizing()){
+            board.addExecutedCommand(new MarkAsEmptyCommand(this));
+        }
+
         notifyAdjacentCells();
+        
         return true;
     }
 
@@ -72,8 +75,37 @@ public class SimulatedUnrevealedCell extends SimulatedCell{
         }
 
         markedAsMine = true;
+
+        if(board.getIsHypothesizing()){
+            board.addExecutedCommand(new MarkAsMineCommand(this));
+        }
+
         notifyAdjacentCells();
         return true;
+    }
+
+    public void unMark(){
+        this.markedAsEmpty = false;
+        this.markedAsMine = false;
+    }
+
+    public void copyAdjacenciesForRestoring(){
+        this.preHypothesisRemainingAdjacentCells = new ArrayList<>(remainingAdjacentCells);
+    }
+
+    public void restoreAdjacencies(boolean wasMarkedAsMine){
+        this.remainingAdjacentCells = new ArrayList<>();
+        for(SimulatedCell adjacentCell : preHypothesisRemainingAdjacentCells){
+            this.addAdjacent(adjacentCell);
+        }
+        
+        if(wasMarkedAsMine){
+            for(SimulatedCell adjacentCell : remainingAdjacentCells){
+                if(adjacentCell instanceof SimulatedRevealedCell){
+                    ((SimulatedRevealedCell) adjacentCell).increaseRemainingMines();
+                }
+            }
+        }
     }
 
     @Override protected SimulatedUnrevealedCell simulateCell(SimulatedBoard board){
