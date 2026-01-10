@@ -29,6 +29,10 @@ public class SimulatedRevealedCell extends SimulatedCell{
         return (SimulatedRevealedCell)board.getAlreadyExistingSimulatedCell(new SimulatedRevealedCell(board, originalCell));
     }
 
+    protected void increaseRemainingMines(){
+        this.remainingMines++;
+    }
+
     public void executeLogicalSequence(){
         board.addOperationToProcess(new SimulatedCountForContradictionsOperation(this));
         board.addOperationToProcess(new SimulatedCountRemainingOperation(this));
@@ -82,29 +86,23 @@ public class SimulatedRevealedCell extends SimulatedCell{
             }
         }
 
-        for(int i=0; i<remainingAdjacentCells.size(); i++){
-            boolean canBeHypothesizedOn;
+        for(int i=0; i<remainingAdjacentCells.size(); i++){      
+            board.startHypothesizing();
 
-            if(remainingAdjacentCells.get(i) instanceof SimulatedUnrevealedCell){
-                SimulatedUnrevealedCell cellToHypothesizeOn = (SimulatedUnrevealedCell)remainingAdjacentCells.get(i);
-                canBeHypothesizedOn = !cellToHypothesizeOn.hasBeenMarked();
-            }else{
-                canBeHypothesizedOn = false;
-            }
-                
-            if(canBeHypothesizedOn){
-                SimulatedBoard currentHypothesisSimulation = new SimulatedBoard(false);
+            //Every cell adjacent to a SimulatedRevealedCell must be an unmarked SimulatedUnrevealedCell, because when they are marked they are removed from adjacencies, and two SimulatedRevealedCell cannot be adjacent
+            SimulatedUnrevealedCell testCell = (SimulatedUnrevealedCell)remainingAdjacentCells.get(i);
 
-                SimulatedUnrevealedCell testCell = (SimulatedUnrevealedCell)remainingAdjacentCells.get(i).simulateCell(currentHypothesisSimulation);
+            if(!board.checkIfHypothesisIsPossible(testCell, hypothesisIsHasMine)){
+                board.finishHypothesis();
 
-                if(!currentHypothesisSimulation.checkIfHypothesisIsPossible(testCell, hypothesisIsHasMine)){
-                    if(hypothesisIsHasMine){
-                        remainingAdjacentCells.get(i).markAsEmpty();                        
-                    }else{
-                        remainingAdjacentCells.get(i).markAsMine();
-                    }
-                    i--;
+                if(hypothesisIsHasMine){
+                    remainingAdjacentCells.get(i).markAsEmpty();
+                }else{
+                    remainingAdjacentCells.get(i).markAsMine();
                 }
+                i--;
+            }else{
+                board.finishHypothesis();
             }
         }
 
@@ -126,10 +124,10 @@ public class SimulatedRevealedCell extends SimulatedCell{
 
     private void react(){
         if(!unknown){
-            if(board.getNeedsToUseDoubleHypothesis()){
-                board.addOperationToProcess(new SimulatedStartDoubleHypothesisOperation(this));
-            }else{
+            if(!board.getNeedsToUseDoubleHypothesis() || board.getIsHypothesizing()){
                 board.addOperationToProcess(new SimulatedStartOperation(this));
+            }else{
+                board.addOperationToProcess(new SimulatedStartDoubleHypothesisOperation(this));
             }
         }
     }
