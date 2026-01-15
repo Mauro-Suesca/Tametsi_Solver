@@ -251,14 +251,14 @@ public class EmptyCell extends Cell{
     }
 
     @Override public SimulatedCell simulateCell(SimulatedBoard simulatedBoard){
-        SimulatedCell resultingSimulatedCell;
+        SimulatedCell resultingSimulatedCell = null;
 
-        if(revealed){
-            resultingSimulatedCell = SimulatedRevealedCell.createSimulatedCell(simulatedBoard, this, remainingMines, unknown);
-        }else{
+        if(revealed && !unknown){
+            resultingSimulatedCell = SimulatedRevealedCell.createSimulatedCell(simulatedBoard, this, remainingMines);
+        }else if(!revealed){
             resultingSimulatedCell = SimulatedUnrevealedCell.createSimulatedCell(simulatedBoard, this, markedAsMine);
         }
-
+        
         return simulateAdjacentCells(simulatedBoard, resultingSimulatedCell);
     }
 

@@ -85,14 +85,16 @@ public abstract class Cell implements CellObserver{
 
     protected SimulatedCell simulateAdjacentCells(SimulatedBoard simulatedBoard, SimulatedCell resultingSimulatedCell){
         for(int i=0; i<remainingAdjacentCells.size(); i++){
-            if(!simulatedBoard.checkIfCellExistsInBoard(remainingAdjacentCells.get(i))){
-                resultingSimulatedCell.addAdjacent(remainingAdjacentCells.get(i).simulateCell(simulatedBoard));
-            }else if(remainingAdjacentCells.get(i).revealed){
-                EmptyCell adjacentCell = (EmptyCell) remainingAdjacentCells.get(i);
-                resultingSimulatedCell.addAdjacent(SimulatedRevealedCell.createSimulatedCell(simulatedBoard, adjacentCell, adjacentCell.remainingMines, adjacentCell.unknown));
-            }else{
-                Cell adjacentCell = remainingAdjacentCells.get(i);
-                resultingSimulatedCell.addAdjacent(SimulatedUnrevealedCell.createSimulatedCell(simulatedBoard, adjacentCell, adjacentCell.markedAsMine));
+            Cell adjacentCell = remainingAdjacentCells.get(i);
+            if(!adjacentCell.revealed || !((EmptyCell)adjacentCell).unknown){
+                if(!simulatedBoard.checkIfCellExistsInBoard(adjacentCell)){
+                    resultingSimulatedCell.addAdjacent(adjacentCell.simulateCell(simulatedBoard));
+                }else if(adjacentCell.revealed){
+                    EmptyCell adjacentEmptyCell = (EmptyCell) adjacentCell;
+                    resultingSimulatedCell.addAdjacent(SimulatedRevealedCell.createSimulatedCell(simulatedBoard, adjacentEmptyCell, adjacentEmptyCell.remainingMines));
+                }else{
+                    resultingSimulatedCell.addAdjacent(SimulatedUnrevealedCell.createSimulatedCell(simulatedBoard, adjacentCell, adjacentCell.markedAsMine));
+                }
             }
         }
 
