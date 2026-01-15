@@ -7,26 +7,16 @@ import cellLogic.simulation.operations.*;
 
 public class SimulatedRevealedCell extends SimulatedCell{
     private int remainingMines;
-    private boolean unknown;
 
-    private SimulatedRevealedCell(SimulatedBoard board, Cell originalCell, int remainingMines, boolean unknown){
+    private SimulatedRevealedCell(SimulatedBoard board, Cell originalCell, int remainingMines){
         this.board = board;
         this.originalCell = originalCell;
         this.remainingMines = remainingMines;
-        this.unknown = unknown;
         this.remainingAdjacentCells = new ArrayList<>();
     }
 
-    private SimulatedRevealedCell(SimulatedBoard board, SimulatedRevealedCell cellToCopy){
-        this(board, cellToCopy.originalCell, cellToCopy.remainingMines, cellToCopy.unknown);
-    }
-
-    public static SimulatedRevealedCell createSimulatedCell(SimulatedBoard board, Cell originalCell, int remainingMines, boolean unknown){
-        return (SimulatedRevealedCell)board.getAlreadyExistingSimulatedCell(new SimulatedRevealedCell(board, originalCell, remainingMines, unknown));
-    }
-
-    public static SimulatedRevealedCell createSimulatedCell(SimulatedBoard board, SimulatedRevealedCell originalCell){
-        return (SimulatedRevealedCell)board.getAlreadyExistingSimulatedCell(new SimulatedRevealedCell(board, originalCell));
+    public static SimulatedRevealedCell createSimulatedCell(SimulatedBoard board, Cell originalCell, int remainingMines){
+        return (SimulatedRevealedCell)board.getAlreadyExistingSimulatedCell(new SimulatedRevealedCell(board, originalCell, remainingMines));
     }
 
     protected void increaseRemainingMines(){
@@ -123,12 +113,10 @@ public class SimulatedRevealedCell extends SimulatedCell{
     }
 
     private void react(){
-        if(!unknown){
-            if(!board.getNeedsToUseDoubleHypothesis() || board.getIsHypothesizing()){
-                board.addOperationToProcess(new SimulatedStartOperation(this));
-            }else{
-                board.addOperationToProcess(new SimulatedStartDoubleHypothesisOperation(this));
-            }
+        if(!board.getNeedsToUseDoubleHypothesis() || board.getIsHypothesizing()){
+            board.addOperationToProcess(new SimulatedStartOperation(this));
+        }else{
+            board.addOperationToProcess(new SimulatedStartDoubleHypothesisOperation(this));
         }
     }
 
@@ -138,12 +126,6 @@ public class SimulatedRevealedCell extends SimulatedCell{
 
     @Override public boolean markAsMine(){
         return false;
-    }
-
-    @Override protected SimulatedRevealedCell simulateCell(SimulatedBoard board){
-        SimulatedRevealedCell resultingSimulatedCell = SimulatedRevealedCell.createSimulatedCell(board, this);
-
-        return (SimulatedRevealedCell)simulateAdjacentCells(board, resultingSimulatedCell);
     }
 
     @Override public boolean equals(Object otherObject){

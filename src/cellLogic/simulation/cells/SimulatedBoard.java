@@ -82,7 +82,9 @@ public class SimulatedBoard{
     }
 
     public void addExecutedCommand(MarkCommand commandToAdd){
-        commandsExecutedWhileHypothesizing.push(commandToAdd);
+        if(!commandsExecutedWhileHypothesizing.contains(commandToAdd)){
+            commandsExecutedWhileHypothesizing.push(commandToAdd);
+        }
     }
 
     public boolean checkIfHypothesisIsPossible(SimulatedUnrevealedCell testCell, boolean hypothesizedCellHasMine){

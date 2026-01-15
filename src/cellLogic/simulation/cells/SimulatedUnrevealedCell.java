@@ -16,17 +16,8 @@ public class SimulatedUnrevealedCell extends SimulatedCell{
         this.remainingAdjacentCells = new ArrayList<>();
     }
 
-    private SimulatedUnrevealedCell(SimulatedBoard board, SimulatedUnrevealedCell cellToCopy){
-        this(board, cellToCopy.originalCell, cellToCopy.markedAsMine);
-        this.markedAsEmpty = cellToCopy.markedAsEmpty;
-    }
-
     public static SimulatedUnrevealedCell createSimulatedCell(SimulatedBoard board, Cell originalCell, boolean markedAsMine){
         return (SimulatedUnrevealedCell)board.getAlreadyExistingSimulatedCell(new SimulatedUnrevealedCell(board, originalCell, markedAsMine));
-    }
-
-    public static SimulatedUnrevealedCell createSimulatedCell(SimulatedBoard board, SimulatedUnrevealedCell originalCell){
-        return (SimulatedUnrevealedCell)board.getAlreadyExistingSimulatedCell(new SimulatedUnrevealedCell(board, originalCell));
     }
 
     @Override protected void notifyAdjacentCells(){
@@ -106,12 +97,6 @@ public class SimulatedUnrevealedCell extends SimulatedCell{
                 }
             }
         }
-    }
-
-    @Override protected SimulatedUnrevealedCell simulateCell(SimulatedBoard board){
-        SimulatedUnrevealedCell resultingSimulatedCell = SimulatedUnrevealedCell.createSimulatedCell(board, this);
-
-        return (SimulatedUnrevealedCell)simulateAdjacentCells(board, resultingSimulatedCell);
     }
 
     @Override public boolean equals(Object otherObject){
