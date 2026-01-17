@@ -21,6 +21,7 @@ public abstract class Board implements CellObserver{
     protected Scanner waitForUserInput;
     protected boolean hasDiagonalAdjacencies;
     protected boolean isTesting;
+    protected boolean addsCellsHorizontally;
 
     public Board(int numberOfMinesInBoard, int columns, int rows, boolean hasDiagonalAdjacencies){
         this(columns, rows, hasDiagonalAdjacencies, new ColorCounter(numberOfMinesInBoard, "grises", DEFAULT_COLOR_ANSI));
@@ -44,10 +45,21 @@ public abstract class Board implements CellObserver{
         this.totalColumns = columns;
         this.hasDiagonalAdjacencies = hasDiagonalAdjacencies;
         this.isTesting = false;
+        this.addsCellsHorizontally = true;
         this.cellsInBoard = new Cell[rows][columns];
         this.operationToProcess = new PriorityQueue<>();
         this.waitForUserInput = new Scanner(System.in);
         resetCurrentRowAndColumn();
+    }
+
+    public void setAddsCellsHorizontally(boolean addsCellsHorizontally){
+        this.addsCellsHorizontally = addsCellsHorizontally;
+    }
+
+    public void addCell(List<? extends Cell> newCells){
+        for(Cell cell : newCells){
+            this.addCell(cell);
+        }
     }
 
     public void addCell(Cell newCell){
@@ -76,16 +88,22 @@ public abstract class Board implements CellObserver{
 
                 placed = true;
             }
+
+            advanceAddingPosition();
+        }
+    }
+
+    private void advanceAddingPosition(){
+        if(addsCellsHorizontally){
             if(++currentColumn == totalColumns){
                 currentColumn = 0;
                 currentRow++;
             }
-        }
-    }
-
-    public void addCell(List<? extends Cell> newCells){
-        for(Cell cell : newCells){
-            this.addCell(cell);
+        }else{
+            if(++currentRow == totalRows){
+                currentRow = 0;
+                currentColumn++;
+            }
         }
     }
 
