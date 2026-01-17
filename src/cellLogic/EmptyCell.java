@@ -64,6 +64,10 @@ public class EmptyCell extends Cell{
         this.isLastActingCell = isLastActingCell;
     }
 
+    public int getRemainingMines(){
+        return remainingMines;
+    }
+
     @Override public void addAdjacent(Cell otherCell){
         if(!remainingAdjacentCells.contains(otherCell) && (!this.revealed || !otherCell.revealed)){
             if(otherCell instanceof DifferentlyAdjacentCell){
