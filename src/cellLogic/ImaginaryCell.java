@@ -59,8 +59,8 @@ public class ImaginaryCell extends EmptyCell{
             }
 
             return true;
+        }else{
+            return false;
         }
-        
-        return false;
     }
 }
