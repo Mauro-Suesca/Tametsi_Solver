@@ -35,39 +35,39 @@ public class Level57 extends Level{
 
         board.setAddsCellsHorizontally(false);
 
-        //Vertical Line 1
+        //Column 1
         board.addCell(grayRevealedFactory.build(4));
         board.addCell(grayUnrevealedEmptyFactory.build(4));
 
-        //Vertical Line 2
+        //Column 2
         board.addCell(pinkMineFactory.build(1));
         board.addCell(pinkUnrevealedEmptyFactory.build(1));
         board.addCell(pinkMineFactory.build(3));
         board.addCell(pinkUnrevealedEmptyFactory.build(2));
         board.addCell(grayMineFactory.build(1));
 
-        //Vertical Line 3
+        //Column 3
         board.addCell(purpleRevealedFactory.build(4));
         board.addCell(purpleMineFactory.build(1));
         board.addCell(purpleUnrevealedEmptyFactory.build(1));
         board.addCell(pinkUnrevealedEmptyFactory.build(1));
         board.addCell(grayMineFactory.build(1));
 
-        //Vertical Line 4
+        //Column 4
         board.addCell(grayRevealedFactory.build(4));
         board.addCell(grayUnrevealedEmptyFactory.build(1));
         board.addCell(purpleUnrevealedEmptyFactory.build(1));
         board.addCell(pinkUnrevealedEmptyFactory.build(1));
         board.addCell(grayUnrevealedEmptyFactory.build(1));
 
-        //Vertical Line 5
+        //Column 5
         board.addCell(nonExistentCellFactory.build(4));
         board.addCell(grayUnrevealedEmptyFactory.build(1));
         board.addCell(purpleUnrevealedEmptyFactory.build(1));
         board.addCell(pinkUnrevealedEmptyFactory.build(1));
         board.addCell(grayMineFactory.build(1));
 
-        //Vertical Line 6
+        //Column 6
         board.addCell(nonExistentCellFactory.build(4));
         board.addCell(grayMineFactory.build(1));
         board.addCell(purpleUnrevealedEmptyFactory.build(1));
@@ -76,7 +76,7 @@ public class Level57 extends Level{
 
         board.setAddsCellsHorizontally(true);
 
-        //Horizontal Line 1
+        //Row 1
         board.addCell(grayUnrevealedEmptyFactory.build(1));
         board.addCell(grayMineFactory.build(1));
         board.addCell(grayUnrevealedEmptyFactory.build(4));
@@ -84,14 +84,14 @@ public class Level57 extends Level{
         board.addCell(grayUnrevealedEmptyFactory.build(2));
         board.addCell(grayMineFactory.build(1));
 
-        //Horizontal Line 2
+        //Row 2
         board.addCell(grayMineFactory.build(1));
         board.addCell(purpleMineFactory.build(3));
         board.addCell(purpleUnrevealedEmptyFactory.build(4));
         board.addCell(purpleMineFactory.build(1));
         board.addCell(grayUnrevealedEmptyFactory.build(1));
 
-        //Horizontal Line 3
+        //Row 3
         board.addCell(grayUnrevealedEmptyFactory.build(1));
         board.addCell(purpleUnrevealedEmptyFactory.build(1));
         board.addCell(pinkUnrevealedEmptyFactory.build(1));
@@ -100,7 +100,7 @@ public class Level57 extends Level{
         board.addCell(purpleUnrevealedEmptyFactory.build(1));
         board.addCell(grayUnrevealedEmptyFactory.build(1));
 
-        //Horizontal Line 4
+        //Row 4
         board.addCell(grayUnrevealedEmptyFactory.build(1));
         board.addCell(purpleMineFactory.build(1));
         board.addCell(pinkUnknownFactory.build(1));
@@ -113,58 +113,58 @@ public class Level57 extends Level{
 
         board.setAddsCellsHorizontally(false);
 
-        //Vertical Line 7
+        //Column 7
         board.addCell(grayMineFactory.build(1));
         board.addCell(purpleMineFactory.build(1));
         board.addCell(pinkUnrevealedEmptyFactory.build(1));
         board.addCell(grayUnrevealedEmptyFactory.build(1));
 
-        //Vertical Line 8
+        //Column 8
         board.addCell(purpleMineFactory.build(1));
         board.addCell(purpleUnrevealedEmptyFactory.build(1));
         board.addCell(pinkUnrevealedEmptyFactory.build(1));
         board.addCell(grayMineFactory.build(1));
 
-        //Vertical Line 9
+        //Column 9
         board.addCell(pinkUnrevealedEmptyFactory.build(1));
         board.addCell(pinkUnknownFactory.build(1));
         board.addCell(pinkUnrevealedEmptyFactory.build(1));
         board.addCell(grayUnrevealedEmptyFactory.build(1));
 
-        //Vertical Line 10
+        //Column 10
         board.addCell(grayUnrevealedEmptyFactory.build(1));
         board.addCell(grayMineFactory.build(2));
         board.addCell(grayUnrevealedEmptyFactory.build(1));
 
-        //Vertical Line 11
+        //Column 11
         board.addCell(nonExistentCellFactory.build(4));
 
-        //Vertical Line 12
+        //Column 12
         board.addCell(nonExistentCellFactory.build(4));
 
-        //Vertical Line 13
+        //Column 13
         board.addCell(grayMineFactory.build(1));
         board.addCell(grayUnrevealedEmptyFactory.build(2));
         board.addCell(grayMineFactory.build(1));
 
-        //Vertical Line 14
+        //Column 14
         board.addCell(pinkUnrevealedEmptyFactory.build(4));
 
-        //Vertical Line 15
+        //Column 15
         board.addCell(purpleUnrevealedEmptyFactory.build(1));
         board.addCell(purpleMineFactory.build(2));
         board.addCell(purpleUnrevealedEmptyFactory.build(1));
 
-        //Vertical Line 16
+        //Column 16
         board.addCell(grayMineFactory.build(1));
         board.addCell(grayUnrevealedEmptyFactory.build(3));
 
         board.resetCurrentRowAndColumn();
 
-        //VerticalCounters
+        //VerticalLines
         board.addVerticalLine(nonExistentCellFactory.build(16));
         
-        //HorizontalCounters
+        //HorizontalLines
         board.addHorizontalLine(externalCounterFactory.build(8));
         
         return board;
