@@ -11,13 +11,13 @@ public class Level53 extends Level{
     @Override protected Board setup(){
         ColorCounter pink = new ColorCounter(1, "pink", "\u001B[38;5;212m");
         ColorCounter red = new ColorCounter(0, "red", "\u001B[31m");
-        ColorCounter gray = new ColorCounter(1, "gray", "\u001B[0m");
+        ColorCounter orange = new ColorCounter(1, "orange", "\u001B[38;5;214m");
         ColorCounter yellow = new ColorCounter(1, "yellow", "\u001B[33m");
 
-        Board board = new BoardLineless(11, 11, false, pink, red, gray, yellow);
+        Board board = new BoardLineless(11, 11, false, pink, red, orange, yellow);
         
         EmptyCellFactory redUnrevealedEmptyFactory = new EmptyCellFactory(red, false, false, 3, 3);
-        EmptyCellFactory grayUnrevealedEmptyFactory = new EmptyCellFactory(gray, false, false, 2, 2);
+        EmptyCellFactory orangeUnrevealedEmptyFactory = new EmptyCellFactory(orange, false, false, 2, 2);
 
         EmptyCellFactory pinkUnknownFactory = new EmptyCellFactory(pink, false, true, 4, 4);
         EmptyCellFactory yellowUnknownFactory = new EmptyCellFactory(yellow, false, true);
@@ -28,21 +28,21 @@ public class Level53 extends Level{
         board.addCell(pinkUnknownFactory.build(1));
 
         //Line 4
-        board.addCell(new MineCell(gray, 2, 2));
+        board.addCell(new MineCell(orange, 2, 2));
         board.addCell(new EmptyCell(yellow, false, false));
 
         //Line 5
         board.addCell(redUnrevealedEmptyFactory.build(1));
         board.addCell(yellowUnknownFactory.build(1));
-        board.addCell(grayUnrevealedEmptyFactory.build(1));
+        board.addCell(orangeUnrevealedEmptyFactory.build(1));
         board.addCell(redUnrevealedEmptyFactory.build(1));
 
         //Line 6
-        board.addCell(grayUnrevealedEmptyFactory.build(1));
+        board.addCell(orangeUnrevealedEmptyFactory.build(1));
         board.addCell(new EmptyCell(yellow, true, true));
 
         //Line 7
-        board.addCell(new EmptyCell(gray, true, false, 2, 2));
+        board.addCell(new EmptyCell(orange, true, false, 2, 2));
         board.addCell(new MineCell(yellow));
 
         //Line 8

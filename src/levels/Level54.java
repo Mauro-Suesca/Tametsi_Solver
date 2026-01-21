@@ -13,18 +13,18 @@ public class Level54 extends Level{
         ColorCounter gray = new ColorCounter(16, "gray", "\u001B[0m");
         ColorCounter pink = new ColorCounter(13, "pink", "\u001B[38;5;212m");
         ColorCounter cyan = new ColorCounter(15, "cyan", "\u001B[36m");
-        ColorCounter yellow = new ColorCounter(15, "yellow", "\u001B[33m");
+        ColorCounter orange = new ColorCounter(15, "orange", "\u001B[38;5;214m");
 
-        Board board = new BoardLineless(13, 13, true, gray, pink, cyan, yellow);
+        Board board = new BoardLineless(13, 13, true, gray, pink, cyan, orange);
         
         MineCellFactory pinkMineFactory = new MineCellFactory(pink);
         MineCellFactory cyanMineFactory = new MineCellFactory(cyan);
-        MineCellFactory yellowMineFactory = new MineCellFactory(yellow);
+        MineCellFactory orangeMineFactory = new MineCellFactory(orange);
         
         EmptyCellFactory grayUnrevealedEmptyFactory = new EmptyCellFactory(gray, false, false);
         EmptyCellFactory cyanUnrevealedEmptyFactory = new EmptyCellFactory(cyan, false, false);
         EmptyCellFactory pinkUnrevealedEmptyFactory = new EmptyCellFactory(pink, false, false);
-        EmptyCellFactory yellowUnrevealedEmptyFactory = new EmptyCellFactory(yellow, false, false);
+        EmptyCellFactory orangeUnrevealedEmptyFactory = new EmptyCellFactory(orange, false, false);
 
         EmptyCellFactory grayRevealedFactory = new EmptyCellFactory(gray, true, false);
 
@@ -43,8 +43,8 @@ public class Level54 extends Level{
         board.addCell(cyanUnrevealedEmptyFactory.build(1));
         board.addCell(cyanMineFactory.build(2));
         board.addCell(new MineCell(gray));
-        board.addCell(yellowMineFactory.build(2));
-        board.addCell(yellowUnrevealedEmptyFactory.build(1));
+        board.addCell(orangeMineFactory.build(2));
+        board.addCell(orangeUnrevealedEmptyFactory.build(1));
         board.addCell(grayUnrevealedEmptyFactory.build(1));
 
         //Line 3
@@ -56,7 +56,7 @@ public class Level54 extends Level{
         board.addCell(new MineCell(gray));
         board.addCell(cyanMineFactory.build(3));
         board.addCell(grayUnrevealedEmptyFactory.build(1));
-        board.addCell(yellowMineFactory.build(3));
+        board.addCell(orangeMineFactory.build(3));
         board.addCell(new MineCell(gray));
 
         //Line 5
@@ -69,9 +69,9 @@ public class Level54 extends Level{
         board.addCell(cyanUnrevealedEmptyFactory.build(1));
         board.addCell(cyanMineFactory.build(1));
         board.addCell(grayUnrevealedEmptyFactory.build(1));
-        board.addCell(yellowMineFactory.build(1));
-        board.addCell(yellowUnrevealedEmptyFactory.build(1));
-        board.addCell(yellowMineFactory.build(1));
+        board.addCell(orangeMineFactory.build(1));
+        board.addCell(orangeUnrevealedEmptyFactory.build(1));
+        board.addCell(orangeMineFactory.build(1));
         board.addCell(grayUnrevealedEmptyFactory.build(1));
 
         //Line 6
@@ -86,8 +86,8 @@ public class Level54 extends Level{
         board.addCell(cyanMineFactory.build(1));
         board.addCell(cyanUnrevealedEmptyFactory.build(1));
         board.addCell(new MineCell(gray));
-        board.addCell(yellowMineFactory.build(2));
-        board.addCell(yellowUnrevealedEmptyFactory.build(1));
+        board.addCell(orangeMineFactory.build(2));
+        board.addCell(orangeUnrevealedEmptyFactory.build(1));
         board.addCell(new MineCell(gray));
 
         //Line 8
@@ -103,8 +103,8 @@ public class Level54 extends Level{
         board.addCell(cyanUnrevealedEmptyFactory.build(1));
         board.addCell(cyanMineFactory.build(1));
         board.addCell(grayUnrevealedEmptyFactory.build(1));
-        board.addCell(yellowUnrevealedEmptyFactory.build(2));
-        board.addCell(yellowMineFactory.build(1));
+        board.addCell(orangeUnrevealedEmptyFactory.build(2));
+        board.addCell(orangeMineFactory.build(1));
         board.addCell(grayUnrevealedEmptyFactory.build(1));
 
         //Line 10
@@ -113,7 +113,7 @@ public class Level54 extends Level{
         board.addCell(new MineCell(gray));
         board.addCell(cyanMineFactory.build(3));
         board.addCell(new MineCell(gray));
-        board.addCell(yellowMineFactory.build(3));
+        board.addCell(orangeMineFactory.build(3));
         board.addCell(grayUnrevealedEmptyFactory.build(1));
 
         //Line 11
@@ -128,8 +128,8 @@ public class Level54 extends Level{
         board.addCell(cyanUnrevealedEmptyFactory.build(1));
         board.addCell(cyanMineFactory.build(1));
         board.addCell(grayUnrevealedEmptyFactory.build(1));
-        board.addCell(yellowMineFactory.build(2));
-        board.addCell(yellowUnrevealedEmptyFactory.build(1));
+        board.addCell(orangeMineFactory.build(2));
+        board.addCell(orangeUnrevealedEmptyFactory.build(1));
         board.addCell(new MineCell(gray));
 
         //Line 13
