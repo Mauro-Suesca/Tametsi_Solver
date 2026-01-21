@@ -6,6 +6,7 @@ import java.util.PriorityQueue;
 import java.util.Scanner;
 
 import cellLogic.logicalOperations.LogicalOperation;
+import cellLogic.logicalOperations.StartOperation;
 
 public abstract class Board implements CellObserver{
     private static final String DEFAULT_COLOR_ANSI = "\u001B[0m";
@@ -36,6 +37,7 @@ public abstract class Board implements CellObserver{
         for(ColorCounter colorCounter : colorMineCounters){
             this.colorMineCounters.add(colorCounter);
             totalNumberOfMines += colorCounter.getRemainingMines();
+            this.addOperationToProcess(new StartOperation(colorCounter));
         }
         
         this.totalMineCounter = new ExternalCounter(totalNumberOfMines);

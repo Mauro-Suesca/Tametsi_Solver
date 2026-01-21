@@ -6,7 +6,6 @@ import cellLogic.BoardLineless;
 import cellLogic.ColorCounter;
 import cellLogic.EmptyCell;
 import cellLogic.MineCell;
-import cellLogic.logicalOperations.StartOperation;
 
 public class Level53 extends Level{
     @Override protected Board setup(){
@@ -52,12 +51,7 @@ public class Level53 extends Level{
         board.addCell(pinkUnknownFactory.build(1));
 
         //Line 9
-        board.addCell(new EmptyCell(red, true, false, 3, 3));
-        
-        board.addOperationToProcess(new StartOperation(red));
-        board.addOperationToProcess(new StartOperation(pink));
-        board.addOperationToProcess(new StartOperation(gray));
-        board.addOperationToProcess(new StartOperation(yellow));       
+        board.addCell(new EmptyCell(red, true, false, 3, 3));  
 
         return board;
     }
