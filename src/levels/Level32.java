@@ -14,9 +14,9 @@ public class Level32 extends Level{
         ColorCounter gray = new ColorCounter(3, "grises", "\u001B[0m");
         ColorCounter purple = new ColorCounter(15, "moradas", "\u001B[35m");
         ColorCounter cyan = new ColorCounter(4, "cian", "\u001B[36m");
-        ColorCounter yellow = new ColorCounter(5, "amarillas", "\u001B[33m");
+        ColorCounter orange = new ColorCounter(5, "naranjas", "\u001B[38;5;214m");
 
-        Board board = new BoardLineless(11, 13, true, gray, cyan, purple, yellow);
+        Board board = new BoardLineless(11, 13, true, gray, cyan, purple, orange);
 
         MineCellFactory purpleMineFactory = new MineCellFactory(purple);
         NonExistentCellFactory nonExistentCellFactory = new NonExistentCellFactory();
@@ -59,9 +59,9 @@ public class Level32 extends Level{
         board.addCell(purpleUnrevealedEmptyFactory.build(1));
         board.addCell(cyanUnrevealedEmptyFactory.build(1));
         board.addCell(nonExistentCellFactory.build(1));
-        board.addCell(new EmptyCell(yellow, false, false));
+        board.addCell(new EmptyCell(orange, false, false));
         board.addCell(nonExistentCellFactory.build(1));
-        board.addCell(new EmptyCell(yellow, false, false));
+        board.addCell(new EmptyCell(orange, false, false));
         board.addCell(nonExistentCellFactory.build(1));
         board.addCell(cyanUnrevealedEmptyFactory.build(1));
         board.addCell(purpleMineFactory.build(1));
@@ -71,11 +71,11 @@ public class Level32 extends Level{
         board.addCell(nonExistentCellFactory.build(1));
         board.addCell(purpleMineFactory.build(1));
         board.addCell(cyanUnrevealedEmptyFactory.build(1));
-        board.addCell(new EmptyCell(yellow, false, false));
+        board.addCell(new EmptyCell(orange, false, false));
         board.addCell(nonExistentCellFactory.build(1));
-        board.addCell(new EmptyCell(yellow, false, false));
+        board.addCell(new EmptyCell(orange, false, false));
         board.addCell(nonExistentCellFactory.build(1));
-        board.addCell(new MineCell(yellow));
+        board.addCell(new MineCell(orange));
         board.addCell(cyanUnrevealedEmptyFactory.build(1));
         board.addCell(purpleUnrevealedEmptyFactory.build(1));
         board.addCell(nonExistentCellFactory.build(1));
@@ -85,9 +85,9 @@ public class Level32 extends Level{
         board.addCell(purpleUnrevealedEmptyFactory.build(1));
         board.addCell(cyanUnrevealedEmptyFactory.build(1));
         board.addCell(nonExistentCellFactory.build(1));
-        board.addCell(new MineCell(yellow));
+        board.addCell(new MineCell(orange));
         board.addCell(nonExistentCellFactory.build(1));
-        board.addCell(new EmptyCell(yellow, false, false));
+        board.addCell(new EmptyCell(orange, false, false));
         board.addCell(nonExistentCellFactory.build(1));
         board.addCell(cyanUnrevealedEmptyFactory.build(1));
         board.addCell(purpleMineFactory.build(1));
@@ -97,11 +97,11 @@ public class Level32 extends Level{
         board.addCell(nonExistentCellFactory.build(1));
         board.addCell(purpleMineFactory.build(1));
         board.addCell(new MineCell(cyan));
-        board.addCell(new MineCell(yellow));
+        board.addCell(new MineCell(orange));
         board.addCell(nonExistentCellFactory.build(1));
-        board.addCell(new EmptyCell(yellow, false, false));
+        board.addCell(new EmptyCell(orange, false, false));
         board.addCell(nonExistentCellFactory.build(1));
-        board.addCell(new EmptyCell(yellow, false, false));
+        board.addCell(new EmptyCell(orange, false, false));
         board.addCell(cyanUnrevealedEmptyFactory.build(1));
         board.addCell(purpleUnrevealedEmptyFactory.build(1));
         board.addCell(nonExistentCellFactory.build(1));
@@ -111,9 +111,9 @@ public class Level32 extends Level{
         board.addCell(purpleUnrevealedEmptyFactory.build(1));
         board.addCell(cyanUnrevealedEmptyFactory.build(1));
         board.addCell(nonExistentCellFactory.build(1));
-        board.addCell(new EmptyCell(yellow, false, false));
+        board.addCell(new EmptyCell(orange, false, false));
         board.addCell(nonExistentCellFactory.build(1));
-        board.addCell(new EmptyCell(yellow, false, false));
+        board.addCell(new EmptyCell(orange, false, false));
         board.addCell(nonExistentCellFactory.build(1));
         board.addCell(cyanUnrevealedEmptyFactory.build(1));
         board.addCell(purpleMineFactory.build(1));
@@ -123,11 +123,11 @@ public class Level32 extends Level{
         board.addCell(nonExistentCellFactory.build(1));
         board.addCell(purpleUnrevealedEmptyFactory.build(1));
         board.addCell(cyanUnrevealedEmptyFactory.build(1));
-        board.addCell(new EmptyCell(yellow, false, false));
+        board.addCell(new EmptyCell(orange, false, false));
         board.addCell(nonExistentCellFactory.build(1));
-        board.addCell(new EmptyCell(yellow, false, false));
+        board.addCell(new EmptyCell(orange, false, false));
         board.addCell(nonExistentCellFactory.build(1));
-        board.addCell(new MineCell(yellow));
+        board.addCell(new MineCell(orange));
         board.addCell(new MineCell(cyan));
         board.addCell(purpleMineFactory.build(1));
         board.addCell(nonExistentCellFactory.build(1));
@@ -137,9 +137,9 @@ public class Level32 extends Level{
         board.addCell(new EmptyCell(purple, false, true));
         board.addCell(new MineCell(cyan));
         board.addCell(nonExistentCellFactory.build(1));
-        board.addCell(new MineCell(yellow));
+        board.addCell(new MineCell(orange));
         board.addCell(nonExistentCellFactory.build(1));
-        board.addCell(new EmptyCell(yellow, false, false));
+        board.addCell(new EmptyCell(orange, false, false));
         board.addCell(nonExistentCellFactory.build(1));
         board.addCell(cyanUnrevealedEmptyFactory.build(1));
         board.addCell(purpleMineFactory.build(1));
