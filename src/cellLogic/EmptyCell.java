@@ -257,7 +257,8 @@ public class EmptyCell extends Cell{
                     }else{
                         remainingAdjacentCells.get(i).markAsMine();
                     }
-                    i--;
+                    board.addOperationToProcess(needsToUseDoubleHypothesis ? new ProofByDoubleHypothesisOperation(this) : new ProofByContradictionOperation(this));
+                    break;
                 }
             }
         }
