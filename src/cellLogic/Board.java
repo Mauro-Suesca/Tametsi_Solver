@@ -8,7 +8,7 @@ import java.util.Scanner;
 import cellLogic.logicalOperations.LogicalOperation;
 
 public abstract class Board implements CellObserver{
-    private static String DEFAULT_COLOR_ANSI = "\u001B[0m";
+    private static final String DEFAULT_COLOR_ANSI = "\u001B[0m";
     protected Cell[][] cellsInBoard;
     protected EmptyCell lastActingCell;
     protected ExternalCounter totalMineCounter;
@@ -98,11 +98,19 @@ public abstract class Board implements CellObserver{
             if(++currentColumn == totalColumns){
                 currentColumn = 0;
                 currentRow++;
+
+                if(currentRow >= totalRows){
+                    currentRow = 0;
+                }
             }
         }else{
             if(++currentRow == totalRows){
                 currentRow = 0;
                 currentColumn++;
+                
+                if(currentColumn >= totalColumns){
+                    currentColumn = 0;
+                }
             }
         }
     }
