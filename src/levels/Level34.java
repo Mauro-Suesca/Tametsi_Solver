@@ -17,6 +17,8 @@ public class Level34 extends Level{
 
         Board board = new BoardLineless(15, 15, false, gray, cyan, blue);
 
+        board.setMaxMineDifferenceForImaginaryCells(5);
+
         MineCellFactory grayMineFactory = new MineCellFactory(gray);
         MineCellFactory blueMineFactory = new MineCellFactory(blue);
         NonExistentCellFactory nonExistentCellFactory = new NonExistentCellFactory();

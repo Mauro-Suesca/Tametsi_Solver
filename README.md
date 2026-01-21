@@ -8,7 +8,7 @@ El propósito del proyecto es aplicar **técnicas de demostración formal**, esp
 
 A diferencia del enfoque intuitivo o exploratorio típico de los videojuegos de lógica, este proyecto propone un método riguroso y formal para abordar la resolución del nivel, respetando los principios del razonamiento matemático formal.
 
-Posterior al trabajo para la asignatura de **Matemáticas Discretas I**, se añadió soporte para los niveles **6, 12, 13, 18, 20, 21, 23, 25, 27, 28, 30, 32, 36, 37, 38, 42, 43, 44, 46, 47, 48, 50, 52, 53, 54, 55, 56 y 57**, como trabajo independiente de Mauro Suesca.
+Posterior al trabajo para la asignatura de **Matemáticas Discretas I**, se añadió soporte para los niveles **6, 12, 13, 18, 20, 21, 23, 25, 27, 28, 30, 32, 34, 36, 37, 38, 42, 43, 44, 46, 47, 48, 50, 52, 53, 54, 55, 56 y 57**, como trabajo independiente de Mauro Suesca.
 
 ## Sobre el juego Tametsi
 
