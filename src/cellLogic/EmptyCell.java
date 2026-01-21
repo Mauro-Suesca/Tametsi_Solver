@@ -10,6 +10,7 @@ public class EmptyCell extends Cell{
     protected boolean unknown;
     protected boolean needsToCountAdjacentMines;
     protected boolean isLastActingCell;
+    protected boolean isLastActingCellDueToImaginary;
 
     //Constructors for EmptyCells that already know their adjacent mines from the get-go
     public EmptyCell(int remainingMines, boolean revealed, boolean unknown){
@@ -20,6 +21,7 @@ public class EmptyCell extends Cell{
         this.markedAsMine = false;
         this.needsToCountAdjacentMines = false;
         this.isLastActingCell = false;
+        this.isLastActingCellDueToImaginary = false;
     }
 
     public EmptyCell(ColorCounter color, int remainingMines, boolean revealed, boolean unknown){
@@ -62,6 +64,11 @@ public class EmptyCell extends Cell{
 
     public void setIsLastActingCell(boolean isLastActingCell){
         this.isLastActingCell = isLastActingCell;
+    }
+
+    protected void setIsLastActingCellDueToImaginary(boolean isLastActingCellDueToImaginary){
+        this.setIsLastActingCell(isLastActingCellDueToImaginary);
+        this.isLastActingCellDueToImaginary = isLastActingCellDueToImaginary;
     }
 
     public int getRemainingMines(){
@@ -197,7 +204,7 @@ public class EmptyCell extends Cell{
                 
                 if(board.maxMineDifferenceForImaginaryCells == Board.NO_MAX_DIFFERENCE || board.maxMineDifferenceForImaginaryCells >= minesOutsideOfSharedOnes){
                     if(adjacenciesOutsideOfSharingCell.size() > 0){
-                        ImaginaryCell cellWithAdjacenciesOutsideOfSharingCell = new ImaginaryCell(minesOutsideOfSharedOnes, adjacenciesOutsideOfSharingCell);
+                        ImaginaryCell cellWithAdjacenciesOutsideOfSharingCell = new ImaginaryCell(minesOutsideOfSharedOnes, adjacenciesOutsideOfSharingCell, this);
 
                         if(!cellWithAdjacenciesOutsideOfSharingCell.isRepeated()){
                             cellWithAdjacenciesOutsideOfSharingCell.addToBoard(board);
@@ -282,10 +289,18 @@ public class EmptyCell extends Cell{
     }
 
     @Override public String toString(){
+        String result;
+
         if(revealed){
-            return this.getColorANSI() + (isLastActingCell ? "\u001B[4m" : "") + (unknown ? "?" : String.valueOf(remainingMines)) + (isLastActingCell ? "\u001B[0m " : " ");
+            result = this.getColorANSI();
+
+            result += (isLastActingCell ? "\u001B[4m" : "") + (isLastActingCellDueToImaginary ? "\u001B[3m" : "");
+            
+            result += (unknown ? "?" : String.valueOf(remainingMines)) + "\u001B[0m ";
         }else{
-            return super.toString();
+            result = super.toString();
         }
+
+        return result;
     }
 }
