@@ -88,6 +88,13 @@ public class EmptyCell extends Cell{
             revealed = true; 
             addToBoardForProcessing();      
             notifyAdjacentCells();
+            
+            if(unknown){
+                for(int i=0; i<remainingAdjacentCells.size(); i++){
+                    this.removeAdjacent(remainingAdjacentCells.get(i));
+                    i--;
+                }
+            }
         }
     }
 
@@ -188,11 +195,13 @@ public class EmptyCell extends Cell{
                 adjacenciesOutsideOfSharingCell.removeAll(completelySharingCell.remainingAdjacentCells);
                 int minesOutsideOfSharedOnes = this.remainingMines - completelySharingCell.remainingMines;
                 
-                if(adjacenciesOutsideOfSharingCell.size() > 0){
-                    ImaginaryCell cellWithAdjacenciesOutsideOfSharingCell = new ImaginaryCell(minesOutsideOfSharedOnes, adjacenciesOutsideOfSharingCell);
+                if(board.maxMineDifferenceForImaginaryCells == Board.NO_MAX_DIFFERENCE || board.maxMineDifferenceForImaginaryCells >= minesOutsideOfSharedOnes){
+                    if(adjacenciesOutsideOfSharingCell.size() > 0){
+                        ImaginaryCell cellWithAdjacenciesOutsideOfSharingCell = new ImaginaryCell(minesOutsideOfSharedOnes, adjacenciesOutsideOfSharingCell);
 
-                    if(!cellWithAdjacenciesOutsideOfSharingCell.isRepeated()){
-                        cellWithAdjacenciesOutsideOfSharingCell.addToBoard(board);
+                        if(!cellWithAdjacenciesOutsideOfSharingCell.isRepeated()){
+                            cellWithAdjacenciesOutsideOfSharingCell.addToBoard(board);
+                        }
                     }
                 }
             }
@@ -208,9 +217,9 @@ public class EmptyCell extends Cell{
                 EmptyCell currentPossibleSharerCell = (EmptyCell)adjacentCell.remainingAdjacentCells.get(i);
                 ArrayList<Cell> currentPossibleSharerCellAdjacencies = currentPossibleSharerCell.remainingAdjacentCells;
 
-                if(this != adjacentCell && !currentPossibleSharerCell.unknown && this.remainingAdjacentCells.containsAll(currentPossibleSharerCellAdjacencies)){
+                if(this != currentPossibleSharerCell && !currentPossibleSharerCell.unknown && this.remainingAdjacentCells.containsAll(currentPossibleSharerCellAdjacencies)){
                     completelySharingCells.add(currentPossibleSharerCell);
-                }else if(this != adjacentCell && !currentPossibleSharerCell.unknown && currentPossibleSharerCellAdjacencies.containsAll(this.remainingAdjacentCells)){
+                }else if(this != currentPossibleSharerCell && !currentPossibleSharerCell.unknown && currentPossibleSharerCellAdjacencies.containsAll(this.remainingAdjacentCells)){
                     currentPossibleSharerCell.addToBoardForProcessing();
                 }
             }

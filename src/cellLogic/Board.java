@@ -9,6 +9,7 @@ import cellLogic.logicalOperations.LogicalOperation;
 
 public abstract class Board implements CellObserver{
     private static final String DEFAULT_COLOR_ANSI = "\u001B[0m";
+    public static final int NO_MAX_DIFFERENCE = -1;
     protected Cell[][] cellsInBoard;
     protected EmptyCell lastActingCell;
     protected ExternalCounter totalMineCounter;
@@ -18,6 +19,7 @@ public abstract class Board implements CellObserver{
     protected int totalColumns;
     protected int currentRow;
     protected int currentColumn;
+    protected int maxMineDifferenceForImaginaryCells;
     protected Scanner waitForUserInput;
     protected boolean hasDiagonalAdjacencies;
     protected boolean isTesting;
@@ -44,12 +46,17 @@ public abstract class Board implements CellObserver{
         this.totalRows = rows;
         this.totalColumns = columns;
         this.hasDiagonalAdjacencies = hasDiagonalAdjacencies;
+        this.maxMineDifferenceForImaginaryCells = NO_MAX_DIFFERENCE;
         this.isTesting = false;
         this.addsCellsHorizontally = true;
         this.cellsInBoard = new Cell[rows][columns];
         this.operationToProcess = new PriorityQueue<>();
         this.waitForUserInput = new Scanner(System.in);
         resetCurrentRowAndColumn();
+    }
+
+    public void setMaxMineDifferenceForImaginaryCells(int maxMineDifferenceForImaginaryCells){
+        this.maxMineDifferenceForImaginaryCells = maxMineDifferenceForImaginaryCells;
     }
 
     public void setAddsCellsHorizontally(boolean addsCellsHorizontally){
