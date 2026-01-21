@@ -4,10 +4,17 @@ import java.util.ArrayList;
 
 public class ImaginaryCell extends EmptyCell{
     private ArrayList<Cell> originalAdjacencies;
+    private EmptyCell originCell;
     
-    public ImaginaryCell(int remainingMines, ArrayList<Cell> remainingAdjacentCells){
+    public ImaginaryCell(int remainingMines, ArrayList<Cell> remainingAdjacentCells, EmptyCell originCell){
         super(remainingMines, true, false);
         this.originalAdjacencies = remainingAdjacentCells;
+        
+        if(originCell instanceof ImaginaryCell){
+            this.originCell = ((ImaginaryCell)originCell).originCell;
+        }else{
+            this.originCell = originCell;
+        }
     }
 
     public void addToBoard(Board board){
@@ -62,5 +69,9 @@ public class ImaginaryCell extends EmptyCell{
         }else{
             return false;
         }
+    }
+
+    @Override public void setIsLastActingCell(boolean isLastActingCell){
+        this.originCell.setIsLastActingCellDueToImaginary(isLastActingCell);
     }
 }
