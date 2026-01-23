@@ -58,7 +58,7 @@ public abstract class Cell implements CellObserver{
     public void addBoard(Board newBoard){
         if(this.board == null){
             this.board = newBoard;
-        }  
+        }
     }
 
     public void addColor(ColorCounter color){
