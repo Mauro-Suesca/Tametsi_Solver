@@ -243,6 +243,18 @@ This project's purpose is to discover and implement an algorithm capable of solv
 ![image](./resources/level100_unsolved.png)
 ![image](./resources/level100_solved.png)
 
+## Level 114 (Lattice I)
+![image](./resources/level114_unsolved.png)
+![image](./resources/level114_solved.png)
+
+## Level 115 (Lattice II)
+![image](./resources/level115_unsolved.png)
+![image](./resources/level115_solved.png)
+
+## Level 116 (Lattice III)
+![image](./resources/level116_unsolved.png)
+![image](./resources/level116_solved.png)
+
     Official Reference:
     Tametsi
     Available on Steam
