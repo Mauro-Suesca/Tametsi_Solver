@@ -15,6 +15,16 @@ public class CellExtension extends Cell implements DifferentlyAdjacentCell{
         this.color = originCell.color;
     }
 
+    @Override public void addAdjacent(Cell otherCell){
+        if(otherCell != originCell){
+            originCell.addAdjacent(otherCell);
+        }
+    }
+
+    @Override protected void notifyAdjacentCells(){
+        return;
+    }
+
     @Override public void reveal(){
         return;
     }
@@ -29,12 +39,6 @@ public class CellExtension extends Cell implements DifferentlyAdjacentCell{
 
     @Override public void reactToCellMarked(Cell markedCell){
         return;
-    }
-
-    @Override public void addAdjacent(Cell otherCell){
-        if(otherCell != originCell){
-            originCell.addAdjacent(otherCell);
-        }
     }
 
     @Override public SimulatedCell simulateCell(SimulatedBoard board){

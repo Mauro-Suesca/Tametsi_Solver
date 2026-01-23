@@ -11,6 +11,7 @@ public class EmptyCell extends Cell{
     protected boolean needsToCountAdjacentMines;
     protected boolean isLastActingCell;
     protected boolean isLastActingCellDueToImaginary;
+    protected boolean isNatural0;
 
     //Constructors for EmptyCells that already know their adjacent mines from the get-go
     public EmptyCell(int remainingMines, boolean revealed, boolean unknown){
@@ -22,6 +23,7 @@ public class EmptyCell extends Cell{
         this.needsToCountAdjacentMines = false;
         this.isLastActingCell = false;
         this.isLastActingCellDueToImaginary = false;
+        this.isNatural0 = true;
     }
 
     public EmptyCell(ColorCounter color, int remainingMines, boolean revealed, boolean unknown){
@@ -84,21 +86,58 @@ public class EmptyCell extends Cell{
                 otherCell.remainingAdjacentCells.add(this);
             }
 
-            if(needsToCountAdjacentMines && otherCell instanceof MineCell){
-                this.remainingMines++;
+            if(otherCell instanceof MineCell){
+                if(needsToCountAdjacentMines){
+                    this.remainingMines++;
+                }
+                this.isNatural0 = false;
             }
+        }
+    }
+
+    @Override protected void notifyAdjacentCells(){
+        for(int i=0; i<remainingAdjacentCells.size(); i++){
+            Cell adjacentCell = remainingAdjacentCells.get(i);
+
+            if(adjacentCell.revealed){
+                this.removeAdjacent(adjacentCell);
+                i--;
+            }
+            
+            adjacentCell.reactToCellReveal(this);
         }
     }
 
     @Override public void reveal(){
         if(!revealed){
-            revealed = true;
-            addToBoardForProcessing();
+            if(isNatural0){
+                reveal(false);
+                notifyBoard();
+            }else{
+                reveal(true);
+            }
+        }
+    }
+
+    private void reveal(boolean notifyBoard){
+        revealed = true;
+        addToBoardForProcessing();
+
+        if(notifyBoard){
+            notifyAdjacent();
+        }else{
             notifyAdjacentCells();
-            
-            if(unknown){
+        }
+
+        if(unknown){
+            for(int i=0; i<remainingAdjacentCells.size(); i++){
+                this.removeAdjacent(remainingAdjacentCells.get(i));
+                i--;
+            }
+        }else{
+            if(isNatural0){
                 for(int i=0; i<remainingAdjacentCells.size(); i++){
-                    this.removeAdjacent(remainingAdjacentCells.get(i));
+                    ((EmptyCell)remainingAdjacentCells.get(i)).reveal(false);
                     i--;
                 }
             }

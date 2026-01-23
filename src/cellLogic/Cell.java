@@ -34,27 +34,6 @@ public abstract class Cell implements CellObserver{
         return color.getColorANSI();
     }
 
-    protected void notifyAdjacentCells(){
-        for(int i=0; i<remainingAdjacentCells.size(); i++){
-            Cell adjacentCell = remainingAdjacentCells.get(i);
-            if(revealed){
-                if(adjacentCell.revealed){
-                    this.removeAdjacent(adjacentCell);
-                    i--;
-                }
-                adjacentCell.reactToCellReveal(this);
-            }
-            if(markedAsMine){
-                this.removeAdjacent(adjacentCell);
-                i--;
-                adjacentCell.reactToCellMarked(this);
-            }
-        }
-
-        if(revealed) board.reactToCellReveal(this);
-        if(markedAsMine) board.reactToCellMarked(this);
-    }
-
     public void addBoard(Board newBoard){
         if(this.board == null){
             this.board = newBoard;
@@ -75,6 +54,18 @@ public abstract class Cell implements CellObserver{
     public void removeAdjacent(Cell otherCell){
         remainingAdjacentCells.remove(otherCell);
         otherCell.remainingAdjacentCells.remove(this);
+    }
+
+    protected void notifyAdjacent(){
+        notifyAdjacentCells();
+        notifyBoard();
+    }
+
+    protected abstract void notifyAdjacentCells();
+
+    protected void notifyBoard(){
+        if(revealed) board.reactToCellReveal(this);
+        if(markedAsMine) board.reactToCellMarked(this);
     }
 
     public abstract void reveal();
