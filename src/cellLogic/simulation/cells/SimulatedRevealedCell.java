@@ -76,7 +76,7 @@ public class SimulatedRevealedCell extends SimulatedCell{
             }
         }
 
-        for(int i=0; i<remainingAdjacentCells.size(); i++){      
+        for(int i=0; i<remainingAdjacentCells.size(); i++){
             board.startHypothesizing();
 
             //Every cell adjacent to a SimulatedRevealedCell must be an unmarked SimulatedUnrevealedCell, because when they are marked they are removed from adjacencies, and two SimulatedRevealedCell cannot be adjacent

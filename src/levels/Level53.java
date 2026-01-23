@@ -51,7 +51,7 @@ public class Level53 extends Level{
         board.addCell(pinkUnknownFactory.build(1));
 
         //Line 9
-        board.addCell(new EmptyCell(red, true, false, 3, 3));  
+        board.addCell(new EmptyCell(red, true, false, 3, 3));
 
         return board;
     }

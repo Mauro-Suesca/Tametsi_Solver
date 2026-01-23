@@ -90,7 +90,7 @@ public class Level36 extends Level{
         board.addCell(new MineCell(pink, 4, 4));
 
         //Line 14
-        board.addCell(new MineCell(gray));  
+        board.addCell(new MineCell(gray));
         board.addCell(greenUnrevealedEmptyFactory.build(1));
 
         //Line 15

@@ -92,8 +92,8 @@ public class EmptyCell extends Cell{
 
     @Override public void reveal(){
         if(!revealed){
-            revealed = true; 
-            addToBoardForProcessing();      
+            revealed = true;
+            addToBoardForProcessing();
             notifyAdjacentCells();
             
             if(unknown){
@@ -150,7 +150,7 @@ public class EmptyCell extends Cell{
         }
     }
 
-    public void basicCheckSharedCells(){      
+    public void basicCheckSharedCells(){
         for(int i=0; i<remainingAdjacentCells.size(); i++){
             Cell adjacentCell = remainingAdjacentCells.get(i);
             ArrayList<EmptyCell> completelySharingCells = findCompletelySharingCells(adjacentCell);

@@ -14,7 +14,7 @@ public class Level56 extends Level{
     @Override protected Board setup(){
         ColorCounter gray = new ColorCounter(21, "gray", "\u001B[0m");
         ColorCounter purple = new ColorCounter(5, "purple", "\u001B[35m");
-        ColorCounter cyan = new ColorCounter(3, "cyan", "\u001B[36m");        
+        ColorCounter cyan = new ColorCounter(3, "cyan", "\u001B[36m");
         ColorCounter orange = new ColorCounter(3, "orange", "\u001B[38;5;214m");
 
         BoardWithLines board = new BoardWithLines(8, 8, false, gray, purple, cyan, orange);
