@@ -39,7 +39,19 @@ public class MineCell extends Cell{
                 if(otherEmptyCell.needsToCountAdjacentMines){
                     otherEmptyCell.remainingMines++;
                 }
+                otherEmptyCell.isNatural0 = false;
             }
+        }
+    }
+
+    @Override protected void notifyAdjacentCells(){
+        for(int i=0; i<remainingAdjacentCells.size(); i++){
+            Cell adjacentCell = remainingAdjacentCells.get(i);
+
+            this.removeAdjacent(adjacentCell);
+            i--;
+            
+            adjacentCell.reactToCellMarked(this);
         }
     }
 
@@ -50,7 +62,7 @@ public class MineCell extends Cell{
     @Override public void markAsMine(){
         if(!markedAsMine){
             markedAsMine = true;
-            notifyAdjacentCells();
+            notifyAdjacent();
         }
     }
 
