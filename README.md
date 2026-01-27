@@ -255,6 +255,30 @@ This project's purpose is to discover and implement an algorithm capable of solv
 ![image](./resources/level116_unsolved.png)
 ![image](./resources/level116_solved.png)
 
+## Level 117 (Tabs)
+![image](./resources/level117_unsolved.png)
+![image](./resources/level117_solved.png)
+
+## Level 118 (Cyclone)
+![image](./resources/level118_unsolved.png)
+![image](./resources/level118_solved.png)
+
+## Level 119 (Tatters)
+![image](./resources/level119_unsolved.png)
+![image](./resources/level119_solved.png)
+
+## Level 120 (Combination Lock IV)
+![image](./resources/level120_unsolved.png)
+![image](./resources/level120_solved.png)
+
+## Level 121 (Combination Lock V)
+![image](./resources/level121_unsolved.png)
+![image](./resources/level121_solved.png)
+
+## Level 122 (Combination Lock VI)
+![image](./resources/level122_unsolved.png)
+![image](./resources/level122_solved.png)
+
     Official Reference:
     Tametsi
     Available on Steam
