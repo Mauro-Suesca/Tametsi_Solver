@@ -20,8 +20,6 @@ public class Level61 extends Level{
         
         BoardWithLines board = new BoardWithLines(18, 18, true, gray, cyan, yellow, orange, red);
 
-        //board.setMaxMineDifferenceForImaginaryCells(5);
-
         ExternalCounterFactory externalCounterFactory = new ExternalCounterFactory();
         NonExistentCellFactory nonExistentCellFactory = new NonExistentCellFactory();
 
