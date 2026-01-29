@@ -45,20 +45,32 @@ public class SimulatedRevealedCell extends SimulatedCell{
         return false;
     }
 
-    public void countRemaining(){
+    public boolean countRemaining(){
+        boolean result = true;
+
         if(remainingMines == 0){
             for(int i=0; i<remainingAdjacentCells.size(); i++){
-                remainingAdjacentCells.get(i).markAsEmpty();
-                i--;
+                if(remainingAdjacentCells.get(i).markAsEmpty()){
+                    i--;
+                }else{
+                    result = false;
+                    break;
+                }               
             }
         }else if(remainingAdjacentCells.size() == remainingMines){
             for(int i=0; i<remainingAdjacentCells.size(); i++){
-                remainingAdjacentCells.get(i).markAsMine();
-                i--;
+                if(remainingAdjacentCells.get(i).markAsMine()){
+                    i--;
+                }else{
+                    result = false;
+                    break;
+                }  
             }
         }
 
         board.addOperationToProcess(new SimulatedCountForContradictionsOperation(this));
+
+        return result;
     }
 
     public void proofByContradiction(){
@@ -76,26 +88,27 @@ public class SimulatedRevealedCell extends SimulatedCell{
             }
         }
 
-        for(int i=0; i<remainingAdjacentCells.size(); i++){
+        //During the hypothesis, due to the way adjacencies are restored, the SimulatedCells themselves might change places in the list, so this is created to make sure every cell is hypothesized on
+        final ArrayList<SimulatedCell> unchangedOriginalAdjacencies = new ArrayList<>(remainingAdjacentCells);
+
+        for(int i=0; i<unchangedOriginalAdjacencies.size(); i++){
             board.startHypothesizing();
 
             //Every cell adjacent to a SimulatedRevealedCell must be an unmarked SimulatedUnrevealedCell, because when they are marked they are removed from adjacencies, and two SimulatedRevealedCell cannot be adjacent
-            SimulatedUnrevealedCell testCell = (SimulatedUnrevealedCell)remainingAdjacentCells.get(i);
+            SimulatedUnrevealedCell testCell = (SimulatedUnrevealedCell)unchangedOriginalAdjacencies.get(i);
 
             if(!board.checkIfHypothesisIsPossible(testCell, hypothesisIsHasMine)){
                 board.finishHypothesis();
 
                 if(hypothesisIsHasMine){
-                    remainingAdjacentCells.get(i).markAsEmpty();
+                    testCell.markAsEmpty();
                 }else{
-                    remainingAdjacentCells.get(i).markAsMine();
+                    testCell.markAsMine();
                 }
-                i--;
             }else{
                 board.finishHypothesis();
             }
         }
-
         board.addOperationToProcess(new SimulatedCountForContradictionsOperation(this));
     }
 
