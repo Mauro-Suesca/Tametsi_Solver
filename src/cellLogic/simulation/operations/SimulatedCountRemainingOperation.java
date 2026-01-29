@@ -8,7 +8,6 @@ public class SimulatedCountRemainingOperation extends SimulatedOperation{
     }
 
     @Override public boolean executeOperation(){
-        callingCell.countRemaining();
-        return true;
+        return callingCell.countRemaining();
     }
 }
