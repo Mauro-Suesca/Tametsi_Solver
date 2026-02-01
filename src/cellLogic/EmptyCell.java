@@ -167,7 +167,7 @@ public class EmptyCell extends Cell{
         board.addOperationToProcess(new CountRemainingOperation(this));
         board.addOperationToProcess(new BasicCheckSharedCellsOperation(this));
         board.addOperationToProcess(new ProofByContradictionOperation(this));
-        board.addOperationToProcess(new IntermediateCheckSharedCellsOperation(this));
+        board.addOperationToProcess(new AdvancedCheckSharedCellsOperation(this));
         board.addOperationToProcess(new ProofByDoubleHypothesisOperation(this));
         board.addOperationToProcess(new ProofByCasesOperation(this));
     }
@@ -217,7 +217,7 @@ public class EmptyCell extends Cell{
         }
     }
     
-    public void intermediateCheckSharedCells(){
+    public void advancedCheckSharedCells(){
         for(int i=0; i<remainingAdjacentCells.size(); i++){
             ArrayList<EmptyCell> completelySharingCells = findCompletelySharingCells(remainingAdjacentCells.get(i));
 
@@ -237,6 +237,7 @@ public class EmptyCell extends Cell{
                 }
             }
         }
+
         board.addOperationToProcess(new ProofByContradictionOperation(this));
     }
 
