@@ -195,37 +195,22 @@ public class EmptyCell extends Cell{
             ArrayList<EmptyCell> completelySharingCells = findCompletelySharingCells(adjacentCell);
 
             for(EmptyCell completelySharingCell : completelySharingCells){
-                ArrayList<Cell> completelySharingCellAdjacencies = completelySharingCell.remainingAdjacentCells;
-                int numberOfCellsOutsideOfSharedOnes = this.remainingAdjacentCells.size() - completelySharingCellAdjacencies.size();
+                ArrayList<Cell> cellsOutsideOfSharedAdjacencies = new ArrayList<>(this.remainingAdjacentCells);
+                cellsOutsideOfSharedAdjacencies.removeAll(completelySharingCell.remainingAdjacentCells);
+
                 int minesOutsideOfSharedOnes = this.remainingMines - completelySharingCell.remainingMines;
                 
                 if(minesOutsideOfSharedOnes == 0){
                     board.updateLastActingCell(this);
-                    for(int k=0; k<remainingAdjacentCells.size(); k++){
-                        adjacentCell = remainingAdjacentCells.get(k);
-
-                        if(!completelySharingCellAdjacencies.contains(adjacentCell)){
-                            if(k <= i){
-                                i--;
-                            }
-
-                            adjacentCell.reveal();
-                            k--;
-                        }
+                    
+                    for(int k=0; k<cellsOutsideOfSharedAdjacencies.size(); k++){
+                        cellsOutsideOfSharedAdjacencies.get(k).reveal();
                     }
-                }else if(minesOutsideOfSharedOnes == numberOfCellsOutsideOfSharedOnes){
+                }else if(minesOutsideOfSharedOnes == cellsOutsideOfSharedAdjacencies.size()){
                     board.updateLastActingCell(this);
-                    for(int k=0; k<remainingAdjacentCells.size(); k++){
-                        adjacentCell = remainingAdjacentCells.get(k);
 
-                        if(!completelySharingCellAdjacencies.contains(adjacentCell)){
-                            if(k <= i){
-                                i--;
-                            }
-
-                            adjacentCell.markAsMine();
-                            k--;
-                        }
+                    for(int k=0; k<cellsOutsideOfSharedAdjacencies.size(); k++){
+                        cellsOutsideOfSharedAdjacencies.get(k).markAsMine();
                     }
                 }
             }
