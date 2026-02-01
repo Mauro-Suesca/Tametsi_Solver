@@ -279,6 +279,18 @@ This project's purpose is to discover and implement an algorithm capable of solv
 ![image](./resources/level122_unsolved.png)
 ![image](./resources/level122_solved.png)
 
+## Level 129 (Circuit I)
+![image](./resources/level129_unsolved.png)
+![image](./resources/level129_solved.png)
+
+## Level 130 (Circuit II)
+![image](./resources/level130_unsolved.png)
+![image](./resources/level130_solved.png)
+
+## Level 131 (Circuit III)
+![image](./resources/level131_unsolved.png)
+![image](./resources/level131_solved.png)
+
     Official Reference:
     Tametsi
     Available on Steam
