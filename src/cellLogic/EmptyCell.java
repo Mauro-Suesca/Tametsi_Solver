@@ -335,7 +335,9 @@ public class EmptyCell extends Cell{
 
             result += (isLastActingCell ? "\u001B[4m" : "") + (isLastActingCellDueToImaginary ? "\u001B[3m" : "");
             
-            result += (unknown ? "?" : String.valueOf(remainingMines)) + "\u001B[0m ";
+            result += (unknown ? "?" : String.valueOf(remainingMines)) + "\u001B[0m";
+
+            result += (remainingMines <= 9 ? " " : "");
         }else{
             result = super.toString();
         }
