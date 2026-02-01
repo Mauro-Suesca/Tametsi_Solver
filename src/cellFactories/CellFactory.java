@@ -2,6 +2,7 @@ package cellFactories;
 
 import java.util.List;
 
+import cellLogic.Board;
 import cellLogic.Cell;
 import cellLogic.ColorCounter;
 
@@ -10,6 +11,7 @@ public abstract class CellFactory{
     protected boolean revealed;
     protected boolean markedAsMine;
     protected ColorCounter color;
+    protected static Board board;
 
     public void setHorizontalSize(int size){
         this.horizontalSize = size;
@@ -31,5 +33,11 @@ public abstract class CellFactory{
         this.color = color;
     }
 
+    public static void setBoard(Board board){
+        CellFactory.board = board;
+    }
+
     public abstract List<? extends Cell> build(int amount);
+
+    public abstract void addToBoard(int amount);
 }
