@@ -8,7 +8,7 @@ import cellLogic.simulation.cells.SimulatedRevealedCell;
 import cellLogic.simulation.cells.SimulatedUnrevealedCell;
 
 public abstract class Cell implements CellObserver{
-    protected Board board;
+    protected static Board board;
     protected ArrayList<Cell> remainingAdjacentCells;
     protected boolean revealed;
     protected boolean markedAsMine;
@@ -34,10 +34,8 @@ public abstract class Cell implements CellObserver{
         return color.getColorANSI();
     }
 
-    public void addBoard(Board newBoard){
-        if(this.board == null){
-            this.board = newBoard;
-        }
+    public static void setBoard(Board board){
+        Cell.board = board;
     }
 
     public void addColor(ColorCounter color){
@@ -77,14 +75,15 @@ public abstract class Cell implements CellObserver{
     protected SimulatedCell simulateAdjacentCells(SimulatedBoard simulatedBoard, SimulatedCell resultingSimulatedCell){
         for(int i=0; i<remainingAdjacentCells.size(); i++){
             Cell adjacentCell = remainingAdjacentCells.get(i);
+            
             if(!adjacentCell.revealed || !((EmptyCell)adjacentCell).unknown){
                 if(!simulatedBoard.checkIfCellExistsInBoard(adjacentCell)){
                     resultingSimulatedCell.addAdjacent(adjacentCell.simulateCell(simulatedBoard));
                 }else if(adjacentCell.revealed){
                     EmptyCell adjacentEmptyCell = (EmptyCell) adjacentCell;
-                    resultingSimulatedCell.addAdjacent(SimulatedRevealedCell.createSimulatedCell(simulatedBoard, adjacentEmptyCell, adjacentEmptyCell.remainingMines));
+                    resultingSimulatedCell.addAdjacent(SimulatedRevealedCell.createSimulatedCell(adjacentEmptyCell, adjacentEmptyCell.remainingMines));
                 }else{
-                    resultingSimulatedCell.addAdjacent(SimulatedUnrevealedCell.createSimulatedCell(simulatedBoard, adjacentCell, adjacentCell.markedAsMine));
+                    resultingSimulatedCell.addAdjacent(SimulatedUnrevealedCell.createSimulatedCell(adjacentCell, adjacentCell.markedAsMine));
                 }
             }
         }

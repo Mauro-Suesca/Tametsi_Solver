@@ -18,8 +18,6 @@ public class ImaginaryCell extends EmptyCell{
     }
 
     public void addToBoard(Board board){
-        this.addBoard(board);
-
         this.remainingAdjacentCells = new ArrayList<>();
 
         for(Cell cell : originalAdjacencies){

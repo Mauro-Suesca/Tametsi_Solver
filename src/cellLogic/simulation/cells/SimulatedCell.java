@@ -5,9 +5,13 @@ import java.util.ArrayList;
 import cellLogic.Cell;
 
 public abstract class SimulatedCell{
+    protected static SimulatedBoard board;
     protected ArrayList<SimulatedCell> remainingAdjacentCells;
-    protected SimulatedBoard board;
     protected Cell originalCell;
+
+    public static void setBoard(SimulatedBoard board){
+        SimulatedCell.board = board;
+    }
 
     public Cell getOriginalCell(){
         return originalCell;
