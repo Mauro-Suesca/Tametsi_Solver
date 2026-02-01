@@ -8,15 +8,14 @@ import cellLogic.simulation.operations.*;
 public class SimulatedRevealedCell extends SimulatedCell{
     private int remainingMines;
 
-    private SimulatedRevealedCell(SimulatedBoard board, Cell originalCell, int remainingMines){
-        this.board = board;
+    private SimulatedRevealedCell(Cell originalCell, int remainingMines){
         this.originalCell = originalCell;
         this.remainingMines = remainingMines;
         this.remainingAdjacentCells = new ArrayList<>();
     }
 
-    public static SimulatedRevealedCell createSimulatedCell(SimulatedBoard board, Cell originalCell, int remainingMines){
-        return (SimulatedRevealedCell)board.getAlreadyExistingSimulatedCell(new SimulatedRevealedCell(board, originalCell, remainingMines));
+    public static SimulatedRevealedCell createSimulatedCell(Cell originalCell, int remainingMines){
+        return (SimulatedRevealedCell)board.getAlreadyExistingSimulatedCell(new SimulatedRevealedCell(originalCell, remainingMines));
     }
 
     protected void increaseRemainingMines(){
@@ -147,10 +146,7 @@ public class SimulatedRevealedCell extends SimulatedCell{
         }
 
         SimulatedRevealedCell otherCell = (SimulatedRevealedCell)otherObject;
-        if(otherCell.board.equals(this.board) && otherCell.originalCell == this.originalCell){
-            return true;
-        }
-
-        return false;
+        
+        return otherCell.originalCell == this.originalCell;
     }
 }

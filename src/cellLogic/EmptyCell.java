@@ -279,6 +279,7 @@ public class EmptyCell extends Cell{
         for(int i=0; i<remainingAdjacentCells.size(); i++){
             if(!remainingAdjacentCells.get(i).revealed){
                 SimulatedBoard currentHypothesisSimulation = new SimulatedBoard(needsToUseDoubleHypothesis);
+                SimulatedCell.setBoard(currentHypothesisSimulation);
 
                 SimulatedUnrevealedCell testCell = (SimulatedUnrevealedCell)remainingAdjacentCells.get(i).simulateCell(currentHypothesisSimulation);
 
@@ -300,9 +301,9 @@ public class EmptyCell extends Cell{
         SimulatedCell resultingSimulatedCell = null;
 
         if(revealed && !unknown){
-            resultingSimulatedCell = SimulatedRevealedCell.createSimulatedCell(simulatedBoard, this, remainingMines);
+            resultingSimulatedCell = SimulatedRevealedCell.createSimulatedCell(this, remainingMines);
         }else if(!revealed){
-            resultingSimulatedCell = SimulatedUnrevealedCell.createSimulatedCell(simulatedBoard, this, markedAsMine);
+            resultingSimulatedCell = SimulatedUnrevealedCell.createSimulatedCell(this, markedAsMine);
         }
         
         return simulateAdjacentCells(simulatedBoard, resultingSimulatedCell);

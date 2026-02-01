@@ -9,15 +9,14 @@ public class SimulatedUnrevealedCell extends SimulatedCell{
     private boolean markedAsEmpty;
     private ArrayList<SimulatedCell> preHypothesisRemainingAdjacentCells;
 
-    private SimulatedUnrevealedCell(SimulatedBoard board, Cell originalCell, boolean markedAsMine){
-        this.board = board;
+    private SimulatedUnrevealedCell(Cell originalCell, boolean markedAsMine){
         this.originalCell = originalCell;
         this.markedAsMine = markedAsMine;
         this.remainingAdjacentCells = new ArrayList<>();
     }
 
-    public static SimulatedUnrevealedCell createSimulatedCell(SimulatedBoard board, Cell originalCell, boolean markedAsMine){
-        return (SimulatedUnrevealedCell)board.getAlreadyExistingSimulatedCell(new SimulatedUnrevealedCell(board, originalCell, markedAsMine));
+    public static SimulatedUnrevealedCell createSimulatedCell(Cell originalCell, boolean markedAsMine){
+        return (SimulatedUnrevealedCell)board.getAlreadyExistingSimulatedCell(new SimulatedUnrevealedCell(originalCell, markedAsMine));
     }
 
     @Override protected void notifyAdjacentCells(){
@@ -105,10 +104,7 @@ public class SimulatedUnrevealedCell extends SimulatedCell{
         }
 
         SimulatedUnrevealedCell otherCell = (SimulatedUnrevealedCell)otherObject;
-        if(otherCell.board.equals(this.board) && otherCell.originalCell == this.originalCell){
-            return true;
-        }
 
-        return false;
+        return otherCell.originalCell == this.originalCell;
     }
 }

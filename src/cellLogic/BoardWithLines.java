@@ -20,7 +20,6 @@ public class BoardWithLines extends Board{
 
     public void addVerticalLine(ExternalCounter newLine){
         verticalLines[currentColumn++] = newLine;
-        newLine.addBoard(this);
         newLine.addToBoardForProcessing();
     }
 
@@ -32,7 +31,6 @@ public class BoardWithLines extends Board{
 
     public void addHorizontalLine(ExternalCounter newLine){
         horizontalLines[currentRow++] = newLine;
-        newLine.addBoard(this);
         newLine.addToBoardForProcessing();
     }
 
@@ -86,40 +84,24 @@ public class BoardWithLines extends Board{
     @Override protected void autoAllAroundAdjacencySetter(){
         allAroundCellToCellAdjacency();
 
-        //Cell and Board to Line adjacency
+        //Cell to line adjacency
         for(int row = 0; row < cellsInBoard.length; row++){
             for(int column = 0; column < cellsInBoard[row].length; column++){
                 verticalLines[column].addAdjacent(cellsInBoard[row][column]);
                 horizontalLines[row].addAdjacent(cellsInBoard[row][column]);
             }
         }
-
-        //ColorCounters to Board adjacency
-        for(ColorCounter colorCounter : colorMineCounters){
-            colorCounter.addBoard(this);
-        }
-
-        //Total mine counter to Board adjacency
-        totalMineCounter.addBoard(this);
     }
 
     @Override protected void autoSideAdjacencySetter(){
         sideCellToCellAdjacency();
 
-        //Cell and Board to Line adjacency
+        //Cell to line adjacency
         for(int row = 0; row < cellsInBoard.length; row++){
             for(int column = 0; column < cellsInBoard[row].length; column++){
                 verticalLines[column].addAdjacent(cellsInBoard[row][column]);
                 horizontalLines[row].addAdjacent(cellsInBoard[row][column]);
             }
         }
-
-        //ColorCounters to Board adjacency
-        for(ColorCounter colorCounter : colorMineCounters){
-            colorCounter.addBoard(this);
-        }
-
-        //Total mine counter to Board adjacency
-        totalMineCounter.addBoard(this);
     }
 }

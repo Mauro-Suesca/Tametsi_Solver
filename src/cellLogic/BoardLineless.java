@@ -45,25 +45,9 @@ public class BoardLineless extends Board{
 
     @Override protected void autoAllAroundAdjacencySetter(){
         allAroundCellToCellAdjacency();
-
-        //ColorCounters to Board adjacency
-        for(ColorCounter colorCounter : colorMineCounters){
-            colorCounter.addBoard(this);
-        }
-
-        //Total mine counter to Board adjacency
-        totalMineCounter.addBoard(this);
     }
 
     @Override protected void autoSideAdjacencySetter(){
         sideCellToCellAdjacency();
-
-        //ColorCounters to Board adjacency
-        for(ColorCounter colorCounter : colorMineCounters){
-            colorCounter.addBoard(this);
-        }
-
-        //Total mine counter to Board adjacency
-        totalMineCounter.addBoard(this);
     }
 }

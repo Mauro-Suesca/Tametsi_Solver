@@ -55,6 +55,8 @@ public abstract class Board implements CellObserver{
         this.operationToProcess = new PriorityQueue<>();
         this.waitForUserInput = new Scanner(System.in);
         resetCurrentRowAndColumn();
+
+        Cell.setBoard(this);
     }
 
     public void setMaxMineDifferenceForImaginaryCells(int maxMineDifferenceForImaginaryCells){
@@ -79,7 +81,6 @@ public abstract class Board implements CellObserver{
                 newCell.addColor(colorMineCounters.get(0));
 
                 cellsInBoard[currentRow][currentColumn] = newCell;
-                newCell.addBoard(this);
 
                 if(newCell.revealed){
                     ((EmptyCell)newCell).addToBoardForProcessing();

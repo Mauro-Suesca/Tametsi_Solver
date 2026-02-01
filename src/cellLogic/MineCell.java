@@ -75,7 +75,7 @@ public class MineCell extends Cell{
     }
 
     @Override public SimulatedUnrevealedCell simulateCell(SimulatedBoard simulatedBoard){
-        SimulatedUnrevealedCell resultingSimulatedCell = SimulatedUnrevealedCell.createSimulatedCell(simulatedBoard, this, markedAsMine);
+        SimulatedUnrevealedCell resultingSimulatedCell = SimulatedUnrevealedCell.createSimulatedCell(this, markedAsMine);
 
         return (SimulatedUnrevealedCell)simulateAdjacentCells(simulatedBoard, resultingSimulatedCell);
     }
