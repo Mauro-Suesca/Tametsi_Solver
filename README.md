@@ -185,11 +185,11 @@ This project's purpose is to discover and implement an algorithm capable of solv
 ![image](./resources/level79_unsolved.png)
 ![image](./resources/level79_solved.png)
 
-# Planned levels
-
 ## Level 80
 ![image](./resources/level80_unsolved.png)
 ![image](./resources/level80_solved.png)
+
+# Planned levels
 
 ## Level 82
 ![image](./resources/level82_unsolved.png)
