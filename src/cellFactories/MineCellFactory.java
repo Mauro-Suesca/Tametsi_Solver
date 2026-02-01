@@ -29,7 +29,7 @@ public class MineCellFactory extends CellFactory{
         this(color, 1, 1);
     }
 
-    public ArrayList<MineCell> build(int amount){
+    @Override public ArrayList<MineCell> build(int amount){
         ArrayList<MineCell> builtCells = new ArrayList<>(amount);
 
         for(int i=0; i<amount; i++){
@@ -41,5 +41,15 @@ public class MineCellFactory extends CellFactory{
         }
 
         return builtCells;
+    }
+
+    @Override public void addToBoard(int amount){
+        for(int i=0; i<amount; i++){
+            if(color != null){
+                board.addCell(new MineCell(color, horizontalSize, verticalSize));
+            }else{
+                board.addCell(new MineCell(horizontalSize, verticalSize));
+            }
+        }
     }
 }

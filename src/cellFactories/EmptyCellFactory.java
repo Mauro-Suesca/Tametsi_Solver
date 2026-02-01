@@ -33,7 +33,7 @@ public class EmptyCellFactory extends CellFactory{
         this.setColor(color);
     }
 
-    public ArrayList<? extends EmptyCell> build(int amount){
+    @Override public ArrayList<? extends EmptyCell> build(int amount){
         ArrayList<EmptyCell> builtCells = new ArrayList<>(amount);
 
         for(int i=0; i<amount; i++){
@@ -45,5 +45,15 @@ public class EmptyCellFactory extends CellFactory{
         }
 
         return builtCells;
+    }
+
+    @Override public void addToBoard(int amount){
+        for(int i=0; i<amount; i++){
+            if(color != null){
+                board.addCell(new EmptyCell(color, revealed, unknown, horizontalSize, verticalSize));
+            }else{
+                board.addCell(new EmptyCell(revealed, unknown, horizontalSize, verticalSize));
+            }
+        }
     }
 }

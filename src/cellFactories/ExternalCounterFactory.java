@@ -9,17 +9,19 @@ public class ExternalCounterFactory extends EmptyCellFactory{
         super(true, false);
     }
 
-    public ArrayList<? extends ExternalCounter> build(int amount){
+    @Override public ArrayList<? extends ExternalCounter> build(int amount){
         ArrayList<ExternalCounter> builtCells = new ArrayList<>(amount);
 
         for(int i=0; i<amount; i++){
-            if(color != null){
-                builtCells.add(new ExternalCounter());
-            }else{
-                builtCells.add(new ExternalCounter());
-            }
+            builtCells.add(new ExternalCounter());
         }
 
         return builtCells;
+    }
+
+    @Override public void addToBoard(int amount){
+        for(int i=0; i<amount; i++){
+            board.addCell(new ExternalCounter());
+        }
     }
 }
