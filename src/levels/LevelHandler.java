@@ -57,6 +57,7 @@ public class LevelHandler{
         levels[79] = new Level79();
         levels[80] = new Level80();
         levels[82] = new Level82();
+        levels[84] = new Level84();
     }
 
     public void showAvailableLevels(){
