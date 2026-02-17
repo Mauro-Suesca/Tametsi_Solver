@@ -291,6 +291,18 @@ This project's purpose is to discover and implement an algorithm capable of solv
 ![image](./resources/level131_unsolved.png)
 ![image](./resources/level131_solved.png)
 
+## Level 132 (Stacks)
+![image](./resources/level132_unsolved.png)
+![image](./resources/level132_solved.png)
+
+## Level 133 (Diverging Roads)
+![image](./resources/level133_unsolved.png)
+![image](./resources/level133_solved.png)
+
+## Level 134 (Reticle)
+![image](./resources/level134_unsolved.png)
+![image](./resources/level134_solved.png)
+
     Official Reference:
     Tametsi
     Available on Steam
