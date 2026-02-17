@@ -11,6 +11,8 @@ public class Level65 extends Level{
     @Override protected Board setup(){
         BoardWithLines board = new BoardWithLines(134, 22, 22, true);
 
+        board.setMaxMineDifferenceForImaginaryCells(5);
+
         ExternalCounterFactory externalCounterFactory = new ExternalCounterFactory();
         NonExistentCellFactory nonExistentCellFactory = new NonExistentCellFactory();
 

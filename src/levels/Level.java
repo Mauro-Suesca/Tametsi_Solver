@@ -1,5 +1,8 @@
 package levels;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+
 import cellLogic.*;
 
 public abstract class Level{
@@ -12,8 +15,16 @@ public abstract class Level{
 
     public void test(){
         try{
-            if(this.setup().startTest()){
-                System.out.println("Test on level " + this + " successful");
+            Board setup = this.setup();
+
+            Instant start = Instant.now();
+
+            boolean testResult = setup.startTest();
+
+            long testTime = start.until(Instant.now(), ChronoUnit.MILLIS);
+
+            if(testResult){
+                System.out.println("Test on level " + this + " successful after " + testTime + " milliseconds");
             }else{
                 System.out.println("Level " + this + " was not completed");
             }
