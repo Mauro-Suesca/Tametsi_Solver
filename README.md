@@ -303,6 +303,26 @@ This project's purpose is to discover and implement an algorithm capable of solv
 ![image](./resources/level134_unsolved.png)
 ![image](./resources/level134_solved.png)
 
+## Level 151 (Stitches)
+![image](./resources/level151_unsolved.png)
+![image](./resources/level151_solved.png)
+
+## Level 155 (Apologies to Mondrian)
+![image](./resources/level155_unsolved.png)
+![image](./resources/level155_solved.png)
+
+## Level 157 (Capacity)
+![image](./resources/level157_unsolved.png)
+![image](./resources/level157_solved.png)
+
+## Level 158 (Interlocked)
+![image](./resources/level158_unsolved.png)
+![image](./resources/level158_solved.png)
+
+## Level 161 (Weave)
+![image](./resources/level161_unsolved.png)
+![image](./resources/level161_solved.png)
+
     Official Reference:
     Tametsi
     Available on Steam
