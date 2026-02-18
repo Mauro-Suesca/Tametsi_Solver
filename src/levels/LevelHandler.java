@@ -62,7 +62,7 @@ public class LevelHandler{
     }
 
     public void showAvailableLevels(){
-        System.out.print("The currently available levels are: ");
+        System.out.print("Los niveles actualmente disponibles son: ");
         for(int i=0; i<MAX_LEVEL; i++){
             if(levels[i] != null){
                 System.out.print(levels[i] + " ");

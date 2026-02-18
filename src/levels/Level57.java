@@ -11,9 +11,9 @@ import cellLogic.EmptyCell;
 
 public class Level57 extends Level{
     @Override protected Board setup(){
-        ColorCounter gray = new ColorCounter(16, "grises", "\u001B[0m");
-        ColorCounter pink = new ColorCounter(4, "rosadas", "\u001B[38;5;212m");
-        ColorCounter purple = new ColorCounter(11, "moradas", "\u001B[35m");
+        ColorCounter gray = new ColorCounter(16, "grises", ESC + "0m");
+        ColorCounter pink = new ColorCounter(4, "rosadas", ESC + "38;5;212m");
+        ColorCounter purple = new ColorCounter(11, "moradas", ESC + "35m");
         
         BoardWithLines board = new BoardWithLines(16, 8, true, gray, pink, purple);
 

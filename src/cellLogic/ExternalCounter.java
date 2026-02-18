@@ -10,7 +10,7 @@ public class ExternalCounter extends EmptyCell{
     }
 
     @Override public String getColorANSI(){
-        return "\u001B[0m";
+        return ESC + "0m";
     }
 
     @Override public void reveal(){

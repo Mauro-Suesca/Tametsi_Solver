@@ -11,8 +11,8 @@ import cellLogic.EmptyCell;
 
 public class Level64 extends Level{
     @Override protected Board setup(){
-        ColorCounter gray = new ColorCounter(31, "grises", "\u001B[0m");
-        ColorCounter cyan = new ColorCounter(2, "cian", "\u001B[36m");
+        ColorCounter gray = new ColorCounter(31, "grises", ESC + "0m");
+        ColorCounter cyan = new ColorCounter(2, "cian", ESC + "36m");
                 
         BoardWithLines board = new BoardWithLines(13, 13, false, gray, cyan);
 

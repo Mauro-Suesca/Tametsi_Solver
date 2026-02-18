@@ -8,6 +8,7 @@ import cellLogic.simulation.cells.SimulatedRevealedCell;
 import cellLogic.simulation.cells.SimulatedUnrevealedCell;
 
 public abstract class Cell implements CellObserver{
+    protected static final String ESC = "\u001B[";
     protected static Board board;
     protected ArrayList<Cell> remainingAdjacentCells;
     protected boolean revealed;
@@ -31,7 +32,7 @@ public abstract class Cell implements CellObserver{
     }
 
     public String getColorANSI(){
-        return color.getColorANSI();
+        return color != null ? color.getColorANSI() : "";
     }
 
     public static void setBoard(Board board){

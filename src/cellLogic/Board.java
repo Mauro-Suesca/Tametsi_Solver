@@ -9,7 +9,7 @@ import cellLogic.logicalOperations.LogicalOperation;
 import cellLogic.logicalOperations.StartOperation;
 
 public abstract class Board implements CellObserver{
-    private static final String DEFAULT_COLOR_ANSI = "\u001B[0m";
+    private static final String DEFAULT_COLOR_ANSI = "";
     public static final int NO_MAX_DIFFERENCE = -1;
     protected Cell[][] cellsInBoard;
     protected EmptyCell lastActingCell;
@@ -253,7 +253,7 @@ public abstract class Board implements CellObserver{
 
     protected void clearScreen(){
         for(int i=0; i<2; i++){
-            System.out.print("\u001B[3J\u001B[2J\u001B[H\u001B[0m"); //ANSI Code for clearing the screen
+            System.out.print(Cell.ESC + "3J" + Cell.ESC + "2J" + Cell.ESC + "H" + Cell.ESC + "0m"); //ANSI Code for clearing the screen
         }
         
         System.out.flush();

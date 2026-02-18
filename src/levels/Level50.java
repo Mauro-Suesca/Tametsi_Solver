@@ -11,9 +11,9 @@ import cellLogic.MineCell;
 
 public class Level50 extends Level{
     @Override protected Board setup(){
-        ColorCounter gray = new ColorCounter(30, "grises", "\u001B[0m");
-        ColorCounter purple = new ColorCounter(7, "moradas", "\u001B[35m");
-        ColorCounter green = new ColorCounter(3, "verdes", "\u001B[32m");
+        ColorCounter gray = new ColorCounter(30, "grises", ESC + "0m");
+        ColorCounter purple = new ColorCounter(7, "moradas", ESC + "35m");
+        ColorCounter green = new ColorCounter(3, "verdes", ESC + "32m");
         
         BoardWithLines board = new BoardWithLines(12, 12, true, gray, purple, green);
 

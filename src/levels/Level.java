@@ -6,6 +6,7 @@ import java.time.temporal.ChronoUnit;
 import cellLogic.*;
 
 public abstract class Level{
+    protected static final String ESC = "\u001B[";
 
     protected abstract Board setup();
 

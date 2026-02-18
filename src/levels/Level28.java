@@ -10,8 +10,8 @@ import cellLogic.NonExistentCell;
 
 public class Level28 extends Level{
     @Override protected Board setup(){
-        ColorCounter gray = new ColorCounter(53, "grises", "\u001B[0m");
-        ColorCounter blue = new ColorCounter(6, "azules", "\u001B[34m");
+        ColorCounter gray = new ColorCounter(53, "grises", ESC + "0m");
+        ColorCounter blue = new ColorCounter(6, "azules", ESC + "34m");
 
         BoardWithLines board = new BoardWithLines(16, 12, true, gray, blue);
 
