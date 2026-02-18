@@ -15,7 +15,7 @@ public class ColorCounter extends ExternalCounter{
     }
 
     public String getColoredColorWord(){
-        return colorANSI + colorWord + "\u001B[0m";
+        return colorANSI + colorWord + ESC + "0m";
     }
 
     public int getRemainingMines(){

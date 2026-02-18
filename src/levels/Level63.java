@@ -9,9 +9,9 @@ import cellLogic.NonExistentCell;
 
 public class Level63 extends Level{
     @Override protected Board setup(){
-        ColorCounter gray = new ColorCounter(0, "gray", "\u001B[0m");
-        ColorCounter blue = new ColorCounter(9, "blue", "\u001B[34m");
-        ColorCounter cyan = new ColorCounter(34, "cyan", "\u001B[36m");
+        ColorCounter gray = new ColorCounter(0, "gray", ESC + "0m");
+        ColorCounter blue = new ColorCounter(9, "blue", ESC + "34m");
+        ColorCounter cyan = new ColorCounter(34, "cyan", ESC + "36m");
         
         Board board = new BoardLineless(11, 11, true, blue, cyan);
 

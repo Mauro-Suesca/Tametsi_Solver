@@ -11,10 +11,10 @@ import cellLogic.EmptyCell;
 
 public class Level79 extends Level{
     @Override protected Board setup(){
-        ColorCounter gray = new ColorCounter(14, "gray", "\u001B[0m");
-        ColorCounter pink = new ColorCounter(19, "pink", "\u001B[38;5;212m");
-        ColorCounter blue = new ColorCounter(10, "blue", "\u001B[34m");
-        ColorCounter yellow = new ColorCounter(0, "yellow", "\u001B[33m");
+        ColorCounter gray = new ColorCounter(14, "gray", ESC + "0m");
+        ColorCounter pink = new ColorCounter(19, "pink", ESC + "38;5;212m");
+        ColorCounter blue = new ColorCounter(10, "blue", ESC + "34m");
+        ColorCounter yellow = new ColorCounter(0, "yellow", ESC + "33m");
         
         BoardWithLines board = new BoardWithLines(15, 15, true, gray, pink, blue, yellow);
 

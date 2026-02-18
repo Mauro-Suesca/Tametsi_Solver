@@ -320,9 +320,11 @@ public class EmptyCell extends Cell{
         if(revealed){
             result = this.getColorANSI();
 
-            result += (isLastActingCell ? "\u001B[4m" : "") + (isLastActingCellDueToImaginary ? "\u001B[3m" : "");
+            result += (isLastActingCell ? ESC + "4m" : "") + (isLastActingCellDueToImaginary ? ESC + "3m" : "");
             
-            result += (unknown ? "?" : String.valueOf(remainingMines)) + "\u001B[0m";
+            result += (unknown ? "?" : String.valueOf(remainingMines)) + ESC + "0m";
+
+            result += (isLastActingCell || isLastActingCellDueToImaginary ? ESC + "0m" : "");
 
             result += (remainingMines <= 9 ? " " : "");
         }else{

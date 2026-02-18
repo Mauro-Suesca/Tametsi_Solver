@@ -11,12 +11,12 @@ import cellLogic.EmptyCell;
 
 public class Level80 extends Level{
     @Override protected Board setup(){
-        ColorCounter gray = new ColorCounter(17, "gray", "\u001B[0m");
-        ColorCounter purple = new ColorCounter(10, "purple", "\u001B[35m");
-        ColorCounter cyan = new ColorCounter(19, "cyan", "\u001B[36m");
-        ColorCounter orange = new ColorCounter(6, "orange", "\u001B[38;5;214m");
-        ColorCounter red = new ColorCounter(11, "red", "\u001B[31m");
-        ColorCounter green = new ColorCounter(11, "green", "\u001B[32m");
+        ColorCounter gray = new ColorCounter(17, "gray", ESC + "0m");
+        ColorCounter purple = new ColorCounter(10, "purple", ESC + "35m");
+        ColorCounter cyan = new ColorCounter(19, "cyan", ESC + "36m");
+        ColorCounter orange = new ColorCounter(6, "orange", ESC + "38;5;214m");
+        ColorCounter red = new ColorCounter(11, "red", ESC + "31m");
+        ColorCounter green = new ColorCounter(11, "green", ESC + "32m");
         
         BoardWithLines board = new BoardWithLines(14, 17, true, gray, purple, cyan, orange, red, green);
 

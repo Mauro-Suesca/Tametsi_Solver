@@ -10,7 +10,7 @@ import cellLogic.ColorCounter;
 
 public class Level52 extends Level{
     @Override protected Board setup(){
-        ColorCounter purple = new ColorCounter(54, "purple", "\u001B[35m");
+        ColorCounter purple = new ColorCounter(54, "purple", ESC + "35m");
         
         BoardWithLines board = new BoardWithLines(20, 20, true, purple);
 
