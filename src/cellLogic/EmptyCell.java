@@ -290,6 +290,7 @@ public class EmptyCell extends Cell{
                     }else{
                         remainingAdjacentCells.get(i).markAsMine();
                     }
+                    
                     board.addOperationToProcess(needsToUseDoubleHypothesis ? new ProofByDoubleHypothesisOperation(this) : new ProofByContradictionOperation(this));
                     break;
                 }
@@ -311,7 +312,56 @@ public class EmptyCell extends Cell{
 
     //TODO Implement logic for proof by cases
     public void proofByCases(){
+        boolean hypothesisIsHasMine;
         
+        if(remainingMines == 0){
+            return;
+        }else if(remainingMines == 1){
+            hypothesisIsHasMine = true;
+        }else{
+            if(remainingAdjacentCells.size() - remainingMines == 1){
+                hypothesisIsHasMine = false;
+            }else{
+                return;
+            }
+        }
+
+        ArrayList<SimulatedUnrevealedCell> agreeingMarkedUnrevealedCells = null;
+
+        for(int i=0; i<remainingAdjacentCells.size(); i++){
+            if(!remainingAdjacentCells.get(i).revealed){
+                SimulatedBoard currentHypothesisSimulation = new SimulatedBoard(false);
+                SimulatedCell.setBoard(currentHypothesisSimulation);
+
+                SimulatedUnrevealedCell testCell = (SimulatedUnrevealedCell)remainingAdjacentCells.get(i).simulateCell(currentHypothesisSimulation);
+
+                ArrayList<SimulatedUnrevealedCell> currentCaseMarkedCells = currentHypothesisSimulation.obtainMarkedCellsFromCase(testCell, hypothesisIsHasMine);
+
+                if(agreeingMarkedUnrevealedCells == null){
+                    agreeingMarkedUnrevealedCells = currentCaseMarkedCells;
+                }else{
+                    for(int j=0; j<agreeingMarkedUnrevealedCells.size(); j++){
+                        if(!currentCaseMarkedCells.contains(agreeingMarkedUnrevealedCells.get(j))){
+                            agreeingMarkedUnrevealedCells.remove(j--);
+                        }
+                    }
+                }
+                
+                if(agreeingMarkedUnrevealedCells.size() == 0){
+                    return;
+                }
+            }
+        }
+        
+        for(int i=0; i<agreeingMarkedUnrevealedCells.size(); i++){
+            boolean cellIsAgreedToBeEmpty = agreeingMarkedUnrevealedCells.get(i).getMarkedAsEmpty();
+
+            if(cellIsAgreedToBeEmpty){
+                agreeingMarkedUnrevealedCells.get(i).markAsEmpty();
+            }else{
+                agreeingMarkedUnrevealedCells.get(i).markAsMine();
+            }
+        }
     }
 
     @Override public String toString(){

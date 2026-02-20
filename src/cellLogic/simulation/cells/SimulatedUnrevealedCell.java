@@ -19,6 +19,10 @@ public class SimulatedUnrevealedCell extends SimulatedCell{
         return (SimulatedUnrevealedCell)board.getAlreadyExistingSimulatedCell(new SimulatedUnrevealedCell(originalCell, markedAsMine));
     }
 
+    public boolean getMarkedAsEmpty(){
+        return markedAsEmpty;
+    }
+
     @Override protected void notifyAdjacentCells(){
         for(int i=0; i<remainingAdjacentCells.size(); i++){
             SimulatedCell adjacentCell = remainingAdjacentCells.get(i);
@@ -52,6 +56,8 @@ public class SimulatedUnrevealedCell extends SimulatedCell{
 
         if(board.getIsHypothesizing()){
             board.addExecutedCommand(new MarkAsEmptyCommand(this));
+        }else{
+            board.addToMarkedCells(this);
         }
 
         notifyAdjacentCells();
@@ -68,6 +74,8 @@ public class SimulatedUnrevealedCell extends SimulatedCell{
 
         if(board.getIsHypothesizing()){
             board.addExecutedCommand(new MarkAsMineCommand(this));
+        }else{
+            board.addToMarkedCells(this);
         }
 
         notifyAdjacentCells();
@@ -105,6 +113,10 @@ public class SimulatedUnrevealedCell extends SimulatedCell{
 
         SimulatedUnrevealedCell otherCell = (SimulatedUnrevealedCell)otherObject;
 
-        return otherCell.originalCell == this.originalCell;
+        if(otherCell.originalCell != this.originalCell){
+            return false;
+        }
+
+        return (otherCell.markedAsEmpty == this.markedAsEmpty) && (otherCell.markedAsMine == this.markedAsMine);
     }
 }
