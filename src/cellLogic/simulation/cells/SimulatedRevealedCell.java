@@ -25,11 +25,13 @@ public class SimulatedRevealedCell extends SimulatedCell{
     public void executeLogicalSequence(){
         board.addOperationToProcess(new SimulatedCountForContradictionsOperation(this));
         board.addOperationToProcess(new SimulatedCountRemainingOperation(this));
+        board.addOperationToProcess(new SimulatedCheckSharedCellsOperation(this));
     }
 
     public void executeLogicalSequenceForDoubleHypothesis(){
         board.addOperationToProcess(new SimulatedCountForContradictionsOperation(this));
         board.addOperationToProcess(new SimulatedCountRemainingOperation(this));
+        board.addOperationToProcess(new SimulatedCheckSharedCellsOperation(this));
         board.addOperationToProcess(new SimulatedProofByContradictionOperation(this));
     }
 
@@ -70,6 +72,49 @@ public class SimulatedRevealedCell extends SimulatedCell{
         board.addOperationToProcess(new SimulatedCountForContradictionsOperation(this));
 
         return result;
+    }
+
+    public boolean basicCheckSharedCells(){
+        for(int i=0; i<remainingAdjacentCells.size(); i++){
+            SimulatedCell adjacentCell = remainingAdjacentCells.get(i);
+            ArrayList<SimulatedRevealedCell> completelySharingCells = new ArrayList<>();
+
+            for(int j=0; j<adjacentCell.remainingAdjacentCells.size(); j++){
+                if(adjacentCell.remainingAdjacentCells.get(j) instanceof SimulatedRevealedCell){
+                    SimulatedRevealedCell currentPossibleSharerCell = (SimulatedRevealedCell)adjacentCell.remainingAdjacentCells.get(j);
+                    ArrayList<SimulatedCell> currentPossibleSharerCellAdjacencies = currentPossibleSharerCell.remainingAdjacentCells;
+
+                    if(!this.equals(currentPossibleSharerCell) && this.remainingAdjacentCells.containsAll(currentPossibleSharerCellAdjacencies)){
+                        completelySharingCells.add(currentPossibleSharerCell);
+                    }else if(!this.equals(currentPossibleSharerCell) && currentPossibleSharerCellAdjacencies.containsAll(this.remainingAdjacentCells)){
+                        currentPossibleSharerCell.react();
+                    }
+                }
+            }
+
+            for(SimulatedRevealedCell completelySharingCell : completelySharingCells){
+                ArrayList<SimulatedCell> cellsOutsideOfSharedAdjacencies = new ArrayList<>(this.remainingAdjacentCells);
+                cellsOutsideOfSharedAdjacencies.removeAll(completelySharingCell.remainingAdjacentCells);
+
+                int minesOutsideOfSharedOnes = this.remainingMines - completelySharingCell.remainingMines;
+                
+                if(minesOutsideOfSharedOnes == 0){
+                    for(int j=0; j<cellsOutsideOfSharedAdjacencies.size(); j++){
+                        cellsOutsideOfSharedAdjacencies.get(j).markAsEmpty();
+                    }
+                }else if(minesOutsideOfSharedOnes == cellsOutsideOfSharedAdjacencies.size()){
+                    for(int j=0; j<cellsOutsideOfSharedAdjacencies.size(); j++){
+                        cellsOutsideOfSharedAdjacencies.get(j).markAsMine();
+                    }
+                }else if(minesOutsideOfSharedOnes < 0){
+                    return false;
+                }
+            }
+        }
+
+        board.addOperationToProcess(new SimulatedCountForContradictionsOperation(this));
+
+        return true;
     }
 
     public void proofByContradiction(){
