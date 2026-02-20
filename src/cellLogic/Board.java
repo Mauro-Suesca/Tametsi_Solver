@@ -125,6 +125,16 @@ public abstract class Board implements CellObserver{
         }
     }
 
+    public void skipToNextLine(){
+        if(addsCellsHorizontally){
+            currentColumn = 0;
+            currentRow++;
+        }else{
+            currentRow = 0;
+            currentColumn++;
+        }
+    }
+
     public void resetCurrentRowAndColumn(){
         currentRow = 0;
         currentColumn = 0;
