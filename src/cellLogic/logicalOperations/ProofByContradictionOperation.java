@@ -8,6 +8,6 @@ public class ProofByContradictionOperation extends LogicalOperation{
     }
 
     @Override public void executeOperation(){
-        callingCell.checkHypothesesForContradictions(false);
+        callingCell.checkHypothesesForContradictions(false, false);
     }
 }

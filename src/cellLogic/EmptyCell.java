@@ -170,6 +170,7 @@ public class EmptyCell extends Cell{
         board.addOperationToProcess(new AdvancedCheckSharedCellsOperation(this));
         board.addOperationToProcess(new ProofByDoubleHypothesisOperation(this));
         board.addOperationToProcess(new ExtensiveProofByContradictionOperation(this));
+        board.addOperationToProcess(new ContradictionWithCheckSharedCellsOperation(this));
         board.addOperationToProcess(new ProofByCasesOperation(this));
     }
 
@@ -262,7 +263,7 @@ public class EmptyCell extends Cell{
     }
 
     //Proof by contradiction
-    public void checkHypothesesForContradictions(boolean needsToUseDoubleHypothesis){
+    public void checkHypothesesForContradictions(boolean needsToUseDoubleHypothesis, boolean needsToCheckSharedCells){
         boolean hypothesisIsHasMine;
         
         if(remainingMines == 0){
@@ -277,7 +278,7 @@ public class EmptyCell extends Cell{
 
         for(int i=0; i<remainingAdjacentCells.size(); i++){
             if(!remainingAdjacentCells.get(i).revealed){
-                SimulatedBoard currentHypothesisSimulation = new SimulatedBoard(needsToUseDoubleHypothesis);
+                SimulatedBoard currentHypothesisSimulation = new SimulatedBoard(needsToUseDoubleHypothesis, needsToCheckSharedCells);
                 SimulatedCell.setBoard(currentHypothesisSimulation);
 
                 SimulatedUnrevealedCell testCell = (SimulatedUnrevealedCell)remainingAdjacentCells.get(i).simulateCell(currentHypothesisSimulation);
@@ -320,7 +321,7 @@ public class EmptyCell extends Cell{
                 boolean hypothesisIsHasMine = true;
 
                 for(int j=0; j<2; j++){
-                    SimulatedBoard currentHypothesisSimulation = new SimulatedBoard(true);
+                    SimulatedBoard currentHypothesisSimulation = new SimulatedBoard(true, false);
                     SimulatedCell.setBoard(currentHypothesisSimulation);
 
                     SimulatedUnrevealedCell testCell = (SimulatedUnrevealedCell)remainingAdjacentCells.get(i).simulateCell(currentHypothesisSimulation);
@@ -363,7 +364,7 @@ public class EmptyCell extends Cell{
 
         for(int i=0; i<remainingAdjacentCells.size(); i++){
             if(!remainingAdjacentCells.get(i).revealed){
-                SimulatedBoard currentHypothesisSimulation = new SimulatedBoard(false);
+                SimulatedBoard currentHypothesisSimulation = new SimulatedBoard(false, false);
                 SimulatedCell.setBoard(currentHypothesisSimulation);
 
                 SimulatedUnrevealedCell testCell = (SimulatedUnrevealedCell)remainingAdjacentCells.get(i).simulateCell(currentHypothesisSimulation);

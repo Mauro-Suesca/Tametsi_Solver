@@ -8,6 +8,6 @@ public class ProofByDoubleHypothesisOperation extends LogicalOperation{
     }
 
     @Override public void executeOperation(){
-        callingCell.checkHypothesesForContradictions(true);
+        callingCell.checkHypothesesForContradictions(true, false);
     }
 }
