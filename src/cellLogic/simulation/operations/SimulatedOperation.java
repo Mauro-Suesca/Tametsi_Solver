@@ -7,7 +7,8 @@ public abstract class SimulatedOperation implements Comparable<SimulatedOperatio
     protected static final int START_WITH_DOUBLE_HYPOTHESIS = 0;
     protected static final int COUNT_FOR_CONTRADICTION = 1;
     protected static final int COUNT_REMAINING = 2;
-    protected static final int PROOF_BY_CONTRADICTION = 3;
+    protected static final int CHECK_SHARED_CELLS = 3;
+    protected static final int PROOF_BY_CONTRADICTION = 4;
     protected SimulatedRevealedCell callingCell;
     protected int type;
 

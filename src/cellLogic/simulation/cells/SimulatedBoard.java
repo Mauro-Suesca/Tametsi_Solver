@@ -15,13 +15,15 @@ public class SimulatedBoard{
     private Stack<MarkCommand> commandsExecutedWhileHypothesizing;
     private boolean needsToUseDoubleHypothesis;
     private boolean isHypothesizing;
+    private boolean needsToCheckSharedCells;
 
-    public SimulatedBoard(boolean needsToUseDoubleHypothesis){
+    public SimulatedBoard(boolean needsToUseDoubleHypothesis, boolean needsToCheckSharedCells){
         this.operationsToProcess = new PriorityQueue<>();
         this.alreadyExistingCells = new ArrayList<>();
         this.markedCells = new ArrayList<>();
         this.needsToUseDoubleHypothesis = needsToUseDoubleHypothesis;
         this.isHypothesizing = false;
+        this.needsToCheckSharedCells = needsToCheckSharedCells;
     }
 
     protected boolean getNeedsToUseDoubleHypothesis(){
@@ -30,6 +32,9 @@ public class SimulatedBoard{
 
     protected boolean getIsHypothesizing(){
         return isHypothesizing;
+    }
+    protected boolean getNeedsToCheckSharedCells(){
+        return needsToCheckSharedCells;
     }
 
     protected void startHypothesizing(){
