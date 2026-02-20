@@ -203,14 +203,14 @@ public class EmptyCell extends Cell{
                 if(minesOutsideOfSharedOnes == 0){
                     board.updateLastActingCell(this);
                     
-                    for(int k=0; k<cellsOutsideOfSharedAdjacencies.size(); k++){
-                        cellsOutsideOfSharedAdjacencies.get(k).reveal();
+                    for(int j=0; j<cellsOutsideOfSharedAdjacencies.size(); j++){
+                        cellsOutsideOfSharedAdjacencies.get(j).reveal();
                     }
                 }else if(minesOutsideOfSharedOnes == cellsOutsideOfSharedAdjacencies.size()){
                     board.updateLastActingCell(this);
 
-                    for(int k=0; k<cellsOutsideOfSharedAdjacencies.size(); k++){
-                        cellsOutsideOfSharedAdjacencies.get(k).markAsMine();
+                    for(int j=0; j<cellsOutsideOfSharedAdjacencies.size(); j++){
+                        cellsOutsideOfSharedAdjacencies.get(j).markAsMine();
                     }
                 }
             }
