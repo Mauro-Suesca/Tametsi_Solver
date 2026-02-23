@@ -45,12 +45,12 @@ public class Level88 extends Level{
         orangeMineFactory.addToBoard(1);
         orangeUnrevealedEmptyFactory.addToBoard(2);
 
-        board.skipToNextLine();
+        board.skipLines(1);
 
         //Row 2
         grayRevealedFactory.addToBoard(9);
 
-        board.skipToNextLine();
+        board.skipLines(1);
 
         //Row 3
         orangeUnrevealedEmptyFactory.addToBoard(1);
@@ -61,7 +61,7 @@ public class Level88 extends Level{
         orangeMineFactory.addToBoard(1);
         orangeUnrevealedEmptyFactory.addToBoard(1);
 
-        board.skipToNextLine();
+        board.skipLines(1);
 
         //Row 4
         orangeUnrevealedEmptyFactory.addToBoard(3);
@@ -72,13 +72,13 @@ public class Level88 extends Level{
         orangeMineFactory.addToBoard(1);
         orangeUnrevealedEmptyFactory.addToBoard(1);
 
-        board.skipToNextLine();
+        board.skipLines(1);
 
         //Row 5
         grayUnknownRevealedFactory.addToBoard(1);
         grayRevealedFactory.addToBoard(8);
 
-        board.skipToNextLine();
+        board.skipLines(1);
 
         //Row 6
         orangeMineFactory.addToBoard(2);
@@ -88,7 +88,7 @@ public class Level88 extends Level{
         orangeMineFactory.addToBoard(1);
         orangeUnrevealedEmptyFactory.addToBoard(2);
 
-        board.skipToNextLine();
+        board.skipLines(1);
 
         //Row 7
         orangeUnrevealedEmptyFactory.addToBoard(1);
@@ -99,12 +99,12 @@ public class Level88 extends Level{
         orangeMineFactory.addToBoard(1);
         orangeUnrevealedEmptyFactory.addToBoard(1);
 
-        board.skipToNextLine();
+        board.skipLines(1);
 
         //Row 8
         grayRevealedFactory.addToBoard(9);
 
-        board.skipToNextLine();
+        board.skipLines(1);
 
         //Row 9
         orangeMineFactory.addToBoard(1);
@@ -115,7 +115,7 @@ public class Level88 extends Level{
         orangeUnrevealedEmptyFactory.addToBoard(1);
         orangeMineFactory.addToBoard(2);
 
-        board.skipToNextLine();
+        board.skipLines(1);
 
         board.setAddsCellsHorizontally(false);
 

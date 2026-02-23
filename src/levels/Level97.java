@@ -68,8 +68,7 @@ public class Level97 extends Level{
         grayUnrevealedEmptyFactory.addToBoard(3);
         grayMineFactory.addToBoard(1);
 
-        board.skipToNextLine();
-        board.skipToNextLine();
+        board.skipLines(2);
     
         //Row 4
         pinkUnrevealedEmptyFactory.addToBoard(1);
@@ -89,8 +88,7 @@ public class Level97 extends Level{
         pinkMineFactory.addToBoard(1);
         grayUnrevealedEmptyFactory.addToBoard(1);
 
-        board.skipToNextLine();
-        board.skipToNextLine();
+        board.skipLines(2);
 
         //Row 7
         grayMineFactory.addToBoard(1);
@@ -108,7 +106,7 @@ public class Level97 extends Level{
         pinkMineFactory.addToBoard(1);
         grayUnrevealedEmptyFactory.addToBoard(1);
 
-        board.skipToNextLine();
+        board.skipLines(1);
 
         //Row 9
         orangeUnrevealedEmptyFactory.addToBoard(3);
@@ -152,7 +150,7 @@ public class Level97 extends Level{
         grayRevealedFactory.addToBoard(2);
         grayUnrevealedEmptyFactory.addToBoard(1);
 
-        board.skipToNextLine();
+        board.skipLines(1);
 
         //Row 13
         grayMineFactory.addToBoard(1);
@@ -169,8 +167,7 @@ public class Level97 extends Level{
         grayUnrevealedEmptyFactory.addToBoard(4);
         grayMineFactory.addToBoard(2);
 
-        board.skipToNextLine();
-        board.skipToNextLine();
+        board.skipLines(2);
 
         //Row 16
         pinkMineFactory.addToBoard(1);
@@ -189,8 +186,7 @@ public class Level97 extends Level{
         grayRevealedFactory.addToBoard(1);
         grayUnrevealedEmptyFactory.addToBoard(1);
 
-        board.skipToNextLine();
-        board.skipToNextLine();
+        board.skipLines(2);
 
         //Row 19
         grayMineFactory.addToBoard(1);

@@ -154,14 +154,14 @@ public class Level95 extends Level{
         //Column 3
         grayRevealedFactory.addToBoard(5);
 
-        board.skipToNextLine();
+        board.skipLines(1);
 
         //Column 4
         cyanUnrevealedEmptyFactory.addToBoard(2);
         cyanMineFactory.addToBoard(2);
         cyanUnrevealedEmptyFactory.addToBoard(1);
 
-        board.skipToNextLine();
+        board.skipLines(1);
 
         //Column 18
         yellowMineFactory.addToBoard(1);
@@ -170,12 +170,12 @@ public class Level95 extends Level{
         yellowUnrevealedEmptyFactory.addToBoard(1);
         grayUnrevealedEmptyFactory.addToBoard(1);
 
-        board.skipToNextLine();
+        board.skipLines(1);
 
         //Column 19
         grayRevealedFactory.addToBoard(5);
 
-        board.skipToNextLine();
+        board.skipLines(1);
         board.setAddsCellsHorizontally(true);
 
         //Row 4 (Part 2)
