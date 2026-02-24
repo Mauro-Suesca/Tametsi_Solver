@@ -107,20 +107,12 @@ public abstract class Board implements CellObserver{
         if(addsCellsHorizontally){
             if(++currentColumn == totalColumns){
                 currentColumn = 0;
-                currentRow++;
-
-                if(currentRow >= totalRows){
-                    currentRow = 0;
-                }
+                currentRow = ++currentRow % totalRows;
             }
         }else{
             if(++currentRow == totalRows){
                 currentRow = 0;
-                currentColumn++;
-                
-                if(currentColumn >= totalColumns){
-                    currentColumn = 0;
-                }
+                currentColumn = ++currentColumn % totalColumns;
             }
         }
     }
@@ -128,10 +120,10 @@ public abstract class Board implements CellObserver{
     public void skipLines(int linesToSkip){
         if(addsCellsHorizontally){
             currentColumn = 0;
-            currentRow += linesToSkip;
+            currentRow = (currentRow + linesToSkip) % totalRows;
         }else{
             currentRow = 0;
-            currentColumn += linesToSkip;
+            currentColumn = (currentColumn + linesToSkip) % totalColumns;
         }
     }
 
