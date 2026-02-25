@@ -241,15 +241,15 @@ This project's purpose is to discover and implement an algorithm capable of solv
 ![image](./resources/level114_unsolved.png)
 ![image](./resources/level114_solved.png)
 
+## Level 115 (Lattice II)
+![image](./resources/level115_unsolved.png)
+![image](./resources/level115_solved.png)
+
 # Planned levels
 
 ## Level 85
 ![image](./resources/level85_unsolved.png)
 ![image](./resources/level85_solved.png)
-
-## Level 115 (Lattice II)
-![image](./resources/level115_unsolved.png)
-![image](./resources/level115_solved.png)
 
 ## Level 116 (Lattice III)
 ![image](./resources/level116_unsolved.png)
