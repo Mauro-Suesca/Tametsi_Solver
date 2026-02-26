@@ -249,15 +249,15 @@ This project's purpose is to discover and implement an algorithm capable of solv
 ![image](./resources/level116_unsolved.png)
 ![image](./resources/level116_solved.png)
 
+## Level 117 (Tabs)
+![image](./resources/level117_unsolved.png)
+![image](./resources/level117_solved.png)
+
 # Planned levels
 
 ## Level 85
 ![image](./resources/level85_unsolved.png)
 ![image](./resources/level85_solved.png)
-
-## Level 117 (Tabs)
-![image](./resources/level117_unsolved.png)
-![image](./resources/level117_solved.png)
 
 ## Level 118 (Cyclone)
 ![image](./resources/level118_unsolved.png)
