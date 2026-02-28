@@ -257,15 +257,15 @@ This project's purpose is to discover and implement an algorithm capable of solv
 ![image](./resources/level118_unsolved.png)
 ![image](./resources/level118_solved.png)
 
+## Level 119 (Tatters)
+![image](./resources/level119_unsolved.png)
+![image](./resources/level119_solved.png)
+
 # Planned levels
 
 ## Level 85
 ![image](./resources/level85_unsolved.png)
 ![image](./resources/level85_solved.png)
-
-## Level 119 (Tatters)
-![image](./resources/level119_unsolved.png)
-![image](./resources/level119_solved.png)
 
 ## Level 120 (Combination Lock IV)
 ![image](./resources/level120_unsolved.png)
