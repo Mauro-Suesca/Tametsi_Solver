@@ -61,7 +61,7 @@ public class Level75 extends Level{
         board.addCell(grayMineFactory.build(1));
         board.addCell(grayUnknownFactory.build(1));
 
-        board.setAddsCellsHorizontally(false);
+        board.addCellsVertically();
 
         //Column 1
         board.addCell(grayUnrevealedEmptyFactory.build(2));

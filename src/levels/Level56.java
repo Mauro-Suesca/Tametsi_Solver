@@ -31,7 +31,7 @@ public class Level56 extends Level{
         EmptyCellFactory purpleUnrevealedEmptyFactory = new EmptyCellFactory(purple, false, false);
         EmptyCellFactory orangeUnrevealedEmptyFactory = new EmptyCellFactory(orange, false, false);
 
-        board.setAddsCellsHorizontally(false);
+        board.addCellsVertically();
 
         //Line 1
         board.addCell(purpleUnrevealedEmptyFactory.build(3));

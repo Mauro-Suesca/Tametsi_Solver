@@ -26,7 +26,7 @@ public class Level87 extends Level{
 
         EmptyCellFactory revealedFactory = new EmptyCellFactory(true, false);       
         
-        board.setAddsCellsHorizontally(false);
+        board.addCellsVertically();
 
         //Column 1
         mineFactory.addToBoard(1);
@@ -43,7 +43,7 @@ public class Level87 extends Level{
         unrevealedEmptyFactory.addToBoard(1);
         nonExistentCellFactory.addToBoard(9);
 
-        board.setAddsCellsHorizontally(true);
+        board.addCellsHorizontally();
 
         //Row 1
         unrevealedEmptyFactory.addToBoard(1);
@@ -67,7 +67,7 @@ public class Level87 extends Level{
         unrevealedEmptyFactory.addToBoard(1);
         nonExistentCellFactory.addToBoard(8);
 
-        board.setAddsCellsHorizontally(false);
+        board.addCellsVertically();
 
         //Column 3
         mineFactory.addToBoard(1);
@@ -126,7 +126,7 @@ public class Level87 extends Level{
         revealedFactory.addToBoard(1);
         unrevealedEmptyFactory.addToBoard(1);
 
-        board.setAddsCellsHorizontally(true);
+        board.addCellsHorizontally();
 
         //Row 4
         nonExistentCellFactory.addToBoard(8);
@@ -168,7 +168,7 @@ public class Level87 extends Level{
         revealedFactory.addToBoard(1);
         unrevealedEmptyFactory.addToBoard(1);
 
-        board.setAddsCellsHorizontally(false);
+        board.addCellsVertically();
 
         //Column 10
         revealedFactory.addToBoard(3);

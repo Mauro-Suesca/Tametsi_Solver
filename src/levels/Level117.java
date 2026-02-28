@@ -87,7 +87,7 @@ public class Level117 extends Level{
         grayRevealedFactory.addToBoard(3);
 
         board.skipLines(6);
-        board.setAddsCellsHorizontally(false);
+        board.addCellsVertically();
 
         //Column 1
         grayMineFactory.addToBoard(2);

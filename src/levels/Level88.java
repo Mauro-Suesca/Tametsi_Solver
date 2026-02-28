@@ -117,7 +117,7 @@ public class Level88 extends Level{
 
         board.skipLines(1);
 
-        board.setAddsCellsHorizontally(false);
+        board.addCellsVertically();
 
         //Column 1
         redUnrevealedEmptyFactory.addToBoard(1);
@@ -187,7 +187,7 @@ public class Level88 extends Level{
         greenMineFactory.addToBoard(1);
         greenUnrevealedEmptyFactory.addToBoard(1);
 
-        board.setAddsCellsHorizontally(true);
+        board.addCellsHorizontally();
 
         //Row 10
         yellowMineFactory.addToBoard(1);
@@ -246,7 +246,7 @@ public class Level88 extends Level{
         yellowMineFactory.addToBoard(1);
         yellowUnrevealedEmptyFactory.addToBoard(2);
 
-        board.setAddsCellsHorizontally(false);
+        board.addCellsVertically();
         
         //Column 11
         grayUnknownRevealedFactory.addToBoard(1);

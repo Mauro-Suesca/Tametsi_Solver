@@ -68,7 +68,7 @@ public class Level92 extends Level{
         grayUnrevealedEmptyFactory.addToBoard(5);
         grayRevealedFactory.addToBoard(1);
 
-        board.setAddsCellsHorizontally(false);
+        board.addCellsVertically();
 
         //Column 1
         grayRevealedFactory.addToBoard(18);
@@ -100,7 +100,7 @@ public class Level92 extends Level{
         grayUnrevealedEmptyFactory.addToBoard(5);
         grayRevealedFactory.addToBoard(1);
 
-        board.setAddsCellsHorizontally(true);
+        board.addCellsHorizontally();
 
         //Row 4
         blueMineFactory.addToBoard(1);
@@ -122,7 +122,7 @@ public class Level92 extends Level{
         blueUnrevealedEmptyFactory.addToBoard(1);
         blueMineFactory.addToBoard(1);
 
-        board.setAddsCellsHorizontally(false);
+        board.addCellsVertically();
 
         //Column 19
         grayUnrevealedEmptyFactory.addToBoard(2);
@@ -168,7 +168,7 @@ public class Level92 extends Level{
         blueMineFactory.addToBoard(1);
         blueUnrevealedEmptyFactory.addToBoard(1);
         
-        board.setAddsCellsHorizontally(true);
+        board.addCellsHorizontally();
 
         //Row 14
         blueUnknownFactory.addToBoard(1);
@@ -271,7 +271,7 @@ public class Level92 extends Level{
         blueUnrevealedEmptyFactory.addToBoard(4);
         blueMineFactory.addToBoard(1);
 
-        board.setAddsCellsHorizontally(false);
+        board.addCellsVertically();
 
         //Column 6
         blueMineFactory.addToBoard(1);

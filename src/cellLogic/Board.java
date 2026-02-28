@@ -63,8 +63,12 @@ public abstract class Board implements CellObserver{
         this.maxMineDifferenceForImaginaryCells = maxMineDifferenceForImaginaryCells;
     }
 
-    public void setAddsCellsHorizontally(boolean addsCellsHorizontally){
-        this.addsCellsHorizontally = addsCellsHorizontally;
+    public void addCellsHorizontally(){
+        this.addsCellsHorizontally = true;
+    }
+
+    public void addCellsVertically(){
+        this.addsCellsHorizontally = false;
     }
 
     public void addCell(List<? extends Cell> newCells){

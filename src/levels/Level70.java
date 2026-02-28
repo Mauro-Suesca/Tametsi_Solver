@@ -19,7 +19,7 @@ public class Level70 extends Level{
         
         EmptyCellFactory unknownFactory = new EmptyCellFactory(false, true);
 
-        board.setAddsCellsHorizontally(false);
+        board.addCellsVertically();
 
         //Column 1
         board.addCell(unrevealedEmptyFactory.build(1));
@@ -32,14 +32,14 @@ public class Level70 extends Level{
         //Column 2 (Part 1)
         board.addCell(mineFactory.build(3));
 
-        board.setAddsCellsHorizontally(true);
+        board.addCellsHorizontally();
 
         //Row 4
         board.addCell(unrevealedEmptyFactory.build(3));
         board.addCell(unknownFactory.build(2));
         board.addCell(unrevealedEmptyFactory.build(2));
         
-        board.setAddsCellsHorizontally(false);
+        board.addCellsVertically();
 
         //Column 2 (Part 2)
         board.addCell(unrevealedEmptyFactory.build(3));

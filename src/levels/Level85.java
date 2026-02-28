@@ -30,7 +30,7 @@ public class Level85 extends Level{
 
         EmptyCellFactory grayRevealedFactory = new EmptyCellFactory(gray, true, false);
 
-        board.setAddsCellsHorizontally(false);
+        board.addCellsVertically();
 
         //Column 1
         greenUnrevealedEmptyFactory.addToBoard(3);
@@ -54,7 +54,7 @@ public class Level85 extends Level{
         greenMineFactory.addToBoard(1);
         nonExistentCellFactory.addToBoard(4);
 
-        board.setAddsCellsHorizontally(true);
+        board.addCellsHorizontally();
 
         //Row 1
         greenUnrevealedEmptyFactory.addToBoard(2);
@@ -82,7 +82,7 @@ public class Level85 extends Level{
         //Row 3 (Part 1)
         purpleUnrevealedEmptyFactory.addToBoard(3);
 
-        board.setAddsCellsHorizontally(false);
+        board.addCellsVertically();
 
         //Column 6
         grayRevealedFactory.addToBoard(2);
@@ -182,7 +182,7 @@ public class Level85 extends Level{
         greenUnrevealedEmptyFactory.addToBoard(1);
         nonExistentCellFactory.addToBoard(4);
 
-        board.setAddsCellsHorizontally(true);
+        board.addCellsHorizontally();
 
         //Row 3 (Part 2)
         purpleMineFactory.addToBoard(1);
@@ -220,7 +220,7 @@ public class Level85 extends Level{
         greenMineFactory.addToBoard(1);
         greenUnrevealedEmptyFactory.addToBoard(2);
 
-        board.setAddsCellsHorizontally(false);
+        board.addCellsVertically();
 
         //Column 18
         grayRevealedFactory.addToBoard(4);
@@ -303,7 +303,7 @@ public class Level85 extends Level{
         grayRevealedFactory.addToBoard(1);
         purpleMineFactory.addToBoard(1);
 
-        board.setAddsCellsHorizontally(true);
+        board.addCellsHorizontally();
 
         //Row 8
         nonExistentCellFactory.addToBoard(1);

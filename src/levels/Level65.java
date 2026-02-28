@@ -24,7 +24,7 @@ public class Level65 extends Level{
 
         EmptyCellFactory revealedFactory = new EmptyCellFactory(true, false);
 
-        board.setAddsCellsHorizontally(false);
+        board.addCellsVertically();
 
         //Column 1 (Part 1)
         board.addCell(mineFactory.build(2));
@@ -36,7 +36,7 @@ public class Level65 extends Level{
         board.addCell(mineFactory.build(1));
         board.addCell(unrevealedEmptyFactory.build(1));
 
-        board.setAddsCellsHorizontally(true);
+        board.addCellsHorizontally();
 
         //Row 17
         board.addCell(nonExistentCellFactory.build(6));
@@ -57,7 +57,7 @@ public class Level65 extends Level{
         board.addCell(mineFactory.build(1));
         board.addCell(nonExistentCellFactory.build(6));
 
-        board.setAddsCellsHorizontally(false);
+        board.addCellsVertically();
 
         //Column 1 (Part 2)
         board.addCell(revealedFactory.build(4));
@@ -97,7 +97,7 @@ public class Level65 extends Level{
         board.addCell(unrevealedEmptyFactory.build(1));
         board.addCell(nonExistentCellFactory.build(6));
 
-        board.setAddsCellsHorizontally(true);
+        board.addCellsHorizontally();
 
         //Row 11
         board.addCell(nonExistentCellFactory.build(14));
@@ -111,7 +111,7 @@ public class Level65 extends Level{
         board.addCell(mineFactory.build(1));
         board.addCell(unrevealedEmptyFactory.build(3));
 
-        board.setAddsCellsHorizontally(false);
+        board.addCellsVertically();
 
         //Column 5 (Part 2)
         board.addCell(unknownFactory.build(1));

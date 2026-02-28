@@ -188,7 +188,7 @@ public class Level69 extends Level{
         board.addCell(grayUnrevealedFactory.build(3));
         board.addCell(grayRevealedFactory.build(1));
 
-        board.setAddsCellsHorizontally(false);
+        board.addCellsVertically();
 
         //Column 1
         board.addCell(nonExistentCellFactory.build(3));

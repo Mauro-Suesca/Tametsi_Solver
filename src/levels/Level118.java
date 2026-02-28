@@ -36,7 +36,7 @@ public class Level118 extends Level{
 
         EmptyCellFactory grayRevealedFactory = new EmptyCellFactory(gray, true, false);
 
-        board.setAddsCellsHorizontally(false);
+        board.addCellsVertically();
 
         //Column 1
         grayUnrevealedEmptyFactory.addToBoard(3);
@@ -84,7 +84,7 @@ public class Level118 extends Level{
         grayUnknownFactory.addToBoard(1);
         grayUnrevealedEmptyFactory.addToBoard(2);
 
-        board.setAddsCellsHorizontally(true);
+        board.addCellsHorizontally();
 
         //Row 1
         grayMineFactory.addToBoard(1);
@@ -169,7 +169,7 @@ public class Level118 extends Level{
         greenMineFactory.addToBoard(1);
         nonExistentCellFactory.addToBoard(5);
         
-        board.setAddsCellsHorizontally(false);
+        board.addCellsVertically();
 
         //Column 13
         pinkUnrevealedEmptyFactory.addToBoard(3);
@@ -218,7 +218,7 @@ public class Level118 extends Level{
         grayMineFactory.addToBoard(1);
         grayUnrevealedEmptyFactory.addToBoard(4);
 
-        board.setAddsCellsHorizontally(true);
+        board.addCellsHorizontally();
 
         //Row 10
         greenMineFactory.addToBoard(3);

@@ -40,7 +40,7 @@ public class Level71 extends Level{
         board.addCell(blueUnrevealedEmptyFactory.build(2));
         board.addCell(blueMineFactory.build(2));
 
-        board.setAddsCellsHorizontally(false);
+        board.addCellsVertically();
 
         //Column 6
         board.addCell(blueUnrevealedEmptyFactory.build(6));
@@ -90,7 +90,7 @@ public class Level71 extends Level{
         board.addCell(greenMineFactory.build(1));
         board.addCell(greenUnrevealedEmptyFactory.build(4));
 
-        board.setAddsCellsHorizontally(true);
+        board.addCellsHorizontally();
 
         //Row 1 (Part 2)
         board.addCell(nonExistentCellFactory.build(5));

@@ -38,7 +38,7 @@ public class Level78 extends Level{
 
         EmptyCellFactory grayRevealedFactory = new EmptyCellFactory(gray, true, false);
 
-        board.setAddsCellsHorizontally(false);
+        board.addCellsVertically();
 
         //Column 1
         board.addCell(cyanUnrevealedEmptyFactory.build(1));

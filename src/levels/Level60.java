@@ -38,7 +38,7 @@ public class Level60 extends Level{
         //Row 1 (Part 1)
         board.addCell(nonExistentCellFactory.build(5));
 
-        board.setAddsCellsHorizontally(false);
+        board.addCellsVertically();
 
         //Column 6
         board.addCell(redMineFactory.build(2));
@@ -107,7 +107,7 @@ public class Level60 extends Level{
         board.addCell(redMineFactory.build(1));
         board.addCell(redUnrevealedEmptyFactory.build(1));
 
-        board.setAddsCellsHorizontally(true);
+        board.addCellsHorizontally();
 
         //Row 1 (Part 2)
         board.addCell(nonExistentCellFactory.build(5));
