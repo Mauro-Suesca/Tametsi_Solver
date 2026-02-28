@@ -35,7 +35,7 @@ public class Level59 extends Level{
 
         EmptyCellFactory grayUnknownEmptyFactory = new EmptyCellFactory(gray, false, true);
 
-        board.setAddsCellsHorizontally(false);
+        board.addCellsVertically();
 
         //Column 1
         board.addCell(grayUnrevealedEmptyFactory.build(3));
@@ -84,7 +84,7 @@ public class Level59 extends Level{
         board.addCell(blueUnrevealedEmptyFactory.build(3));
         board.addCell(blueMineFactory.build(2));
 
-        board.setAddsCellsHorizontally(true);
+        board.addCellsHorizontally();
 
         //Row 1
         board.addCell(nonExistentCellFactory.build(6));
@@ -118,13 +118,13 @@ public class Level59 extends Level{
         board.addCell(grayUnrevealedEmptyFactory.build(1));
         board.addCell(grayMineFactory.build(1));
 
-        board.setAddsCellsHorizontally(false);
+        board.addCellsVertically();
 
         //Column 6
         board.addCell(grayUnknownEmptyFactory.build(1));
         board.addCell(grayUnrevealedEmptyFactory.build(1));
 
-        board.setAddsCellsHorizontally(true);
+        board.addCellsHorizontally();
 
         //Row 12
         board.addCell(blueUnrevealedEmptyFactory.build(5));
@@ -155,7 +155,7 @@ public class Level59 extends Level{
         board.addCell(blueUnrevealedEmptyFactory.build(1));
         board.addCell(grayUnrevealedEmptyFactory.build(4));
 
-        board.setAddsCellsHorizontally(false);
+        board.addCellsVertically();
 
         //Column 7
         board.addCell(grayUnrevealedEmptyFactory.build(1));

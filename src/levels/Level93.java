@@ -28,21 +28,21 @@ public class Level93 extends Level{
 
         EmptyCellFactory revealedFactory = new EmptyCellFactory(true, false);       
         
-        board.setAddsCellsHorizontally(false);
+        board.addCellsVertically();
 
         //Column 1 (Part 1)
         unrevealedEmptyFactory.addToBoard(2);
         mineFactory.addToBoard(1);
         unrevealedEmptyFactory.addToBoard(4);
 
-        board.setAddsCellsHorizontally(true);
+        board.addCellsHorizontally();
 
         //Row 8
         revealedFactory.addToBoard(6);
         nonExistentCellFactory.addToBoard(3);
         revealedFactory.addToBoard(6);
 
-        board.setAddsCellsHorizontally(false);
+        board.addCellsVertically();
 
         //Column 1 (Part 2)
         mineFactory.addToBoard(1);

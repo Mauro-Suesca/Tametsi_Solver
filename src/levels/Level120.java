@@ -43,7 +43,7 @@ public class Level120 extends Level{
         mineFactory.addToBoard(1);
         unrevealedEmptyFactory.addToBoard(3);
 
-        board.setAddsCellsHorizontally(false);
+        board.addCellsVertically();
 
         //Column 1
         mineFactory.addToBoard(4);
@@ -58,7 +58,7 @@ public class Level120 extends Level{
         mineFactory.addToBoard(3);
         unrevealedEmptyFactory.addToBoard(1);
 
-        board.setAddsCellsHorizontally(true);
+        board.addCellsHorizontally();
 
         //Row 4
         mineFactory.addToBoard(3);

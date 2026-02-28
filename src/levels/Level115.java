@@ -43,7 +43,7 @@ public class Level115 extends Level{
         purpleUnrevealedEmptyFactory.addToBoard(2);
         purpleMineFactory.addToBoard(3);
 
-        board.setAddsCellsHorizontally(false);
+        board.addCellsVertically();
 
         //Column 1
         purpleMineFactory.addToBoard(1);
@@ -194,7 +194,7 @@ public class Level115 extends Level{
         purpleMineFactory.addToBoard(2);
         purpleUnrevealedEmptyFactory.addToBoard(1);
 
-        board.setAddsCellsHorizontally(true);
+        board.addCellsHorizontally();
 
         //Row 2
         grayMineFactory.addToBoard(1);

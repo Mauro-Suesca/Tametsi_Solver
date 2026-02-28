@@ -23,7 +23,7 @@ public class Level121 extends Level{
         
         EmptyCellFactory unknownFactory = new EmptyCellFactory(false, true);
 
-        board.setAddsCellsHorizontally(false);
+        board.addCellsVertically();
 
         //Column 1
         unrevealedEmptyFactory.addToBoard(1);

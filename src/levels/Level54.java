@@ -28,7 +28,7 @@ public class Level54 extends Level{
 
         EmptyCellFactory grayRevealedFactory = new EmptyCellFactory(gray, true, false);
 
-        board.setAddsCellsHorizontally(false);
+        board.addCellsVertically();
 
         //Line 1
         board.addCell(grayRevealedFactory.build(2));

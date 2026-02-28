@@ -49,7 +49,7 @@ public class Level63 extends Level{
         board.addCell(cyanMineFactory.build(1));
         board.addCell(grayRevealedFactory.build(1));
         
-        board.setAddsCellsHorizontally(false);
+        board.addCellsVertically();
 
         //Column 5
         board.addCell(cyanUnrevealedEmptyFactory.build(1));
@@ -76,7 +76,7 @@ public class Level63 extends Level{
         board.addCell(cyanMineFactory.build(3));
         board.addCell(grayRevealedFactory.build(1));
 
-        board.setAddsCellsHorizontally(true);
+        board.addCellsHorizontally();
 
         //Row 3 (Part 2)
         board.addCell(grayRevealedFactory.build(1));

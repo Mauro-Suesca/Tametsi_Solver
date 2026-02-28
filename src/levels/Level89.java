@@ -39,7 +39,7 @@ public class Level89 extends Level{
         EmptyCellFactory grayVerticalFactory = new EmptyCellFactory(gray, true, false, 1, 2);
         EmptyCellFactory grayHorizontalFactory = new EmptyCellFactory(gray, true, false, 2, 1);
 
-        board.setAddsCellsHorizontally(false);
+        board.addCellsVertically();
 
         //Column 1
         grayUnrevealedEmptyFactory.addToBoard(1);
@@ -53,7 +53,7 @@ public class Level89 extends Level{
         grayMineFactory.addToBoard(1);
         grayUnrevealedEmptyFactory.addToBoard(1);
 
-        board.setAddsCellsHorizontally(true);
+        board.addCellsHorizontally();
 
         //Row 1
         grayUnrevealedEmptyFactory.addToBoard(1);
@@ -118,7 +118,7 @@ public class Level89 extends Level{
         purpleUnrevealedEmptyFactory.addToBoard(1);
         grayUnrevealedEmptyFactory.addToBoard(1);
 
-        board.setAddsCellsHorizontally(false);
+        board.addCellsVertically();
 
         //Column 2
         gray2x2Factory.addToBoard(1);

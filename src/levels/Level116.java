@@ -40,7 +40,7 @@ public class Level116 extends Level{
 
         EmptyCellFactory grayRevealedFactory = new EmptyCellFactory(gray, true, false);
 
-        board.setAddsCellsHorizontally(false);
+        board.addCellsVertically();
         board.skipLines(1);
 
         //Column 2
@@ -175,7 +175,7 @@ public class Level116 extends Level{
         grayUnrevealedEmptyFactory.addToBoard(1);
 
         board.skipLines(1);
-        board.setAddsCellsHorizontally(true);
+        board.addCellsHorizontally();
 
         //Row 1
         grayRevealedFactory.addToBoard(3);

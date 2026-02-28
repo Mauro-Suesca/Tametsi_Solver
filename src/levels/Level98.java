@@ -65,7 +65,7 @@ public class Level98 extends Level{
         nonExistentCellFactory.addToBoard(15);
 
         board.skipLines(4);
-        board.setAddsCellsHorizontally(false);
+        board.addCellsVertically();
 
         //Column 1
         grayUnrevealedEmptyFactory.addToBoard(1);
