@@ -269,15 +269,15 @@ This project's purpose is to discover and implement an algorithm capable of solv
 ![image](./resources/level121_unsolved.png)
 ![image](./resources/level121_solved.png)
 
+## Level 122 (Combination Lock VI)
+![image](./resources/level122_unsolved.png)
+![image](./resources/level122_solved.png)
+
 # Planned levels
 
 ## Level 85
 ![image](./resources/level85_unsolved.png)
 ![image](./resources/level85_solved.png)
-
-## Level 122 (Combination Lock VI)
-![image](./resources/level122_unsolved.png)
-![image](./resources/level122_solved.png)
 
 ## Level 129 (Circuit I)
 ![image](./resources/level129_unsolved.png)
