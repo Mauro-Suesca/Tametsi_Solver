@@ -277,15 +277,15 @@ This project's purpose is to discover and implement an algorithm capable of solv
 ![image](./resources/level129_unsolved.png)
 ![image](./resources/level129_solved.png)
 
+## Level 130 (Circuit II)
+![image](./resources/level130_unsolved.png)
+![image](./resources/level130_solved.png)
+
 # Planned levels
 
 ## Level 85
 ![image](./resources/level85_unsolved.png)
 ![image](./resources/level85_solved.png)
-
-## Level 130 (Circuit II)
-![image](./resources/level130_unsolved.png)
-![image](./resources/level130_solved.png)
 
 ## Level 131 (Circuit III)
 ![image](./resources/level131_unsolved.png)
