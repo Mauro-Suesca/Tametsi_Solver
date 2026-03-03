@@ -8,7 +8,7 @@ El propósito del proyecto es aplicar **técnicas de demostración formal**, esp
 
 A diferencia del enfoque intuitivo o exploratorio típico de los videojuegos de lógica, este proyecto propone un método riguroso y formal para abordar la resolución del nivel, respetando los principios del razonamiento matemático formal.
 
-Posterior al trabajo para la asignatura de **Matemáticas Discretas I**, se añadió soporte para los niveles **6, 12, 13, 18, 20, 21, 23, 25, 27, 28, 30, 32, 34, 36, 37, 38, 42, 43, 44, 46, 47, 48, 50, 52, 53, 54, 55, 56, 57, 59, 60, 61, 63, 64, 65, 67, 69, 70, 71, 73, 75, 76, 78, 79, 80, 82, 84, 87, 88, 89, 92, 93, 94, 95, 97, 98, 100, 114 (Lattice I), 115 (Lattice II), 116 (Lattice III), 117 (Tabs), 118 (Cyclone), 119 (Tatters), 120 (Combination Lock IV), 121 (Combination Lock V), 122 (Combination Lock VI), 129 (Circuit I), 130 (Circuit II) y 131 (Circuit III)**, como trabajo independiente de Mauro Suesca.
+Posterior al trabajo para la asignatura de **Matemáticas Discretas I**, se añadió soporte para los niveles **6, 12, 13, 18, 20, 21, 23, 25, 27, 28, 30, 32, 34, 36, 37, 38, 42, 43, 44, 46, 47, 48, 50, 52, 53, 54, 55, 56, 57, 59, 60, 61, 63, 64, 65, 67, 69, 70, 71, 73, 75, 76, 78, 79, 80, 82, 84, 87, 88, 89, 92, 93, 94, 95, 97, 98, 100, 114 (Lattice I), 115 (Lattice II), 116 (Lattice III), 117 (Tabs), 118 (Cyclone), 119 (Tatters), 120 (Combination Lock IV), 121 (Combination Lock V), 122 (Combination Lock VI), 129 (Circuit I), 130 (Circuit II), 131 (Circuit III) y 132 (Stacks)**, como trabajo independiente de Mauro Suesca.
 
 ## Sobre el juego Tametsi
 
