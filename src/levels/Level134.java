@@ -18,6 +18,8 @@ public class Level134 extends Level{
         
         BoardWithLines board = new BoardWithLines(19, 19, true, gray, blue, cyan);
 
+        board.setMaxMineDifferenceForImaginaryCells(5);
+
         CellFactory.setBoard(board);
 
         ExternalCounterFactory externalCounterFactory = new ExternalCounterFactory();

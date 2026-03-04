@@ -16,6 +16,8 @@ public class Level85 extends Level{
 
         Board board = new BoardLineless(19, 19, true, gray, green, purple);
 
+        board.setMaxMineDifferenceForImaginaryCells(5);
+
         CellFactory.setBoard(board);
 
         NonExistentCellFactory nonExistentCellFactory = new NonExistentCellFactory();

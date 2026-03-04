@@ -293,8 +293,6 @@ This project's purpose is to discover and implement an algorithm capable of solv
 ![image](./resources/level133_unsolved.png)
 ![image](./resources/level133_solved.png)
 
-# Planned levels
-
 ## Level 85
 ![image](./resources/level85_unsolved.png)
 ![image](./resources/level85_solved.png)
@@ -302,6 +300,8 @@ This project's purpose is to discover and implement an algorithm capable of solv
 ## Level 134 (Reticle)
 ![image](./resources/level134_unsolved.png)
 ![image](./resources/level134_solved.png)
+
+# Planned levels
 
 ## Level 151 (Stitches)
 ![image](./resources/level151_unsolved.png)

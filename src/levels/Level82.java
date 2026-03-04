@@ -13,7 +13,7 @@ public class Level82 extends Level{
     @Override protected Board setup(){
         BoardWithLines board = new BoardWithLines(55, 15, 15, true);
 
-        board.setMaxMineDifferenceForImaginaryCells(10);
+        board.setMaxMineDifferenceForImaginaryCells(5);
 
         CellFactory.setBoard(board);
 
