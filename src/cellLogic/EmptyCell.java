@@ -169,6 +169,7 @@ public class EmptyCell extends Cell{
         board.addOperationToProcess(new ProofByContradictionOperation(this));
         board.addOperationToProcess(new AdvancedCheckSharedCellsOperation(this));
         board.addOperationToProcess(new ProofByDoubleHypothesisOperation(this));
+        board.addOperationToProcess(new ExtensiveProofByContradictionOperation(this));
         board.addOperationToProcess(new ProofByCasesOperation(this));
     }
 
@@ -268,12 +269,10 @@ public class EmptyCell extends Cell{
             return;
         }else if(remainingMines == 1){
             hypothesisIsHasMine = true;
+        }else if(remainingAdjacentCells.size() - remainingMines == 1){
+            hypothesisIsHasMine = false;
         }else{
-            if(remainingAdjacentCells.size() - remainingMines == 1){
-                hypothesisIsHasMine = false;
-            }else{
-                return;
-            }
+            return;
         }
 
         for(int i=0; i<remainingAdjacentCells.size(); i++){
@@ -308,6 +307,40 @@ public class EmptyCell extends Cell{
         }
         
         return simulateAdjacentCells(simulatedBoard, resultingSimulatedCell);
+    }
+
+    public void extensiveProofByContradiction(){
+        //Only Cells that aren't applicable for the other proof by contradiction method have anything to gain from this one
+        if(remainingMines == 0 || remainingMines == 1 || remainingAdjacentCells.size() - remainingMines == 1){
+            return;
+        }
+
+        for(int i=0; i<remainingAdjacentCells.size(); i++){
+            if(!remainingAdjacentCells.get(i).revealed){
+                boolean hypothesisIsHasMine = true;
+
+                for(int j=0; j<2; j++){
+                    SimulatedBoard currentHypothesisSimulation = new SimulatedBoard(true);
+                    SimulatedCell.setBoard(currentHypothesisSimulation);
+
+                    SimulatedUnrevealedCell testCell = (SimulatedUnrevealedCell)remainingAdjacentCells.get(i).simulateCell(currentHypothesisSimulation);
+
+                    if(!currentHypothesisSimulation.checkIfHypothesisIsPossible(testCell, hypothesisIsHasMine)){
+                        board.updateLastActingCell(this);
+                        if(hypothesisIsHasMine){
+                            remainingAdjacentCells.get(i).reveal();
+                        }else{
+                            remainingAdjacentCells.get(i).markAsMine();
+                        }
+                        
+                        board.addOperationToProcess(new ExtensiveProofByContradictionOperation(this));
+                        break;
+                    }
+
+                    hypothesisIsHasMine = false;
+                }
+            }
+        }
     }
 
     //TODO Implement logic for proof by cases
