@@ -79,12 +79,10 @@ public class SimulatedRevealedCell extends SimulatedCell{
             return;
         }else if(remainingMines == 1){
             hypothesisIsHasMine = true;
+        }else if(remainingAdjacentCells.size() - remainingMines == 1){
+            hypothesisIsHasMine = false;
         }else{
-            if(remainingAdjacentCells.size() - remainingMines == 1){
-                hypothesisIsHasMine = false;
-            }else{
-                return;
-            }
+            return;
         }
 
         //During the hypothesis, due to the way adjacencies are restored, the SimulatedCells themselves might change places in the list, so this is created to make sure every cell is hypothesized on
