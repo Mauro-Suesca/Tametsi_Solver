@@ -305,11 +305,11 @@ This project's purpose is to discover and implement an algorithm capable of solv
 ![image](./resources/level151_unsolved.png)
 ![image](./resources/level151_solved.png)
 
-# Planned levels
-
 ## Level 155 (Apologies to Mondrian)
 ![image](./resources/level155_unsolved.png)
 ![image](./resources/level155_solved.png)
+
+# Planned levels
 
 ## Level 157 (Capacity)
 ![image](./resources/level157_unsolved.png)
