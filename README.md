@@ -301,11 +301,11 @@ This project's purpose is to discover and implement an algorithm capable of solv
 ![image](./resources/level134_unsolved.png)
 ![image](./resources/level134_solved.png)
 
-# Planned levels
-
 ## Level 151 (Stitches)
 ![image](./resources/level151_unsolved.png)
 ![image](./resources/level151_solved.png)
+
+# Planned levels
 
 ## Level 155 (Apologies to Mondrian)
 ![image](./resources/level155_unsolved.png)
