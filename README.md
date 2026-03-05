@@ -309,11 +309,11 @@ This project's purpose is to discover and implement an algorithm capable of solv
 ![image](./resources/level155_unsolved.png)
 ![image](./resources/level155_solved.png)
 
-# Planned levels
-
 ## Level 157 (Capacity)
 ![image](./resources/level157_unsolved.png)
 ![image](./resources/level157_solved.png)
+
+# Planned levels
 
 ## Level 158 (Interlocked)
 ![image](./resources/level158_unsolved.png)
