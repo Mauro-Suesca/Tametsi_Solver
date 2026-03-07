@@ -25,18 +25,14 @@ public class SimulatedRevealedCell extends SimulatedCell{
     public void executeLogicalSequence(){
         board.addOperationToProcess(new SimulatedCountForContradictionsOperation(this));
         board.addOperationToProcess(new SimulatedCountRemainingOperation(this));
-        if(board.getNeedsToCheckSharedCells()){
-            board.addOperationToProcess(new SimulatedCheckSharedCellsOperation(this));
-        }
-    }
 
-    public void executeLogicalSequenceForDoubleHypothesis(){
-        board.addOperationToProcess(new SimulatedCountForContradictionsOperation(this));
-        board.addOperationToProcess(new SimulatedCountRemainingOperation(this));
         if(board.getNeedsToCheckSharedCells()){
             board.addOperationToProcess(new SimulatedCheckSharedCellsOperation(this));
         }
-        board.addOperationToProcess(new SimulatedProofByContradictionOperation(this));
+
+        if(board.getNeedsToUseDoubleHypothesis() && !board.getIsHypothesizing()){
+            board.addOperationToProcess(new SimulatedProofByContradictionOperation(this));
+        }
     }
 
     public boolean countAndCheckIfThereAreContradictions(){
@@ -91,7 +87,7 @@ public class SimulatedRevealedCell extends SimulatedCell{
                     if(!this.equals(currentPossibleSharerCell) && this.remainingAdjacentCells.containsAll(currentPossibleSharerCellAdjacencies)){
                         completelySharingCells.add(currentPossibleSharerCell);
                     }else if(!this.equals(currentPossibleSharerCell) && currentPossibleSharerCellAdjacencies.containsAll(this.remainingAdjacentCells)){
-                        currentPossibleSharerCell.react();
+                        board.addOperationToProcess(new SimulatedStartOperation(currentPossibleSharerCell));
                     }
                 }
             }
@@ -163,20 +159,12 @@ public class SimulatedRevealedCell extends SimulatedCell{
     }
 
     @Override public void reactToCellMarkedAsEmpty(SimulatedCell revealedCell){
-        react();
+        board.addOperationToProcess(new SimulatedStartOperation(this));
     }
 
     @Override public void reactToCellMarkedAsMine(SimulatedCell markedCell){
         remainingMines--;
-        react();
-    }
-
-    private void react(){
-        if(!board.getNeedsToUseDoubleHypothesis() || board.getIsHypothesizing()){
-            board.addOperationToProcess(new SimulatedStartOperation(this));
-        }else{
-            board.addOperationToProcess(new SimulatedStartDoubleHypothesisOperation(this));
-        }
+        board.addOperationToProcess(new SimulatedStartOperation(this));
     }
 
     @Override public boolean markAsEmpty(){
