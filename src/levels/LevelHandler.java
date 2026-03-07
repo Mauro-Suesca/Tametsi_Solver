@@ -1,7 +1,7 @@
 package levels;
 
 public class LevelHandler{
-    private static final int MAX_LEVEL = 161;
+    private static final int MAX_LEVEL = 162;
     private Level[] levels;
 
     public LevelHandler(){
@@ -88,6 +88,7 @@ public class LevelHandler{
         levels[155] = new Level155();
         levels[157] = new Level157();
         levels[158] = new Level158();
+        levels[161] = new Level161();
     }
 
     public void showAvailableLevels(){
