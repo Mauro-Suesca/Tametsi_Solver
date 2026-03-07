@@ -11,7 +11,6 @@ public class SimulatedBoard{
     private PriorityQueue<SimulatedOperation> operationsToProcess;
     private PriorityQueue<SimulatedOperation> operationsToProcessWhileHypothesizing;
     private ArrayList<SimulatedCell> alreadyExistingCells;
-    private ArrayList<SimulatedUnrevealedCell> markedCells;
     private Stack<MarkCommand> commandsExecutedWhileHypothesizing;
     private boolean needsToUseDoubleHypothesis;
     private boolean isHypothesizing;
@@ -20,7 +19,6 @@ public class SimulatedBoard{
     public SimulatedBoard(boolean needsToUseDoubleHypothesis, boolean needsToCheckSharedCells){
         this.operationsToProcess = new PriorityQueue<>();
         this.alreadyExistingCells = new ArrayList<>();
-        this.markedCells = new ArrayList<>();
         this.needsToUseDoubleHypothesis = needsToUseDoubleHypothesis;
         this.isHypothesizing = false;
         this.needsToCheckSharedCells = needsToCheckSharedCells;
@@ -94,10 +92,6 @@ public class SimulatedBoard{
         }
     }
 
-    public void addToMarkedCells(SimulatedUnrevealedCell cell){
-        this.markedCells.add(cell);
-    }
-
     public boolean checkIfHypothesisIsPossible(SimulatedUnrevealedCell testCell, boolean hypothesizedCellHasMine){
         if(hypothesizedCellHasMine){
             if(!testCell.markAsMine()){
@@ -125,25 +119,5 @@ public class SimulatedBoard{
         }
 
         return isPossible;
-    }
-
-    public ArrayList<SimulatedUnrevealedCell> obtainMarkedCellsFromCase(SimulatedUnrevealedCell testCell, boolean hypothesizedCellHasMine){
-        if(hypothesizedCellHasMine){
-            testCell.markAsMine();
-        }else{
-            testCell.markAsEmpty();
-        }
-
-        executeNextProcess();
-
-        return markedCells;
-    }
-
-    private void executeNextProcess(){
-        PriorityQueue<SimulatedOperation> operations = isHypothesizing ? operationsToProcessWhileHypothesizing : operationsToProcess;
-
-        while(!operations.isEmpty()){
-            operations.remove().executeOperation();
-        }
     }
 }
