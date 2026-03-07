@@ -4,7 +4,6 @@ import cellLogic.simulation.cells.SimulatedRevealedCell;
 
 public abstract class SimulatedOperation implements Comparable<SimulatedOperation>{
     protected static final int START = 0;
-    protected static final int START_WITH_DOUBLE_HYPOTHESIS = 0;
     protected static final int COUNT_FOR_CONTRADICTION = 1;
     protected static final int COUNT_REMAINING = 2;
     protected static final int CHECK_SHARED_CELLS = 3;
