@@ -11,7 +11,6 @@ public abstract class LogicalOperation implements Comparable<LogicalOperation>{
     protected static final int PROOF_BY_DOUBLE_HYPOTHESIS = 5;
     protected static final int EXTENSIVE_PROOF_BY_CONTRADICTION = 6;
     protected static final int CONTRADICTION_WITH_CHECK_SHARED_CELLS = 7;
-    protected static final int PROOF_BY_CASES = 8;
     protected EmptyCell callingCell;
     protected int type;
 
