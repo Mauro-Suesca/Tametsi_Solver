@@ -14,7 +14,9 @@ public abstract class Level{
         this.setup().start();
     }
 
-    public void test(){
+    public long test(){
+        long testTime = 0;
+
         try{
             Board setup = this.setup();
 
@@ -22,7 +24,7 @@ public abstract class Level{
 
             boolean testResult = setup.startTest();
 
-            long testTime = start.until(Instant.now(), ChronoUnit.MILLIS);
+            testTime = start.until(Instant.now(), ChronoUnit.MILLIS);
 
             if(testResult){
                 System.out.println("Test on level " + this + " successful after " + testTime + " milliseconds");
@@ -34,6 +36,8 @@ public abstract class Level{
 
             e.printStackTrace();
         }
+
+        return testTime;
     }
 
     @Override public abstract String toString();
