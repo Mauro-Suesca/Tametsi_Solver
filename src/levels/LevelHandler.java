@@ -103,11 +103,15 @@ public class LevelHandler{
 
     public void runLevel(String levelId){
         if(levelId.equals("test")){
+            long totalTestTime = 0;
+
             for(int i=0; i<MAX_LEVEL; i++){
                 if(levels[i] != null){
-                    levels[i].test();
+                    totalTestTime += levels[i].test();
                 }
             }
+            
+            System.out.println("En total, los niveles tardaron " + totalTestTime + " milisegundos en completarse");
         }else{
             int levelIndex = Integer.parseInt(levelId);
 
